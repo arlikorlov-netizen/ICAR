@@ -1,3 +1,5 @@
+// === НАЧАЛО БЛОКА APP_JS_001 ===
+
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
     console.log('ICAR приложение загружено');
@@ -82,3 +84,5 @@ function loadMockData() {
     
     console.log('Тестовые данные загружены');
 }
+
+// === КОНЕЦ БЛОКА APP_JS_001 ===

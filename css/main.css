@@ -1,3 +1,5 @@
+/* === НАЧАЛО БЛОКА MAIN_CSS_001 === */
+
 /* Сброс стилей */
 * {
     margin: 0;
@@ -7,6 +9,7 @@
 
 /* Переменные цветов */
 :root {
+    /* === НАЧАЛО БЛОКА MAIN_CSS_001 === */
     --color-health: #FF6B6B;
     --color-habits: #4ECDC4;
     --color-tasks: #45B7D1;
@@ -193,3 +196,5 @@ body {
     font-size: 14px;
     color: #666;
 }
+
+/* === КОНЕЦ БЛОКА MAIN_CSS_001 === */
