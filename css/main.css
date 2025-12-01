@@ -1,4 +1,4 @@
-/* === НАЧАЛО БЛОКА MAIN_CSS_002 === */
+/* === НАЧАЛО БЛОКА MAIN_CSS_003 === */
 
 /* Сброс стилей */
 * {
@@ -19,7 +19,7 @@
     --color-button: #2E8B57;       /* Зелёный для кнопок */
     --color-button-hover: #3CB371; /* Зелёный при наведении */
     --color-panel: #1A1A1A;        /* Панели */
-    --shadow: 0 4px 20px rgba(50, 205, 50, 0.15); /* Зелёная тень */
+    --shadow: 0 4px 20px rgba(50, 205, 50, 0.15);
 }
 
 /* Основные стили */
@@ -29,7 +29,6 @@ body {
     color: var(--color-text);
     line-height: 1.5;
     height: 100vh;
-    overflow-x: hidden;
 }
 
 .app-container {
@@ -40,14 +39,16 @@ body {
     background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
+    padding-bottom: 80px; /* Место для нижней кнопки */
 }
 
-/* ВЕРХНЯЯ ПАНЕЛЬ С ИМЕНЕМ И УРОВНЕМ */
+/* ВЕРХНЯЯ ПАНЕЛЬ */
 .top-panel {
     padding: 16px 20px;
     background-color: var(--color-card);
     border-bottom: 1px solid var(--color-accent);
     box-shadow: var(--shadow);
+    flex-shrink: 0;
 }
 
 .user-info {
@@ -101,13 +102,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    overflow-y: auto;
 }
 
 /* ЦЕНТРАЛЬНАЯ КАРТИНКА */
 .center-image-container {
     text-align: center;
-    margin: 20px 0;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .human-image {
@@ -133,6 +135,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    flex-shrink: 0;
 }
 
 .progress-item {
@@ -182,10 +185,24 @@ body {
     display: flex;
     justify-content: space-between;
     position: relative;
-    height: 120px;
+    margin-top: auto; /* Прижимаем к низу */
+    padding-top: 20px;
+    flex-shrink: 0;
 }
 
-.tab-buttons-left, .tab-buttons-right {
+.tab-buttons-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tab-buttons-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -222,20 +239,18 @@ body {
     font-weight: bold;
 }
 
-/* Расположение кнопок как закладки */
-.tab-buttons-left .tab-button {
-    transform-origin: left bottom;
-}
-
-.tab-buttons-right .tab-button {
-    transform-origin: right bottom;
-}
-
 /* ШИРОКАЯ КНОПКА СНИЗУ */
 .bottom-sheet-trigger {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
     padding: 15px 20px;
     background-color: var(--color-card);
     border-top: 1px solid var(--color-accent);
+    z-index: 999;
 }
 
 .slide-up-button {
@@ -263,7 +278,7 @@ body {
     font-size: 20px;
 }
 
-/* БОКОВАЯ ПАНЕЛЬ (справа) */
+/* БОКОВАЯ ПАНЕЛЬ */
 .side-panel {
     position: fixed;
     top: 0;
@@ -316,21 +331,23 @@ body {
 .bottom-sheet {
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
     max-width: 500px;
-    margin: 0 auto;
+    height: 70vh;
     background-color: var(--color-panel);
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.2);
     z-index: 1001;
-    transform: translateY(100%);
     transition: transform 0.4s ease;
     border-top: 2px solid var(--color-accent);
+    display: flex;
+    flex-direction: column;
 }
 
 .bottom-sheet.active {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .sheet-header {
@@ -339,6 +356,7 @@ body {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--color-accent);
+    flex-shrink: 0;
 }
 
 .sheet-handle {
@@ -355,6 +373,7 @@ body {
 .sheet-title {
     color: var(--color-text);
     font-size: 18px;
+    margin-left: 30px;
 }
 
 .sheet-close {
@@ -368,6 +387,8 @@ body {
 .sheet-body {
     padding: 20px;
     color: var(--color-text-secondary);
+    overflow-y: auto;
+    flex: 1;
 }
 
 /* АДАПТИВНОСТЬ */
@@ -384,27 +405,18 @@ body {
     
     .progress-item {
         padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .progress-label {
+        min-width: 100px;
+        font-size: 13px;
     }
 }
-/* Временный фикс для отображения */
-.tab-buttons-left {
-    position: absolute;
-    left: 10px;
-    bottom: 0;
+
+/* Placeholder для картинки */
+.placeholder-image {
+    display: inline-block;
 }
 
-.tab-buttons-right {
-    position: absolute;
-    right: 10px;
-    bottom: 0;
-}
-
-.progress-indicators {
-    margin-bottom: 140px; /* Отступ для кнопок */
-}
-
-.center-image-container {
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-/* === КОНЕЦ БЛОКА MAIN_CSS_002 === */
+/* === КОНЕЦ БЛОКА MAIN_CSS_003 === */
