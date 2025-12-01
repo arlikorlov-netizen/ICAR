@@ -1,4 +1,4 @@
-// БЛОК 27: Конфигурация приложения
+// Конфигурация приложения
 const AppConfig = {
     userName: "Алексей",
     userLevel: 7,
@@ -15,7 +15,7 @@ let activePanel = null;
 
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v4 загружен');
+    console.log('ICAR v5 загружен');
     
     // Инициализация данных
     initUserData();
@@ -28,12 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initBottomSheet();
     initAllModulesPanel();
     initSettingsButton();
+    initPanelCloseButtons();
     
     // Закрытие панелей при клике вне
     initClosePanels();
 });
 
-// БЛОК 28: Установка данных пользователя
+// Установка данных пользователя
 function initUserData() {
     const userNameElement = document.getElementById('userName');
     const userLevelElement = document.getElementById('userLevel');
@@ -47,7 +48,7 @@ function initUserData() {
     }
 }
 
-// БЛОК 29: Инициализация прогресс-баров
+// Инициализация прогресс-баров
 function initProgressBars() {
     setTimeout(() => {
         setProgressValue('physical', AppConfig.progressValues.physical);
@@ -57,7 +58,7 @@ function initProgressBars() {
     }, 300);
 }
 
-// БЛОК 30: Установка значения прогресс-бара
+// Установка значения прогресс-бара
 function setProgressValue(type, value) {
     const barElement = document.querySelector(`#progress${type.charAt(0).toUpperCase() + type.slice(1)} .progress-bar`);
     const valueElement = document.getElementById(`value${type.charAt(0).toUpperCase() + type.slice(1)}`);
@@ -79,7 +80,7 @@ function setProgressValue(type, value) {
     }
 }
 
-// БЛОК 31: Обработчик центральной картинки
+// Обработчик центральной картинки
 function initHumanImage() {
     const humanImage = document.getElementById('humanImage');
     const centerImage = document.getElementById('centerImage');
@@ -108,7 +109,7 @@ function initHumanImage() {
     }
 }
 
-// БЛОК 32: Обработчики боковых кнопок
+// Обработчики боковых кнопок
 function initSideTabs() {
     const sideTabs = document.querySelectorAll('.side-tab');
     
@@ -121,7 +122,7 @@ function initSideTabs() {
     });
 }
 
-// БЛОК 33: Переключение угловой панели
+// Переключение угловой панели
 function toggleCornerPanel(panelType, button) {
     const panelId = `${panelType}Panel`;
     const panel = document.getElementById(panelId);
@@ -145,7 +146,27 @@ function toggleCornerPanel(panelType, button) {
     }
 }
 
-// БЛОК 34: Закрытие всех угловых панелей
+// Инициализация кнопок закрытия панелей
+function initPanelCloseButtons() {
+    const closeButtons = document.querySelectorAll('.panel-close');
+    
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const panelType = button.getAttribute('data-close');
+            const panel = document.getElementById(`${panelType}Panel`);
+            
+            if (panel) {
+                panel.classList.remove('active');
+                if (activePanel === panelType) {
+                    activePanel = null;
+                }
+            }
+        });
+    });
+}
+
+// Закрытие всех угловых панелей
 function closeAllCornerPanels() {
     const panels = document.querySelectorAll('.corner-panel');
     panels.forEach(panel => {
@@ -154,7 +175,7 @@ function closeAllCornerPanels() {
     activePanel = null;
 }
 
-// БЛОК 35: Инициализация панели всех модулей
+// Инициализация панели всех модулей
 function initAllModulesPanel() {
     const allModulesPanel = document.getElementById('allModulesPanel');
     const closeModulesBtn = document.getElementById('closeModulesBtn');
@@ -175,7 +196,7 @@ function initAllModulesPanel() {
     });
 }
 
-// БЛОК 36: Открытие всех модулей
+// Открытие всех модулей
 function openAllModules() {
     const allModulesPanel = document.getElementById('allModulesPanel');
     closeAllCornerPanels();
@@ -185,7 +206,7 @@ function openAllModules() {
     }
 }
 
-// БЛОК 37: Закрытие всех модулей
+// Закрытие всех модулей
 function closeAllModules() {
     const allModulesPanel = document.getElementById('allModulesPanel');
     
@@ -194,7 +215,7 @@ function closeAllModules() {
     }
 }
 
-// БЛОК 38: Обработчик двойной линии
+// Обработчик двойной линии
 function initBottomLine() {
     const bottomLineTrigger = document.getElementById('bottomLineTrigger');
     const bottomSheet = document.getElementById('bottomSheet');
@@ -216,7 +237,7 @@ function initBottomLine() {
     }
 }
 
-// БЛОК 39: Обработчик нижней панели
+// Обработчик нижней панели
 function initBottomSheet() {
     const closeBottomSheet = document.getElementById('closeBottomSheet');
     const bottomSheet = document.getElementById('bottomSheet');
@@ -228,7 +249,7 @@ function initBottomSheet() {
     }
 }
 
-// БЛОК 40: Обработчик кнопки настроек
+// Обработчик кнопки настроек
 function initSettingsButton() {
     const settingsBtn = document.getElementById('settingsBtn');
     
@@ -239,12 +260,15 @@ function initSettingsButton() {
     }
 }
 
-// БЛОК 41: Закрытие панелей при клике вне
+// Закрытие панелей при клике вне
 function initClosePanels() {
     document.addEventListener('click', (event) => {
         // Закрытие угловых панелей
-        if (activePanel && !event.target.closest('.side-tab') && 
-            !event.target.closest('.corner-panel')) {
+        const isPanel = event.target.closest('.corner-panel');
+        const isPanelClose = event.target.closest('.panel-close');
+        const isSideTab = event.target.closest('.side-tab');
+        
+        if (activePanel && !isSideTab && !isPanel && !isPanelClose) {
             closeAllCornerPanels();
         }
         
@@ -280,7 +304,7 @@ function initClosePanels() {
     });
 }
 
-// БЛОК 42: Демо: изменение значений прогресс-баров
+// Демо: изменение значений прогресс-баров
 setInterval(() => {
     if (Math.random() > 0.7) {
         const randomChange = () => Math.floor(Math.random() * 15) - 7;

@@ -1,41 +1,42 @@
-/* БЛОК 10: Сброс и базовые стили */
+/* Базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* БЛОК 11: Подключение шрифта */
+/* Подключение шрифта CrySis Bold из папки fonts/ */
 @font-face {
     font-family: 'CrySis Bold';
-    src: url('../fonts/CrySis-Bold.woff2') format('woff2'),
-         url('../fonts/CrySis-Bold.woff') format('woff');
+    src: url('../fonts/CrySis-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
-/* БЛОК 12: Цветовая схема */
+/* Цветовая схема с тёмно-зелёным фоном */
 :root {
-    --color-bg: #000000;
-    --color-card: #1A1A1A;
-    --color-text: #90EE90;
-    --color-text-secondary: #7CFC7C;
-    --color-accent: #32CD32;
-    --color-progress-bg: #333333;
-    --color-progress-fill: #32CD32;
-    --color-button: #2E8B57;
-    --color-button-hover: #3CB371;
-    --color-panel: #1A1A1A;
+    --color-bg: #0A2A0A;           /* Тёмно-зелёный фон */
+    --color-card: #1A3A1A;         /* Карточки чуть светлее */
+    --color-text: #90EE90;         /* Светло-зелёный текст */
+    --color-text-secondary: #7CFC7C; /* Вторичный текст */
+    --color-accent: #32CD32;       /* Ярко-зелёный акцент */
+    --color-progress-bg: #2A4A2A;  /* Фон прогресс-баров */
+    --color-progress-fill: #32CD32; /* Заполнение прогресс-баров */
+    --color-button: #2E8B57;       /* Цвет кнопок */
+    --color-button-hover: #3CB371; /* Цвет кнопок при наведении */
+    --color-panel: #1A3A1A;        /* Цвет панелей */
     --shadow: 0 4px 20px rgba(50, 205, 50, 0.15);
+    --border-radius: 12px;         /* Закругления углов */
 }
 
-/* БЛОК 13: Основные стили */
+/* Основные стили */
 body {
     font-family: 'CrySis Bold', 'Arial Black', sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.5;
     height: 100vh;
+    overflow: hidden;
 }
 
 .app-container {
@@ -47,16 +48,18 @@ body {
     display: flex;
     flex-direction: column;
     padding-bottom: 60px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-/* БЛОК 14: Верхняя панель (БЕЗ ОБРЕЗКИ УГЛОВ) */
+/* Верхняя панель - без обрезки углов */
 .top-panel {
     padding: 20px;
     background-color: var(--color-card);
     border-bottom: 2px solid var(--color-accent);
     flex-shrink: 0;
-    position: relative;
+    text-align: center;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
 .user-info {
@@ -66,7 +69,7 @@ body {
 }
 
 .user-details {
-    text-align: left;
+    text-align: center;
     flex: 1;
 }
 
@@ -81,6 +84,7 @@ body {
 .user-level {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     color: var(--color-text-secondary);
     font-size: 16px;
@@ -91,12 +95,13 @@ body {
     color: #FFD700;
 }
 
-/* БЛОК 15: Кнопка настроек */
+/* Кнопка настроек */
 .settings-btn {
     width: 44px;
     height: 44px;
     background-color: var(--color-button);
     border: 2px solid var(--color-accent);
+    border-radius: 8px;
     color: var(--color-text);
     font-size: 20px;
     cursor: pointer;
@@ -104,7 +109,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    margin-left: 15px;
 }
 
 .settings-btn:hover {
@@ -112,7 +116,7 @@ body {
     transform: scale(1.05);
 }
 
-/* БЛОК 16: Основное содержимое */
+/* Основное содержимое */
 .main-content {
     flex: 1;
     padding: 20px;
@@ -121,7 +125,7 @@ body {
     gap: 30px;
 }
 
-/* БЛОК 17: Центральный блок */
+/* Центральный блок */
 .center-section {
     position: relative;
     display: flex;
@@ -131,19 +135,21 @@ body {
     margin: 10px 0;
 }
 
-/* БЛОК 18: Кнопки по бокам от фигурки */
+/* Кнопки по бокам от фигурки - без обрезки углов */
 .side-tab {
     position: absolute;
     width: 70px;
     height: 70px;
     background-color: var(--color-button);
     border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
+    box-shadow: var(--shadow);
 }
 
 .side-tab:hover {
@@ -155,32 +161,28 @@ body {
     font-size: 28px;
 }
 
-/* БЛОК 19: Позиционирование кнопок с правильной обрезкой углов */
+/* Позиционирование кнопок */
 .left-top-tab {
     top: 20px;
     left: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
 
 .right-top-tab {
     top: 20px;
     right: 20px;
-    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
 }
 
 .left-bottom-tab {
     bottom: 20px;
     left: 20px;
-    clip-path: polygon(0 20px, 20px 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .right-bottom-tab {
     bottom: 20px;
     right: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 20px) 100%, 0 20px);
 }
 
-/* БЛОК 20: Центральная картинка (без рамки, больше) */
+/* Центральная картинка - без рамки */
 .center-image-container {
     z-index: 5;
     cursor: pointer;
@@ -206,10 +208,10 @@ body {
     width: 220px;
     height: 280px;
     background-color: var(--color-card);
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
 }
 
 .image-placeholder span {
@@ -217,7 +219,7 @@ body {
     color: var(--color-accent);
 }
 
-/* БЛОК 21: 4 показателя прогресса с правильной обрезкой */
+/* 4 показателя прогресса - без обрезки углов */
 .progress-indicators {
     display: flex;
     flex-direction: column;
@@ -229,32 +231,16 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 12px 15px;
+    padding: 15px;
     background-color: var(--color-card);
     border: 1px solid var(--color-accent);
+    border-radius: var(--border-radius);
     transition: all 0.3s ease;
-}
-
-/* Каждый прогресс-бар обрезан по-своему */
-#progressPhysical {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-}
-
-#progressMental {
-    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-}
-
-#progressFinancial {
-    clip-path: polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%);
-}
-
-#progressActivity {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    box-shadow: var(--shadow);
 }
 
 .progress-item:hover {
     transform: translateX(5px);
-    box-shadow: var(--shadow);
 }
 
 .progress-label {
@@ -262,16 +248,15 @@ body {
     font-size: 16px;
     color: var(--color-text);
     min-width: 120px;
-    letter-spacing: 0.5px;
 }
 
 .progress-bar-container {
     flex: 2;
     height: 22px;
     background-color: var(--color-progress-bg);
+    border-radius: 11px;
     overflow: hidden;
     position: relative;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .progress-bar {
@@ -279,6 +264,7 @@ body {
     background-color: var(--color-progress-fill);
     width: 0%;
     transition: width 0.5s ease;
+    border-radius: 11px;
 }
 
 .progress-value {
@@ -289,7 +275,7 @@ body {
     color: var(--color-text);
 }
 
-/* БЛОК 22: Двойная линия снизу с обрезанными углами */
+/* Двойная линия снизу - без обрезки углов */
 .bottom-line-trigger {
     position: fixed;
     bottom: 0;
@@ -299,10 +285,11 @@ body {
     max-width: 500px;
     padding: 15px 0;
     background-color: var(--color-card);
-    border-top: 1px solid var(--color-accent);
+    border-top: 2px solid var(--color-accent);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     z-index: 999;
     cursor: pointer;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 40px 100%, 0 calc(100% - 40px));
+    box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.1);
 }
 
 .double-line {
@@ -325,13 +312,14 @@ body {
     transition: all 0.3s ease;
 }
 
-/* БЛОК 23: Панельки для каждой кнопки (исправлено расположение) */
+/* Панельки для каждой кнопки - правильное расположение */
 .corner-panel {
     position: fixed;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     background-color: var(--color-panel);
     border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius);
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
@@ -346,33 +334,34 @@ body {
 }
 
 /* Правильное расположение панелей */
-.habits-panel {
-    bottom: 80px;
+.health-panel {
+    top: 150px;    /* Слева сверху */
     left: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px));
 }
 
-.health-panel {
-    bottom: 80px;
+.habits-panel {
+    top: 150px;    /* Справа сверху */
     right: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 0 40px);
 }
 
 .tasks-panel {
-    top: 150px;
+    bottom: 80px;  /* Слева снизу */
     left: 20px;
-    clip-path: polygon(0 40px, 40px 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .finance-panel {
-    top: 150px;
+    bottom: 80px;  /* Справа снизу */
     right: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+.panel-content {
+    position: relative;
+    height: 100%;
 }
 
 .panel-content h3 {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: var(--color-text);
 }
 
@@ -382,7 +371,30 @@ body {
     line-height: 1.6;
 }
 
-/* БЛОК 24: Панель всех модулей */
+.panel-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.panel-close:hover {
+    background-color: #FF6B6B;
+    transform: scale(1.1);
+}
+
+/* Панель всех модулей */
 .all-modules-panel {
     position: fixed;
     top: 50%;
@@ -391,13 +403,13 @@ body {
     width: 300px;
     background-color: var(--color-panel);
     border: 3px solid var(--color-accent);
+    border-radius: var(--border-radius);
     z-index: 1002;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease;
     padding: 0;
     box-shadow: 0 0 30px rgba(50, 205, 50, 0.3);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
 
 .all-modules-panel.active {
@@ -443,11 +455,11 @@ body {
 .module-card {
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
-    padding: 15px;
+    border-radius: var(--border-radius);
+    padding: 20px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .module-card:hover {
@@ -457,7 +469,7 @@ body {
 
 .module-icon {
     font-size: 32px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .module-name {
@@ -465,7 +477,7 @@ body {
     color: var(--color-text);
 }
 
-/* БЛОК 25: Общая панель снизу (БЕЗ ОБРЕЗКИ УГЛОВ) */
+/* Общая панель снизу - без обрезки углов */
 .bottom-sheet {
     position: fixed;
     bottom: 0;
@@ -476,9 +488,10 @@ body {
     height: 60vh;
     background-color: var(--color-panel);
     box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.2);
+    border-top: 2px solid var(--color-accent);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     z-index: 1001;
     transition: transform 0.4s ease;
-    border-top: 2px solid var(--color-accent);
     display: flex;
     flex-direction: column;
 }
@@ -538,10 +551,10 @@ body {
 .quick-item {
     background-color: var(--color-card);
     padding: 15px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--color-accent);
     cursor: pointer;
     transition: all 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .quick-item:hover {
@@ -549,7 +562,7 @@ body {
     transform: translateX(5px);
 }
 
-/* БЛОК 26: Адаптивность */
+/* Адаптивность */
 @media (max-width: 480px) {
     .side-tab {
         width: 60px;
@@ -562,7 +575,7 @@ body {
     }
     
     .progress-item {
-        padding: 10px 12px;
+        padding: 12px;
         gap: 10px;
     }
     
