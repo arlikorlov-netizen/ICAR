@@ -1,3 +1,14 @@
+<!-- 
+  БЛОК 14: index.html v2
+  Изменения:
+  1. Убрана аватарка
+  2. Имя и уровень по центру
+  3. Добавлена кнопка настроек справа
+  4. Исправлены панели: левая верхняя → слева сверху, правая верхняя → справа сверху
+  5. Добавлена панель всех модулей
+  6. Добавлены кнопки закрытия на панелях
+  7. Подключен Service Worker для PWA
+-->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,25 +16,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICAR - Контроль Жизни</title>
     
-    <!-- PWA настройки -->
+    <!-- PWA настройки для iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="ICAR">
     
-    <!-- Шрифт CrySis Bold -->
+    <!-- Шрифт подключен в CSS -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="manifest" href="manifest.json">
     
-    <!-- Иконки для PWA -->
+    <!-- Иконки -->
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <link rel="icon" type="image/png" href="icons/icon-192.png">
 </head>
 <body>
     <div class="app-container">
         
-        <!-- Верхняя панель -->
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <header class="top-panel">
             <div class="user-info">
+                <!-- Центрированное имя и уровень -->
                 <div class="user-details">
                     <h2 class="user-name" id="userName">Алексей</h2>
                     <div class="user-level">
@@ -31,44 +43,45 @@
                         <span class="level-text" id="userLevel">Уровень: 7</span>
                     </div>
                 </div>
+                <!-- Кнопка настроек справа -->
                 <button class="settings-btn" id="settingsBtn">⚙️</button>
             </div>
         </header>
 
-        <!-- Основное содержимое -->
+        <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
         <main class="main-content">
             
-            <!-- Центральный блок с фигуркой и кнопками -->
+            <!-- ЦЕНТРАЛЬНЫЙ БЛОК С ФИГУРКОЙ И КНОПКАМИ -->
             <div class="center-section">
-                <!-- Левая верхняя кнопка - Здоровье -->
+                <!-- Левая верхняя кнопка → Панель слева сверху -->
                 <button class="side-tab left-top-tab" data-tab="health">
                     <span class="tab-icon">❤️</span>
                 </button>
                 
-                <!-- Правая верхняя кнопка - Привычки -->
+                <!-- Правая верхняя кнопка → Панель справа сверху -->
                 <button class="side-tab right-top-tab" data-tab="habits">
                     <span class="tab-icon">🎯</span>
                 </button>
 
-                <!-- Центральная картинка -->
+                <!-- ЦЕНТРАЛЬНАЯ КАРТИНКА - открывает все модули -->
                 <div class="center-image-container" id="centerImage">
                     <div class="image-wrapper">
                         <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
                     </div>
                 </div>
 
-                <!-- Левая нижняя кнопка - Задачи -->
+                <!-- Левая нижняя кнопка → Панель слева снизу -->
                 <button class="side-tab left-bottom-tab" data-tab="tasks">
                     <span class="tab-icon">✅</span>
                 </button>
                 
-                <!-- Правая нижняя кнопка - Финансы -->
+                <!-- Правая нижняя кнопка → Панель справа снизу -->
                 <button class="side-tab right-bottom-tab" data-tab="finance">
                     <span class="tab-icon">💰</span>
                 </button>
             </div>
 
-            <!-- 4 показателя прогресса -->
+            <!-- 4 ПОКАЗАТЕЛЯ ПРОГРЕССА -->
             <div class="progress-indicators">
                 <div class="progress-item" id="progressPhysical">
                     <div class="progress-label">Физ. здоровье</div>
@@ -105,7 +118,7 @@
 
         </main>
 
-        <!-- Двойная линия снизу -->
+        <!-- ДВОЙНАЯ ЛИНИЯ СНИЗУ -->
         <div class="bottom-line-trigger" id="bottomLineTrigger">
             <div class="double-line">
                 <div class="line"></div>
@@ -113,8 +126,8 @@
             </div>
         </div>
 
-        <!-- Панельки для каждой кнопки - ТЕПЕРЬ ПРАВИЛЬНО -->
-        <!-- Левая верхняя кнопка открывает панель СЛЕВА СВЕРХУ -->
+        <!-- ПАНЕЛЬКИ ДЛЯ КАЖДОЙ КНОПКИ - ТЕПЕРЬ ПРАВИЛЬНО -->
+        <!-- Левая верхняя кнопка открывает эту панель -->
         <div class="corner-panel health-panel" id="healthPanel">
             <div class="panel-content">
                 <h3>❤️ Здоровье</h3>
@@ -123,7 +136,7 @@
             </div>
         </div>
 
-        <!-- Правая верхняя кнопка открывает панель СПРАВА СВЕРХУ -->
+        <!-- Правая верхняя кнопка открывает эту панель -->
         <div class="corner-panel habits-panel" id="habitsPanel">
             <div class="panel-content">
                 <h3>🎯 Привычки</h3>
@@ -132,7 +145,7 @@
             </div>
         </div>
 
-        <!-- Левая нижняя кнопка открывает панель СЛЕВА СНИЗУ -->
+        <!-- Левая нижняя кнопка открывает эту панель -->
         <div class="corner-panel tasks-panel" id="tasksPanel">
             <div class="panel-content">
                 <h3>✅ Задачи</h3>
@@ -141,7 +154,7 @@
             </div>
         </div>
 
-        <!-- Правая нижняя кнопка открывает панель СПРАВА СНИЗУ -->
+        <!-- Правая нижняя кнопка открывает эту панель -->
         <div class="corner-panel finance-panel" id="financePanel">
             <div class="panel-content">
                 <h3>💰 Финансы</h3>
@@ -150,7 +163,7 @@
             </div>
         </div>
 
-        <!-- Панель всех модулей -->
+        <!-- ПАНЕЛЬ ВСЕХ МОДУЛЕЙ -->
         <div class="all-modules-panel" id="allModulesPanel">
             <div class="modules-header">
                 <h3>Все модули</h3>
@@ -176,7 +189,7 @@
             </div>
         </div>
 
-        <!-- Общая панель снизу -->
+        <!-- ОБЩАЯ ПАНЕЛЬ СНИЗУ -->
         <div class="bottom-sheet" id="bottomSheet">
             <div class="sheet-header">
                 <div class="sheet-handle"></div>
@@ -195,5 +208,21 @@
     </div>
 
     <script src="js/app.js"></script>
+    
+    <!-- Регистрация Service Worker для PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(
+                    function(registration) {
+                        console.log('Service Worker зарегистрирован:', registration.scope);
+                    },
+                    function(err) {
+                        console.log('Ошибка регистрации Service Worker:', err);
+                    }
+                );
+            });
+        }
+    </script>
 </body>
 </html>

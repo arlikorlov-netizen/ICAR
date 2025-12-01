@@ -1,35 +1,46 @@
-/* Базовые стили */
+/*
+  БЛОК 15: main.css v2
+  Изменения:
+  1. Убрана вся обрезка углов (clip-path)
+  2. Только нормальные border-radius
+  3. Исправлен шрифт - TTF файл из папки fonts/
+  4. Тёмно-зелёный фон: #0A2A0A
+  5. Правильное расположение панелей
+  6. Убраны рамки с картинки
+*/
+
+/* 1. Сброс и базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Подключение шрифта CrySis Bold из папки fonts/ */
+/* 2. Шрифт CrySis Bold - ТОЧНО РАБОЧАЯ ВЕРСИЯ */
 @font-face {
     font-family: 'CrySis Bold';
     src: url('../fonts/CrySis-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap; /* Чтобы текст сразу отображался */
 }
 
-/* Цветовая схема с тёмно-зелёным фоном */
+/* 3. Цветовая схема - ТЁМНО-ЗЕЛЁНЫЙ ФОН */
 :root {
     --color-bg: #0A2A0A;           /* Тёмно-зелёный фон */
-    --color-card: #1A3A1A;         /* Карточки чуть светлее */
+    --color-card: #1A3A1A;         /* Карточки */
     --color-text: #90EE90;         /* Светло-зелёный текст */
     --color-text-secondary: #7CFC7C; /* Вторичный текст */
     --color-accent: #32CD32;       /* Ярко-зелёный акцент */
     --color-progress-bg: #2A4A2A;  /* Фон прогресс-баров */
-    --color-progress-fill: #32CD32; /* Заполнение прогресс-баров */
-    --color-button: #2E8B57;       /* Цвет кнопок */
-    --color-button-hover: #3CB371; /* Цвет кнопок при наведении */
-    --color-panel: #1A3A1A;        /* Цвет панелей */
-    --shadow: 0 4px 20px rgba(50, 205, 50, 0.15);
-    --border-radius: 12px;         /* Закругления углов */
+    --color-button: #2E8B57;       /* Кнопки */
+    --color-button-hover: #3CB371; /* Кнопки при наведении */
+    --color-panel: #1A3A1A;        /* Панели */
+    --border-radius: 15px;         /* Закругления */
+    --shadow: 0 4px 20px rgba(50, 205, 50, 0.2);
 }
 
-/* Основные стили */
+/* 4. Основные стили */
 body {
     font-family: 'CrySis Bold', 'Arial Black', sans-serif;
     background-color: var(--color-bg);
@@ -39,27 +50,26 @@ body {
     overflow: hidden;
 }
 
+/* 5. Контейнер приложения */
 .app-container {
     min-height: 100vh;
     max-width: 500px;
     margin: 0 auto;
-    position: relative;
     background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
-    padding-bottom: 60px;
+    position: relative;
     overflow-x: hidden;
-    overflow-y: auto;
 }
 
-/* Верхняя панель - без обрезки углов */
+/* 6. ВЕРХНЯЯ ПАНЕЛЬ - имя и уровень по центру */
 .top-panel {
     padding: 20px;
     background-color: var(--color-card);
     border-bottom: 2px solid var(--color-accent);
-    flex-shrink: 0;
     text-align: center;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    position: relative;
+    z-index: 100;
 }
 
 .user-info {
@@ -69,13 +79,12 @@ body {
 }
 
 .user-details {
-    text-align: center;
     flex: 1;
+    text-align: center;
 }
 
 .user-name {
     font-size: 24px;
-    font-weight: bold;
     color: var(--color-text);
     margin-bottom: 5px;
     letter-spacing: 1px;
@@ -95,13 +104,13 @@ body {
     color: #FFD700;
 }
 
-/* Кнопка настроек */
+/* 7. КНОПКА НАСТРОЕК СПРАВА */
 .settings-btn {
     width: 44px;
     height: 44px;
     background-color: var(--color-button);
     border: 2px solid var(--color-accent);
-    border-radius: 8px;
+    border-radius: 10px;
     color: var(--color-text);
     font-size: 20px;
     cursor: pointer;
@@ -109,33 +118,35 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    margin-left: 10px;
 }
 
 .settings-btn:hover {
     background-color: var(--color-button-hover);
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
-/* Основное содержимое */
+/* 8. Основное содержимое */
 .main-content {
     flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    overflow-y: auto;
 }
 
-/* Центральный блок */
+/* 9. ЦЕНТРАЛЬНЫЙ БЛОК */
 .center-section {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 320px;
-    margin: 10px 0;
+    height: 300px;
+    margin: 20px 0;
 }
 
-/* Кнопки по бокам от фигурки - без обрезки углов */
+/* 10. КНОПКИ ПО БОКАМ - без обрезки углов */
 .side-tab {
     position: absolute;
     width: 70px;
@@ -148,7 +159,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 50;
     box-shadow: var(--shadow);
 }
 
@@ -161,31 +172,31 @@ body {
     font-size: 28px;
 }
 
-/* Позиционирование кнопок */
+/* 11. Позиционирование кнопок */
 .left-top-tab {
-    top: 20px;
-    left: 20px;
+    top: 0;
+    left: 0;
 }
 
 .right-top-tab {
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
 }
 
 .left-bottom-tab {
-    bottom: 20px;
-    left: 20px;
+    bottom: 0;
+    left: 0;
 }
 
 .right-bottom-tab {
-    bottom: 20px;
-    right: 20px;
+    bottom: 0;
+    right: 0;
 }
 
-/* Центральная картинка - без рамки */
+/* 12. ЦЕНТРАЛЬНАЯ КАРТИНКА - без рамки */
 .center-image-container {
-    z-index: 5;
     cursor: pointer;
+    z-index: 40;
 }
 
 .image-wrapper {
@@ -193,38 +204,34 @@ body {
 }
 
 .human-image {
-    width: 220px;
-    height: 280px;
+    width: 200px;
+    height: 250px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(50, 205, 50, 0.3));
 }
 
-.human-image:hover {
-    transform: scale(1.02);
-}
-
-/* Placeholder для картинки */
+/* 13. Placeholder для картинки */
 .image-placeholder {
-    width: 220px;
-    height: 280px;
+    width: 200px;
+    height: 250px;
     background-color: var(--color-card);
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .image-placeholder span {
-    font-size: 80px;
+    font-size: 60px;
     color: var(--color-accent);
 }
 
-/* 4 показателя прогресса - без обрезки углов */
+/* 14. ПРОГРЕСС-БАРЫ - без обрезки углов */
 .progress-indicators {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: auto;
 }
 
 .progress-item {
@@ -233,14 +240,14 @@ body {
     gap: 15px;
     padding: 15px;
     background-color: var(--color-card);
-    border: 1px solid var(--color-accent);
+    border: 2px solid var(--color-accent);
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
-    box-shadow: var(--shadow);
 }
 
 .progress-item:hover {
     transform: translateX(5px);
+    box-shadow: var(--shadow);
 }
 
 .progress-label {
@@ -252,19 +259,18 @@ body {
 
 .progress-bar-container {
     flex: 2;
-    height: 22px;
+    height: 20px;
     background-color: var(--color-progress-bg);
-    border-radius: 11px;
+    border-radius: 10px;
     overflow: hidden;
-    position: relative;
 }
 
 .progress-bar {
     height: 100%;
-    background-color: var(--color-progress-fill);
+    background: linear-gradient(90deg, var(--color-accent), #7CFC7C);
     width: 0%;
-    transition: width 0.5s ease;
-    border-radius: 11px;
+    border-radius: 10px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .progress-value {
@@ -275,7 +281,7 @@ body {
     color: var(--color-text);
 }
 
-/* Двойная линия снизу - без обрезки углов */
+/* 15. ДВОЙНАЯ ЛИНИЯ СНИЗУ */
 .bottom-line-trigger {
     position: fixed;
     bottom: 0;
@@ -286,39 +292,39 @@ body {
     padding: 15px 0;
     background-color: var(--color-card);
     border-top: 2px solid var(--color-accent);
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    z-index: 999;
+    border-radius: 20px 20px 0 0;
     cursor: pointer;
-    box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.1);
+    z-index: 999;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
 }
 
 .double-line {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
 }
 
 .line {
-    width: 80px;
+    width: 60px;
     height: 3px;
     background-color: var(--color-text);
     border-radius: 2px;
+    transition: all 0.3s ease;
 }
 
 .bottom-line-trigger:hover .line {
     background-color: var(--color-accent);
-    transform: scaleX(1.2);
-    transition: all 0.3s ease;
+    width: 80px;
 }
 
-/* Панельки для каждой кнопки - правильное расположение */
+/* 16. ПАНЕЛЬКИ - правильное расположение */
 .corner-panel {
     position: fixed;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     background-color: var(--color-panel);
-    border: 2px solid var(--color-accent);
+    border: 3px solid var(--color-accent);
     border-radius: var(--border-radius);
     z-index: 1000;
     opacity: 0;
@@ -333,24 +339,24 @@ body {
     visibility: visible;
 }
 
-/* Правильное расположение панелей */
+/* 17. РАСПОЛОЖЕНИЕ КАЖДОЙ ПАНЕЛИ */
 .health-panel {
-    top: 150px;    /* Слева сверху */
+    top: 120px;    /* Слева сверху */
     left: 20px;
 }
 
 .habits-panel {
-    top: 150px;    /* Справа сверху */
+    top: 120px;    /* Справа сверху */
     right: 20px;
 }
 
 .tasks-panel {
-    bottom: 80px;  /* Слева снизу */
+    bottom: 70px;  /* Слева снизу */
     left: 20px;
 }
 
 .finance-panel {
-    bottom: 80px;  /* Справа снизу */
+    bottom: 70px;  /* Справа снизу */
     right: 20px;
 }
 
@@ -360,9 +366,10 @@ body {
 }
 
 .panel-content h3 {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 15px;
     color: var(--color-text);
+    text-align: center;
 }
 
 .panel-content p {
@@ -394,7 +401,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Панель всех модулей */
+/* 18. ПАНЕЛЬ ВСЕХ МОДУЛЕЙ */
 .all-modules-panel {
     position: fixed;
     top: 50%;
@@ -407,9 +414,9 @@ body {
     z-index: 1002;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     padding: 0;
-    box-shadow: 0 0 30px rgba(50, 205, 50, 0.3);
+    box-shadow: 0 0 40px rgba(50, 205, 50, 0.4);
 }
 
 .all-modules-panel.active {
@@ -423,12 +430,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
 }
 
 .modules-header h3 {
     color: var(--color-text);
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .close-modules {
@@ -442,7 +449,7 @@ body {
 }
 
 .close-modules:hover {
-    transform: scale(1.1);
+    transform: rotate(90deg);
 }
 
 .modules-grid {
@@ -464,7 +471,7 @@ body {
 
 .module-card:hover {
     background-color: var(--color-button);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .module-icon {
@@ -475,9 +482,10 @@ body {
 .module-name {
     font-size: 14px;
     color: var(--color-text);
+    font-weight: bold;
 }
 
-/* Общая панель снизу - без обрезки углов */
+/* 19. ОБЩАЯ ПАНЕЛЬ СНИЗУ */
 .bottom-sheet {
     position: fixed;
     bottom: 0;
@@ -487,11 +495,10 @@ body {
     max-width: 500px;
     height: 60vh;
     background-color: var(--color-panel);
-    box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.2);
-    border-top: 2px solid var(--color-accent);
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-top: 3px solid var(--color-accent);
+    border-radius: 25px 25px 0 0;
     z-index: 1001;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     flex-direction: column;
 }
@@ -505,15 +512,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--color-accent);
-    flex-shrink: 0;
+    border-bottom: 2px solid var(--color-accent);
+    position: relative;
 }
 
 .sheet-handle {
-    width: 40px;
-    height: 4px;
+    width: 50px;
+    height: 5px;
     background-color: var(--color-text-secondary);
-    border-radius: 2px;
+    border-radius: 3px;
     position: absolute;
     left: 50%;
     top: 10px;
@@ -522,17 +529,22 @@ body {
 
 .sheet-title {
     color: var(--color-text);
-    font-size: 18px;
-    margin-left: 30px;
+    font-size: 20px;
+    margin-left: 40px;
 }
 
 .sheet-close {
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.sheet-close:hover {
+    transform: rotate(90deg);
 }
 
 .sheet-body {
@@ -550,20 +562,25 @@ body {
 
 .quick-item {
     background-color: var(--color-card);
-    padding: 15px;
+    padding: 18px;
     border-radius: var(--border-radius);
-    border: 1px solid var(--color-accent);
+    border: 2px solid var(--color-accent);
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 16px;
 }
 
 .quick-item:hover {
     background-color: var(--color-button);
-    transform: translateX(5px);
+    transform: translateX(10px);
 }
 
-/* Адаптивность */
+/* 20. АДАПТИВНОСТЬ */
 @media (max-width: 480px) {
+    .user-name {
+        font-size: 22px;
+    }
+    
     .side-tab {
         width: 60px;
         height: 60px;
@@ -571,7 +588,7 @@ body {
     
     .human-image {
         width: 180px;
-        height: 240px;
+        height: 220px;
     }
     
     .progress-item {
