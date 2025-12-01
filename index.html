@@ -1,64 +1,137 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- === НАЧАЛО БЛОКА MAIN_HTML_001 === -->
+    <!-- === НАЧАЛО БЛОКА MAIN_HTML_002 === -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICAR - Контроль Жизни</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="manifest" href="manifest.json">
-    <!-- === КОНЕЦ БЛОКА MAIN_HTML_001 === -->
+    <!-- === КОНЕЦ БЛОКА MAIN_HTML_002 === -->
 </head>
 <body>
-    <!-- === НАЧАЛО БЛОКА MAIN_HTML_001 === -->
+    <!-- === НАЧАЛО БЛОКА MAIN_HTML_002 === -->
     <div class="app-container">
-        <header class="main-header">
-            <h1 class="app-title">ICAR</h1>
-            <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+        
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <header class="top-panel">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <h2 class="user-name" id="userName">Пользователь</h2>
+                    <div class="user-level">
+                        <span class="level-icon">⭐</span>
+                        <span class="level-text" id="userLevel">Уровень: 1</span>
+                    </div>
+                </div>
+            </div>
         </header>
 
+        <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
         <main class="main-content">
-            <div class="human-container" id="humanContainer">
-                <div class="human-figure">
-                    <div class="head"></div>
-                    <div class="body"></div>
-                    <div class="arm left"></div>
-                    <div class="arm right"></div>
-                    <div class="leg left"></div>
-                    <div class="leg right"></div>
-                </div>
-                <div class="human-label">Нажми для обзора дня</div>
+            
+            <!-- ЦЕНТРАЛЬНАЯ КАРТИНКА -->
+            <div class="center-image-container">
+                <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
+                <div class="image-label">Нажми для деталей</div>
             </div>
 
-            <div class="modules-grid">
-                <div class="module-card health" data-module="health">
-                    <div class="module-icon">❤️</div>
-                    <h3 class="module-title">Здоровье</h3>
-                    <p class="module-status">--</p>
+            <!-- 4 ПОКАЗАТЕЛЯ ПРОГРЕССА -->
+            <div class="progress-indicators">
+                <div class="progress-item" id="progressPhysical">
+                    <div class="progress-label">Физ. здоровье</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-value="0"></div>
+                    </div>
+                    <div class="progress-value" id="valuePhysical">0%</div>
                 </div>
                 
-                <div class="module-card habits" data-module="habits">
-                    <div class="module-icon">🎯</div>
-                    <h3 class="module-title">Привычки</h3>
-                    <p class="module-status">--</p>
+                <div class="progress-item" id="progressMental">
+                    <div class="progress-label">Мент. здоровье</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-value="0"></div>
+                    </div>
+                    <div class="progress-value" id="valueMental">0%</div>
                 </div>
                 
-                <div class="module-card tasks" data-module="tasks">
-                    <div class="module-icon">✅</div>
-                    <h3 class="module-title">Задачи</h3>
-                    <p class="module-status">--</p>
+                <div class="progress-item" id="progressFinancial">
+                    <div class="progress-label">Финансы</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-value="0"></div>
+                    </div>
+                    <div class="progress-value" id="valueFinancial">0%</div>
                 </div>
                 
-                <div class="module-card finance" data-module="finance">
-                    <div class="module-icon">💰</div>
-                    <h3 class="module-title">Финансы</h3>
-                    <p class="module-status">--</p>
+                <div class="progress-item" id="progressActivity">
+                    <div class="progress-label">Активность</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" data-value="0"></div>
+                    </div>
+                    <div class="progress-value" id="valueActivity">0%</div>
                 </div>
             </div>
+
+            <!-- КНОПКИ-ЗАКЛАДОЧКИ (2 слева, 2 справа) -->
+            <div class="tab-buttons-container">
+                <div class="tab-buttons-left">
+                    <button class="tab-button" id="tabLeft1" data-tab="health">
+                        <span class="tab-icon">❤️</span>
+                        <span class="tab-label">Здоровье</span>
+                    </button>
+                    <button class="tab-button" id="tabLeft2" data-tab="habits">
+                        <span class="tab-icon">🎯</span>
+                        <span class="tab-label">Привычки</span>
+                    </button>
+                </div>
+                
+                <div class="tab-buttons-right">
+                    <button class="tab-button" id="tabRight1" data-tab="tasks">
+                        <span class="tab-icon">✅</span>
+                        <span class="tab-label">Задачи</span>
+                    </button>
+                    <button class="tab-button" id="tabRight2" data-tab="finance">
+                        <span class="tab-icon">💰</span>
+                        <span class="tab-label">Финансы</span>
+                    </button>
+                </div>
+            </div>
+
         </main>
+
+        <!-- ШИРОКАЯ КНОПКА СНИЗУ -->
+        <div class="bottom-sheet-trigger">
+            <button class="slide-up-button" id="slideUpBtn">
+                <span class="slide-icon">⬆️</span>
+                <span class="slide-text">Открыть панель</span>
+            </button>
+        </div>
+
+        <!-- БОКОВАЯ ПАНЕЛЬ (справа) -->
+        <aside class="side-panel right-panel" id="rightPanel">
+            <div class="panel-content">
+                <button class="panel-close" id="closeRightPanel">✕</button>
+                <h3 class="panel-title" id="panelTitle">Панель</h3>
+                <div class="panel-body" id="panelBody">
+                    <!-- Контент будет динамически заполняться -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ СНИЗУ -->
+        <div class="bottom-sheet" id="bottomSheet">
+            <div class="sheet-header">
+                <div class="sheet-handle"></div>
+                <h3 class="sheet-title">Быстрый доступ</h3>
+                <button class="sheet-close" id="closeBottomSheet">✕</button>
+            </div>
+            <div class="sheet-body" id="sheetBody">
+                <!-- Контент будет динамически заполняться -->
+            </div>
+        </div>
+
     </div>
 
     <script src="js/app.js"></script>
-    <!-- === КОНЕЦ БЛОКА MAIN_HTML_001 === -->
+    <!-- === КОНЕЦ БЛОКА MAIN_HTML_002 === -->
 </body>
 </html>

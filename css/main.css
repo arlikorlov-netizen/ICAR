@@ -1,4 +1,4 @@
-/* === НАЧАЛО БЛОКА MAIN_CSS_001 === */
+/* === НАЧАЛО БЛОКА MAIN_CSS_002 === */
 
 /* Сброс стилей */
 * {
@@ -7,18 +7,19 @@
     box-sizing: border-box;
 }
 
-/* Переменные цветов */
+/* ТЁМНАЯ ТЕМА */
 :root {
-    /* === НАЧАЛО БЛОКА MAIN_CSS_001 === */
-    --color-health: #FF6B6B;
-    --color-habits: #4ECDC4;
-    --color-tasks: #45B7D1;
-    --color-finance: #96CEB4;
-    --color-accent: #007AFF;
-    --color-text: #333333;
-    --color-bg: #F8F9FA;
-    --color-card: #FFFFFF;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --color-bg: #000000;           /* Чёрный фон */
+    --color-card: #1A1A1A;         /* Тёмно-серый для карточек */
+    --color-text: #90EE90;         /* Светло-зелёный текст */
+    --color-text-secondary: #7CFC7C; /* Более яркий зелёный */
+    --color-accent: #32CD32;       /* Зелёный акцент */
+    --color-progress-bg: #333333;  /* Фон прогресс-баров */
+    --color-progress-fill: #32CD32; /* Заливка прогресс-баров */
+    --color-button: #2E8B57;       /* Зелёный для кнопок */
+    --color-button-hover: #3CB371; /* Зелёный при наведении */
+    --color-panel: #1A1A1A;        /* Панели */
+    --shadow: 0 4px 20px rgba(50, 205, 50, 0.15); /* Зелёная тень */
 }
 
 /* Основные стили */
@@ -27,174 +28,363 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.5;
+    height: 100vh;
+    overflow-x: hidden;
 }
 
 .app-container {
     min-height: 100vh;
     max-width: 500px;
     margin: 0 auto;
+    position: relative;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Шапка */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
+/* ВЕРХНЯЯ ПАНЕЛЬ С ИМЕНЕМ И УРОВНЕМ */
+.top-panel {
+    padding: 16px 20px;
     background-color: var(--color-card);
+    border-bottom: 1px solid var(--color-accent);
     box-shadow: var(--shadow);
 }
 
-.app-title {
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 24px;
+    color: var(--color-bg);
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-name {
+    font-size: 20px;
     font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 4px;
 }
 
-.menu-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    padding: 8px;
-    cursor: pointer;
+.user-level {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-secondary);
 }
 
-/* Основной контент */
+.level-icon {
+    font-size: 16px;
+}
+
+.level-text {
+    font-size: 14px;
+}
+
+/* ОСНОВНОЕ СОДЕРЖИМОЕ */
 .main-content {
+    flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    gap: 30px;
 }
 
-/* Фигурка человека */
-.human-container {
+/* ЦЕНТРАЛЬНАЯ КАРТИНКА */
+.center-image-container {
     text-align: center;
+    margin: 20px 0;
     cursor: pointer;
 }
 
-.human-figure {
-    width: 120px;
-    height: 180px;
-    position: relative;
-    margin: 0 auto 10px;
-}
-
-.human-figure .head {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-text);
-    border-radius: 50%;
-}
-
-.human-figure .body {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 60px;
-    background-color: var(--color-text);
-}
-
-.human-figure .arm {
-    position: absolute;
-    width: 30px;
-    height: 10px;
-    background-color: var(--color-text);
-    top: 50px;
-}
-
-.human-figure .arm.left {
-    left: calc(50% - 40px);
-    transform: rotate(30deg);
-}
-
-.human-figure .arm.right {
-    left: calc(50% + 10px);
-    transform: rotate(-30deg);
-}
-
-.human-figure .leg {
-    position: absolute;
-    width: 10px;
-    height: 50px;
-    background-color: var(--color-text);
-    top: 100px;
-}
-
-.human-figure .leg.left {
-    left: calc(50% - 15px);
-}
-
-.human-figure .leg.right {
-    left: calc(50% + 5px);
-}
-
-.human-label {
-    font-size: 14px;
-    color: #666;
-    margin-top: 10px;
-}
-
-/* Сетка модулей */
-.modules-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    width: 100%;
-}
-
-.module-card {
+.human-image {
+    width: 150px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 20px;
+    border: 2px solid var(--color-accent);
+    padding: 10px;
     background-color: var(--color-card);
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
     box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: transform 0.2s;
-    border: 2px solid transparent;
 }
 
-.module-card:active {
-    transform: translateY(2px);
-}
-
-/* Цвета модулей */
-.module-card.health {
-    border-color: var(--color-health);
-}
-
-.module-card.habits {
-    border-color: var(--color-habits);
-}
-
-.module-card.tasks {
-    border-color: var(--color-tasks);
-}
-
-.module-card.finance {
-    border-color: var(--color-finance);
-}
-
-.module-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-}
-
-.module-title {
-    font-size: 16px;
-    margin-bottom: 4px;
-    font-weight: 600;
-}
-
-.module-status {
+.image-label {
+    margin-top: 10px;
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-secondary);
+    font-style: italic;
 }
 
-/* === КОНЕЦ БЛОКА MAIN_CSS_001 === */
+/* 4 ПОКАЗАТЕЛЯ ПРОГРЕССА */
+.progress-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    background-color: var(--color-card);
+    border-radius: 12px;
+    border: 1px solid var(--color-accent);
+}
+
+.progress-label {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text);
+    min-width: 120px;
+}
+
+.progress-bar-container {
+    flex: 2;
+    height: 20px;
+    background-color: var(--color-progress-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--color-progress-fill);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progress-value {
+    min-width: 50px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+/* КНОПКИ-ЗАКЛАДОЧКИ */
+.tab-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    height: 120px;
+}
+
+.tab-buttons-left, .tab-buttons-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tab-button {
+    width: 80px;
+    height: 50px;
+    background-color: var(--color-button);
+    border: none;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--color-text);
+    position: relative;
+}
+
+.tab-button:hover {
+    background-color: var(--color-button-hover);
+    transform: translateY(-5px);
+}
+
+.tab-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.tab-label {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Расположение кнопок как закладки */
+.tab-buttons-left .tab-button {
+    transform-origin: left bottom;
+}
+
+.tab-buttons-right .tab-button {
+    transform-origin: right bottom;
+}
+
+/* ШИРОКАЯ КНОПКА СНИЗУ */
+.bottom-sheet-trigger {
+    padding: 15px 20px;
+    background-color: var(--color-card);
+    border-top: 1px solid var(--color-accent);
+}
+
+.slide-up-button {
+    width: 100%;
+    height: 50px;
+    background-color: var(--color-button);
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.slide-up-button:hover {
+    background-color: var(--color-button-hover);
+}
+
+.slide-icon {
+    font-size: 20px;
+}
+
+/* БОКОВАЯ ПАНЕЛЬ (справа) */
+.side-panel {
+    position: fixed;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    background-color: var(--color-panel);
+    box-shadow: -2px 0 20px rgba(50, 205, 50, 0.2);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    border-left: 1px solid var(--color-accent);
+}
+
+.side-panel.active {
+    transform: translateX(0);
+}
+
+.right-panel {
+    right: 0;
+}
+
+.panel-content {
+    padding: 20px;
+    height: 100%;
+}
+
+.panel-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.panel-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--color-text);
+    font-size: 20px;
+}
+
+.panel-body {
+    color: var(--color-text-secondary);
+}
+
+/* ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ СНИЗУ */
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--color-panel);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.2);
+    z-index: 1001;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    border-top: 2px solid var(--color-accent);
+}
+
+.bottom-sheet.active {
+    transform: translateY(0);
+}
+
+.sheet-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-accent);
+}
+
+.sheet-handle {
+    width: 40px;
+    height: 4px;
+    background-color: var(--color-text-secondary);
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+
+.sheet-title {
+    color: var(--color-text);
+    font-size: 18px;
+}
+
+.sheet-close {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sheet-body {
+    padding: 20px;
+    color: var(--color-text-secondary);
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 480px) {
+    .tab-button {
+        width: 70px;
+        height: 45px;
+    }
+    
+    .human-image {
+        width: 130px;
+        height: 180px;
+    }
+    
+    .progress-item {
+        padding: 10px 12px;
+    }
+}
+
+/* === КОНЕЦ БЛОКА MAIN_CSS_002 === */
