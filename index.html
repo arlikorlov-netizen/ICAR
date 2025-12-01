@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICAR</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <h1 class="app-title">ICAR</h1>
+            <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+        </header>
+
+        <main class="main-content">
+            <!-- Центральная фигурка -->
+            <div class="human-container" id="humanContainer">
+                <div class="human-figure">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
+                </div>
+                <div class="human-label">Нажми для обзора дня</div>
+            </div>
+
+            <!-- 4 модуля -->
+            <div class="modules-grid">
+                <div class="module-card health" data-module="health">
+                    <div class="module-icon">❤️</div>
+                    <h3 class="module-title">Здоровье</h3>
+                    <p class="module-status">--</p>
+                </div>
+                
+                <div class="module-card habits" data-module="habits">
+                    <div class="module-icon">🎯</div>
+                    <h3 class="module-title">Привычки</h3>
+                    <p class="module-status">--</p>
+                </div>
+                
+                <div class="module-card tasks" data-module="tasks">
+                    <div class="module-icon">✅</div>
+                    <h3 class="module-title">Задачи</h3>
+                    <p class="module-status">--</p>
+                </div>
+                
+                <div class="module-card finance" data-module="finance">
+                    <div class="module-icon">💰</div>
+                    <h3 class="module-title">Финансы</h3>
+                    <p class="module-status">--</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
