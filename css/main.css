@@ -386,5 +386,25 @@ body {
         padding: 10px 12px;
     }
 }
+/* Временный фикс для отображения */
+.tab-buttons-left {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+}
 
+.tab-buttons-right {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+}
+
+.progress-indicators {
+    margin-bottom: 140px; /* Отступ для кнопок */
+}
+
+.center-image-container {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
 /* === КОНЕЦ БЛОКА MAIN_CSS_002 === */
