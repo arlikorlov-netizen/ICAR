@@ -1,13 +1,11 @@
-/* === НАЧАЛО БЛОКА MAIN_CSS_004 === */
-
-/* Сброс стилей */
+/* БЛОК 10: Сброс и базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ШРИФТ */
+/* БЛОК 11: Подключение шрифта */
 @font-face {
     font-family: 'CrySis Bold';
     src: url('../fonts/CrySis-Bold.woff2') format('woff2'),
@@ -16,7 +14,7 @@
     font-style: normal;
 }
 
-/* ТЁМНАЯ ТЕМА */
+/* БЛОК 12: Цветовая схема */
 :root {
     --color-bg: #000000;
     --color-card: #1A1A1A;
@@ -31,9 +29,9 @@
     --shadow: 0 4px 20px rgba(50, 205, 50, 0.15);
 }
 
-/* Основные стили */
+/* БЛОК 13: Основные стили */
 body {
-    font-family: 'CrySis Bold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'CrySis Bold', 'Arial Black', sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.5;
@@ -52,44 +50,32 @@ body {
     overflow: hidden;
 }
 
-/* ВЕРХНЯЯ ПАНЕЛЬ */
+/* БЛОК 14: Верхняя панель (БЕЗ ОБРЕЗКИ УГЛОВ) */
 .top-panel {
-    padding: 16px 20px;
+    padding: 20px;
     background-color: var(--color-card);
-    border-bottom: 1px solid var(--color-accent);
-    box-shadow: var(--shadow);
+    border-bottom: 2px solid var(--color-accent);
     flex-shrink: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px));
+    position: relative;
 }
 
 .user-info {
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--color-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: var(--color-bg);
+    justify-content: space-between;
 }
 
 .user-details {
+    text-align: left;
     flex: 1;
 }
 
 .user-name {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     color: var(--color-text);
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
 }
 
 .user-level {
@@ -97,37 +83,55 @@ body {
     align-items: center;
     gap: 8px;
     color: var(--color-text-secondary);
-}
-
-.level-icon {
     font-size: 16px;
 }
 
-.level-text {
-    font-size: 14px;
+.level-icon {
+    font-size: 18px;
+    color: #FFD700;
 }
 
-/* ОСНОВНОЕ СОДЕРЖИМОЕ */
+/* БЛОК 15: Кнопка настроек */
+.settings-btn {
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    color: var(--color-text);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+.settings-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+}
+
+/* БЛОК 16: Основное содержимое */
 .main-content {
     flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
-    overflow-y: auto;
 }
 
-/* ЦЕНТРАЛЬНЫЙ БЛОК С ФИГУРКОЙ И КНОПКАМИ */
+/* БЛОК 17: Центральный блок */
 .center-section {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 280px;
-    margin: 20px 0;
+    height: 320px;
+    margin: 10px 0;
 }
 
-/* КНОПКИ ПО БОКАМ ОТ ФИГУРКИ */
+/* БЛОК 18: Кнопки по бокам от фигурки */
 .side-tab {
     position: absolute;
     width: 70px;
@@ -140,7 +144,6 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px));
 }
 
 .side-tab:hover {
@@ -148,44 +151,39 @@ body {
     transform: scale(1.1);
 }
 
-.side-tab:active {
-    transform: scale(0.95);
-}
-
 .tab-icon {
     font-size: 28px;
 }
 
-/* Позиционирование кнопок */
-.left-tab {
+/* БЛОК 19: Позиционирование кнопок с правильной обрезкой углов */
+.left-top-tab {
+    top: 20px;
     left: 20px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
 
-.right-tab {
+.right-top-tab {
+    top: 20px;
     right: 20px;
     clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
 }
 
-.top-tab {
-    top: 20px;
-}
-
-.bottom-tab {
+.left-bottom-tab {
     bottom: 20px;
-}
-
-.left-tab.bottom-tab {
+    left: 20px;
     clip-path: polygon(0 20px, 20px 0, 100% 0, 100% 100%, 0 100%);
 }
 
-.right-tab.bottom-tab {
+.right-bottom-tab {
+    bottom: 20px;
+    right: 20px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 20px) 100%, 0 20px);
 }
 
-/* ЦЕНТРАЛЬНАЯ КАРТИНКА */
+/* БЛОК 20: Центральная картинка (без рамки, больше) */
 .center-image-container {
     z-index: 5;
+    cursor: pointer;
 }
 
 .image-wrapper {
@@ -193,23 +191,33 @@ body {
 }
 
 .human-image {
-    width: 180px;
-    height: 240px;
+    width: 220px;
+    height: 280px;
     object-fit: contain;
-    border: 3px solid var(--color-accent);
+    transition: transform 0.3s ease;
+}
+
+.human-image:hover {
+    transform: scale(1.02);
+}
+
+/* Placeholder для картинки */
+.image-placeholder {
+    width: 220px;
+    height: 280px;
     background-color: var(--color-card);
-    box-shadow: var(--shadow);
-    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
 }
 
-.image-label {
-    margin-top: 10px;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    font-style: italic;
+.image-placeholder span {
+    font-size: 80px;
+    color: var(--color-accent);
 }
 
-/* 4 ПОКАЗАТЕЛЯ ПРОГРЕССА */
+/* БЛОК 21: 4 показателя прогресса с правильной обрезкой */
 .progress-indicators {
     display: flex;
     flex-direction: column;
@@ -224,8 +232,24 @@ body {
     padding: 12px 15px;
     background-color: var(--color-card);
     border: 1px solid var(--color-accent);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
     transition: all 0.3s ease;
+}
+
+/* Каждый прогресс-бар обрезан по-своему */
+#progressPhysical {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+#progressMental {
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+}
+
+#progressFinancial {
+    clip-path: polygon(0 15px, 15px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+#progressActivity {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
 }
 
 .progress-item:hover {
@@ -235,7 +259,7 @@ body {
 
 .progress-label {
     flex: 1;
-    font-size: 15px;
+    font-size: 16px;
     color: var(--color-text);
     min-width: 120px;
     letter-spacing: 0.5px;
@@ -243,9 +267,8 @@ body {
 
 .progress-bar-container {
     flex: 2;
-    height: 20px;
+    height: 22px;
     background-color: var(--color-progress-bg);
-    border-radius: 10px;
     overflow: hidden;
     position: relative;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
@@ -261,12 +284,12 @@ body {
 .progress-value {
     min-width: 50px;
     text-align: right;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
     color: var(--color-text);
 }
 
-/* ДВОЙНАЯ ЛИНИЯ СНИЗУ */
+/* БЛОК 22: Двойная линия снизу с обрезанными углами */
 .bottom-line-trigger {
     position: fixed;
     bottom: 0;
@@ -279,7 +302,7 @@ body {
     border-top: 1px solid var(--color-accent);
     z-index: 999;
     cursor: pointer;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 0 40px);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 40px 100%, 0 calc(100% - 40px));
 }
 
 .double-line {
@@ -302,7 +325,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ПАНЕЛЬКИ ДЛЯ КАЖДОЙ КНОПКИ */
+/* БЛОК 23: Панельки для каждой кнопки (исправлено расположение) */
 .corner-panel {
     position: fixed;
     width: 200px;
@@ -322,16 +345,17 @@ body {
     visibility: visible;
 }
 
-.health-panel {
+/* Правильное расположение панелей */
+.habits-panel {
     bottom: 80px;
     left: 20px;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px));
 }
 
-.habits-panel {
+.health-panel {
     bottom: 80px;
     right: 20px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 40px 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 0 40px);
 }
 
 .tasks-panel {
@@ -358,7 +382,90 @@ body {
     line-height: 1.6;
 }
 
-/* ОБЩАЯ ПАНЕЛЬ СНИЗУ */
+/* БЛОК 24: Панель всех модулей */
+.all-modules-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 300px;
+    background-color: var(--color-panel);
+    border: 3px solid var(--color-accent);
+    z-index: 1002;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    padding: 0;
+    box-shadow: 0 0 30px rgba(50, 205, 50, 0.3);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.all-modules-panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modules-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-accent);
+}
+
+.modules-header h3 {
+    color: var(--color-text);
+    font-size: 20px;
+}
+
+.close-modules {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.close-modules:hover {
+    transform: scale(1.1);
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 20px;
+}
+
+.module-card {
+    background-color: var(--color-card);
+    border: 2px solid var(--color-accent);
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.module-card:hover {
+    background-color: var(--color-button);
+    transform: translateY(-5px);
+}
+
+.module-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.module-name {
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+/* БЛОК 25: Общая панель снизу (БЕЗ ОБРЕЗКИ УГЛОВ) */
 .bottom-sheet {
     position: fixed;
     bottom: 0;
@@ -374,7 +481,6 @@ body {
     border-top: 2px solid var(--color-accent);
     display: flex;
     flex-direction: column;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 50px) 100%, 0 50px);
 }
 
 .bottom-sheet.active {
@@ -432,7 +538,6 @@ body {
 .quick-item {
     background-color: var(--color-card);
     padding: 15px;
-    border-radius: 10px;
     border: 1px solid var(--color-accent);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -444,7 +549,7 @@ body {
     transform: translateX(5px);
 }
 
-/* АДАПТИВНОСТЬ */
+/* БЛОК 26: Адаптивность */
 @media (max-width: 480px) {
     .side-tab {
         width: 60px;
@@ -452,8 +557,8 @@ body {
     }
     
     .human-image {
-        width: 150px;
-        height: 200px;
+        width: 180px;
+        height: 240px;
     }
     
     .progress-item {
@@ -470,23 +575,8 @@ body {
         width: 180px;
         height: 180px;
     }
+    
+    .all-modules-panel {
+        width: 280px;
+    }
 }
-
-/* Placeholder для картинки */
-.image-placeholder {
-    width: 180px;
-    height: 240px;
-    background-color: var(--color-card);
-    border: 3px solid var(--color-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
-}
-
-.image-placeholder span {
-    font-size: 50px;
-    color: var(--color-accent);
-}
-
-/* === КОНЕЦ БЛОКА MAIN_CSS_004 === */
