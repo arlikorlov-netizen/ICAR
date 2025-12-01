@@ -1,4 +1,4 @@
-/* === НАЧАЛО БЛОКА MAIN_CSS_003 === */
+/* === НАЧАЛО БЛОКА MAIN_CSS_004 === */
 
 /* Сброс стилей */
 * {
@@ -7,24 +7,33 @@
     box-sizing: border-box;
 }
 
+/* ШРИФТ */
+@font-face {
+    font-family: 'CrySis Bold';
+    src: url('../fonts/CrySis-Bold.woff2') format('woff2'),
+         url('../fonts/CrySis-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
 /* ТЁМНАЯ ТЕМА */
 :root {
-    --color-bg: #000000;           /* Чёрный фон */
-    --color-card: #1A1A1A;         /* Тёмно-серый для карточек */
-    --color-text: #90EE90;         /* Светло-зелёный текст */
-    --color-text-secondary: #7CFC7C; /* Более яркий зелёный */
-    --color-accent: #32CD32;       /* Зелёный акцент */
-    --color-progress-bg: #333333;  /* Фон прогресс-баров */
-    --color-progress-fill: #32CD32; /* Заливка прогресс-баров */
-    --color-button: #2E8B57;       /* Зелёный для кнопок */
-    --color-button-hover: #3CB371; /* Зелёный при наведении */
-    --color-panel: #1A1A1A;        /* Панели */
+    --color-bg: #000000;
+    --color-card: #1A1A1A;
+    --color-text: #90EE90;
+    --color-text-secondary: #7CFC7C;
+    --color-accent: #32CD32;
+    --color-progress-bg: #333333;
+    --color-progress-fill: #32CD32;
+    --color-button: #2E8B57;
+    --color-button-hover: #3CB371;
+    --color-panel: #1A1A1A;
     --shadow: 0 4px 20px rgba(50, 205, 50, 0.15);
 }
 
 /* Основные стили */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'CrySis Bold', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.5;
@@ -39,7 +48,8 @@ body {
     background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
-    padding-bottom: 80px; /* Место для нижней кнопки */
+    padding-bottom: 60px;
+    overflow: hidden;
 }
 
 /* ВЕРХНЯЯ ПАНЕЛЬ */
@@ -49,6 +59,7 @@ body {
     border-bottom: 1px solid var(--color-accent);
     box-shadow: var(--shadow);
     flex-shrink: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px));
 }
 
 .user-info {
@@ -74,10 +85,11 @@ body {
 }
 
 .user-name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: var(--color-text);
     margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
 .user-level {
@@ -105,22 +117,89 @@ body {
     overflow-y: auto;
 }
 
+/* ЦЕНТРАЛЬНЫЙ БЛОК С ФИГУРКОЙ И КНОПКАМИ */
+.center-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 280px;
+    margin: 20px 0;
+}
+
+/* КНОПКИ ПО БОКАМ ОТ ФИГУРКИ */
+.side-tab {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px));
+}
+
+.side-tab:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.1);
+}
+
+.side-tab:active {
+    transform: scale(0.95);
+}
+
+.tab-icon {
+    font-size: 28px;
+}
+
+/* Позиционирование кнопок */
+.left-tab {
+    left: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+.right-tab {
+    right: 20px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+}
+
+.top-tab {
+    top: 20px;
+}
+
+.bottom-tab {
+    bottom: 20px;
+}
+
+.left-tab.bottom-tab {
+    clip-path: polygon(0 20px, 20px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.right-tab.bottom-tab {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 20px) 100%, 0 20px);
+}
+
 /* ЦЕНТРАЛЬНАЯ КАРТИНКА */
 .center-image-container {
+    z-index: 5;
+}
+
+.image-wrapper {
     text-align: center;
-    cursor: pointer;
-    flex-shrink: 0;
 }
 
 .human-image {
-    width: 150px;
-    height: 200px;
+    width: 180px;
+    height: 240px;
     object-fit: contain;
-    border-radius: 20px;
-    border: 2px solid var(--color-accent);
-    padding: 10px;
+    border: 3px solid var(--color-accent);
     background-color: var(--color-card);
     box-shadow: var(--shadow);
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
 }
 
 .image-label {
@@ -135,7 +214,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    flex-shrink: 0;
+    margin-top: auto;
 }
 
 .progress-item {
@@ -144,15 +223,22 @@ body {
     gap: 15px;
     padding: 12px 15px;
     background-color: var(--color-card);
-    border-radius: 12px;
     border: 1px solid var(--color-accent);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    transition: all 0.3s ease;
+}
+
+.progress-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
 }
 
 .progress-label {
     flex: 1;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text);
     min-width: 120px;
+    letter-spacing: 0.5px;
 }
 
 .progress-bar-container {
@@ -162,12 +248,12 @@ body {
     border-radius: 10px;
     overflow: hidden;
     position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .progress-bar {
     height: 100%;
     background-color: var(--color-progress-fill);
-    border-radius: 10px;
     width: 0%;
     transition: width 0.5s ease;
 }
@@ -175,159 +261,104 @@ body {
 .progress-value {
     min-width: 50px;
     text-align: right;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     color: var(--color-text);
 }
 
-/* КНОПКИ-ЗАКЛАДОЧКИ */
-.tab-buttons-container {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    margin-top: auto; /* Прижимаем к низу */
-    padding-top: 20px;
-    flex-shrink: 0;
-}
-
-.tab-buttons-left {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.tab-buttons-right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.tab-button {
-    width: 80px;
-    height: 50px;
-    background-color: var(--color-button);
-    border: none;
-    border-radius: 10px 10px 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: var(--color-text);
-    position: relative;
-}
-
-.tab-button:hover {
-    background-color: var(--color-button-hover);
-    transform: translateY(-5px);
-}
-
-.tab-icon {
-    font-size: 20px;
-    margin-bottom: 4px;
-}
-
-.tab-label {
-    font-size: 11px;
-    font-weight: bold;
-}
-
-/* ШИРОКАЯ КНОПКА СНИЗУ */
-.bottom-sheet-trigger {
+/* ДВОЙНАЯ ЛИНИЯ СНИЗУ */
+.bottom-line-trigger {
     position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     max-width: 500px;
-    padding: 15px 20px;
+    padding: 15px 0;
     background-color: var(--color-card);
     border-top: 1px solid var(--color-accent);
     z-index: 999;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 40px) 100%, 0 40px);
 }
 
-.slide-up-button {
-    width: 100%;
-    height: 50px;
-    background-color: var(--color-button);
-    border: none;
-    border-radius: 12px;
+.double-line {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    color: var(--color-text);
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    gap: 4px;
 }
 
-.slide-up-button:hover {
-    background-color: var(--color-button-hover);
+.line {
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-text);
+    border-radius: 2px;
 }
 
-.slide-icon {
-    font-size: 20px;
+.bottom-line-trigger:hover .line {
+    background-color: var(--color-accent);
+    transform: scaleX(1.2);
+    transition: all 0.3s ease;
 }
 
-/* БОКОВАЯ ПАНЕЛЬ */
-.side-panel {
+/* ПАНЕЛЬКИ ДЛЯ КАЖДОЙ КНОПКИ */
+.corner-panel {
     position: fixed;
-    top: 0;
-    width: 280px;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     background-color: var(--color-panel);
-    box-shadow: -2px 0 20px rgba(50, 205, 50, 0.2);
+    border: 2px solid var(--color-accent);
     z-index: 1000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    border-left: 1px solid var(--color-accent);
-}
-
-.side-panel.active {
-    transform: translateX(0);
-}
-
-.right-panel {
-    right: 0;
-}
-
-.panel-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
     padding: 20px;
-    height: 100%;
+    box-shadow: var(--shadow);
 }
 
-.panel-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
+.corner-panel.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.health-panel {
+    bottom: 80px;
+    left: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px));
+}
+
+.habits-panel {
+    bottom: 80px;
+    right: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 40px 100%);
+}
+
+.tasks-panel {
+    top: 150px;
+    left: 20px;
+    clip-path: polygon(0 40px, 40px 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.finance-panel {
+    top: 150px;
+    right: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+}
+
+.panel-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
     color: var(--color-text);
-    font-size: 20px;
-    cursor: pointer;
 }
 
-.panel-title {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    color: var(--color-text);
-    font-size: 20px;
-}
-
-.panel-body {
+.panel-content p {
+    font-size: 14px;
     color: var(--color-text-secondary);
+    line-height: 1.6;
 }
 
-/* ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ СНИЗУ */
+/* ОБЩАЯ ПАНЕЛЬ СНИЗУ */
 .bottom-sheet {
     position: fixed;
     bottom: 0;
@@ -335,15 +366,15 @@ body {
     transform: translateX(-50%) translateY(100%);
     width: 100%;
     max-width: 500px;
-    height: 70vh;
+    height: 60vh;
     background-color: var(--color-panel);
-    border-radius: 20px 20px 0 0;
     box-shadow: 0 -4px 20px rgba(50, 205, 50, 0.2);
     z-index: 1001;
     transition: transform 0.4s ease;
     border-top: 2px solid var(--color-accent);
     display: flex;
     flex-direction: column;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 50px) 100%, 0 50px);
 }
 
 .bottom-sheet.active {
@@ -382,6 +413,7 @@ body {
     color: var(--color-text);
     font-size: 20px;
     cursor: pointer;
+    padding: 5px;
 }
 
 .sheet-body {
@@ -391,16 +423,37 @@ body {
     flex: 1;
 }
 
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quick-item {
+    background-color: var(--color-card);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--color-accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.quick-item:hover {
+    background-color: var(--color-button);
+    transform: translateX(5px);
+}
+
 /* АДАПТИВНОСТЬ */
 @media (max-width: 480px) {
-    .tab-button {
-        width: 70px;
-        height: 45px;
+    .side-tab {
+        width: 60px;
+        height: 60px;
     }
     
     .human-image {
-        width: 130px;
-        height: 180px;
+        width: 150px;
+        height: 200px;
     }
     
     .progress-item {
@@ -410,13 +463,30 @@ body {
     
     .progress-label {
         min-width: 100px;
-        font-size: 13px;
+        font-size: 14px;
+    }
+    
+    .corner-panel {
+        width: 180px;
+        height: 180px;
     }
 }
 
 /* Placeholder для картинки */
-.placeholder-image {
-    display: inline-block;
+.image-placeholder {
+    width: 180px;
+    height: 240px;
+    background-color: var(--color-card);
+    border: 3px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
 }
 
-/* === КОНЕЦ БЛОКА MAIN_CSS_003 === */
+.image-placeholder span {
+    font-size: 50px;
+    color: var(--color-accent);
+}
+
+/* === КОНЕЦ БЛОКА MAIN_CSS_004 === */

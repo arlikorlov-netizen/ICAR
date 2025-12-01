@@ -1,4 +1,4 @@
-// === НАЧАЛО БЛОКА APP_JS_002 ===
+// === НАЧАЛО БЛОКА APP_JS_003 ===
 
 // Конфигурация приложения
 const AppConfig = {
@@ -12,9 +12,12 @@ const AppConfig = {
     }
 };
 
+// Текущая активная панель
+let activePanel = null;
+
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v2 загружен');
+    console.log('ICAR v3 загружен');
     
     // Инициализация данных
     initUserData();
@@ -22,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Инициализация интерактивных элементов
     initHumanImage();
-    initTabButtons();
-    initSlideUpButton();
-    initPanelCloses();
+    initSideTabs();
+    initBottomLine();
+    initBottomSheet();
     
-    // Загрузка тестовых данных
-    loadTestData();
+    // Закрытие панелей при клике вне
+    initClosePanels();
 });
 
 // Установка данных пользователя
@@ -46,13 +49,6 @@ function initUserData() {
 
 // Инициализация прогресс-баров
 function initProgressBars() {
-    const progressItems = {
-        physical: document.getElementById('progressPhysical'),
-        mental: document.getElementById('progressMental'),
-        financial: document.getElementById('progressFinancial'),
-        activity: document.getElementById('progressActivity')
-    };
-    
     // Установка начальных значений
     setTimeout(() => {
         setProgressValue('physical', AppConfig.progressValues.physical);
@@ -68,7 +64,6 @@ function setProgressValue(type, value) {
     const valueElement = document.getElementById(`value${type.charAt(0).toUpperCase() + type.slice(1)}`);
     
     if (barElement && valueElement) {
-        // Ограничение значения 0-100
         const clampedValue = Math.max(0, Math.min(100, value));
         
         // Анимация заполнения
@@ -80,11 +75,11 @@ function setProgressValue(type, value) {
         
         // Цвет в зависимости от значения
         if (clampedValue < 30) {
-            barElement.style.backgroundColor = '#FF6B6B'; // Красный
+            barElement.style.backgroundColor = '#FF6B6B';
         } else if (clampedValue < 70) {
-            barElement.style.backgroundColor = '#FFD166'; // Жёлтый
+            barElement.style.backgroundColor = '#FFD166';
         } else {
-            barElement.style.backgroundColor = '#06D6A0'; // Зелёный
+            barElement.style.backgroundColor = '#06D6A0';
         }
     }
 }
@@ -92,171 +87,166 @@ function setProgressValue(type, value) {
 // Обработчик центральной картинки
 function initHumanImage() {
     const humanImage = document.getElementById('humanImage');
+    const imageWrapper = document.querySelector('.image-wrapper');
     
     if (humanImage) {
-        // Установка placeholder картинки если нет файла
-        if (humanImage.src.includes('human-figure.png') && !imageExists('assets/human-figure.png')) {
-            humanImage.style.display = 'none';
-            humanImage.parentElement.innerHTML += `
-                <div class="placeholder-image">
-                    <div style="width:150px;height:200px;background:#1A1A1A;border:2px solid #32CD32;
-                        border-radius:20px;display:flex;align-items:center;justify-content:center;">
-                        <span style="font-size:40px;">👤</span>
+        // Если картинка не загружена, показываем placeholder
+        humanImage.onerror = function() {
+            this.style.display = 'none';
+            if (imageWrapper && !document.querySelector('.image-placeholder')) {
+                imageWrapper.innerHTML = `
+                    <div class="image-placeholder">
+                        <span>👤</span>
+                        <div class="image-label">Нажми для деталей</div>
                     </div>
-                </div>
-            `;
+                `;
+                
+                // Добавляем обработчик для placeholder
+                const placeholder = document.querySelector('.image-placeholder');
+                if (placeholder) {
+                    placeholder.addEventListener('click', () => {
+                        alert('Детальная статистика - в разработке!');
+                        console.log('Placeholder нажат');
+                    });
+                }
+            }
+        };
+        
+        // Проверяем загрузилась ли картинка
+        if (humanImage.complete && humanImage.naturalHeight === 0) {
+            humanImage.onerror();
         }
         
         humanImage.addEventListener('click', () => {
             alert('Детальная статистика - в разработке!');
-            console.log('Картинка нажата - открыть детали');
+            console.log('Картинка нажата');
         });
     }
 }
 
-// Проверка существования картинки
-function imageExists(url) {
-    // В реальном приложении здесь была бы проверка файла
-    return false; // Возвращаем false для демонстрации
-}
-
-// Обработчики кнопок-закладок
-function initTabButtons() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const rightPanel = document.getElementById('rightPanel');
-    const panelTitle = document.getElementById('panelTitle');
-    const panelBody = document.getElementById('panelBody');
+// Обработчики боковых кнопок
+function initSideTabs() {
+    const sideTabs = document.querySelectorAll('.side-tab');
     
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabType = button.getAttribute('data-tab');
-            openTabPanel(tabType, button);
+    sideTabs.forEach(tab => {
+        tab.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const tabType = tab.getAttribute('data-tab');
+            toggleCornerPanel(tabType, tab);
         });
     });
+}
+
+// Переключение угловой панели
+function toggleCornerPanel(panelType, button) {
+    const panelId = `${panelType}Panel`;
+    const panel = document.getElementById(panelId);
     
-    // Функция открытия панели
-    function openTabPanel(tabType, button) {
-        if (rightPanel && panelTitle && panelBody) {
-            // Определяем контент для панели
-            const panelContents = {
-                health: {
-                    title: '❤️ Здоровье',
-                    content: 'Статистика сна, энергия, настроение<br>Средний сон: 7.5ч<br>Энергия: 3/5<br>Настроение: 4/5'
-                },
-                habits: {
-                    title: '🎯 Привычки',
-                    content: 'Ежедневные привычки<br>✅ Медитация<br>✅ Спорт<br>⚪ Чтение'
-                },
-                tasks: {
-                    title: '✅ Задачи',
-                    content: 'Текущие задачи<br>⚪ Купить продукты<br>✅ Позвонить маме<br>⚪ Записаться к врачу'
-                },
-                finance: {
-                    title: '💰 Финансы',
-                    content: 'Финансовый обзор<br>Расходы сегодня: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽'
-                }
-            };
-            
-            const content = panelContents[tabType] || {
-                title: 'Панель',
-                content: 'Выберите раздел'
-            };
-            
-            // Заполняем панель
-            panelTitle.textContent = content.title;
-            panelBody.innerHTML = content.content;
-            
-            // Показываем панель
-            rightPanel.classList.add('active');
-            
-            // Эффект нажатия кнопки
-            button.style.transform = 'translateY(-10px)';
+    if (!panel) return;
+    
+    // Закрываем все другие панели
+    closeAllCornerPanels();
+    
+    // Если нажимаем на ту же кнопку - закрываем, иначе открываем
+    if (activePanel === panelType) {
+        activePanel = null;
+    } else {
+        panel.classList.add('active');
+        activePanel = panelType;
+        
+        // Эффект нажатия кнопки
+        if (button) {
+            button.style.transform = 'scale(0.9)';
             setTimeout(() => {
                 button.style.transform = '';
-            }, 300);
-            
-            console.log(`Открыта панель: ${tabType}`);
+            }, 200);
         }
+        
+        console.log(`Открыта панель: ${panelType}`);
     }
 }
 
-// Обработчик широкой кнопки снизу
-function initSlideUpButton() {
-    const slideUpBtn = document.getElementById('slideUpBtn');
+// Закрытие всех угловых панелей
+function closeAllCornerPanels() {
+    const panels = document.querySelectorAll('.corner-panel');
+    panels.forEach(panel => {
+        panel.classList.remove('active');
+    });
+    activePanel = null;
+}
+
+// Обработчик двойной линии
+function initBottomLine() {
+    const bottomLineTrigger = document.getElementById('bottomLineTrigger');
     const bottomSheet = document.getElementById('bottomSheet');
-    const sheetBody = document.getElementById('sheetBody');
     
-    if (slideUpBtn && bottomSheet && sheetBody) {
-        slideUpBtn.addEventListener('click', () => {
-            // Заполняем контент панели
-            sheetBody.innerHTML = `
-                <div style="display:flex;flex-direction:column;gap:15px;">
-                    <div style="background:#1A1A1A;padding:15px;border-radius:10px;border:1px solid #32CD32;">
-                        <strong>Быстрый ввод</strong><br>
-                        Внесите данные за сегодня
-                    </div>
-                    <div style="background:#1A1A1A;padding:15px;border-radius:10px;border:1px solid #32CD32;">
-                        <strong>Статистика</strong><br>
-                        Просмотр прогресса за неделю
-                    </div>
-                    <div style="background:#1A1A1A;padding:15px;border-radius:10px;border:1px solid #32CD32;">
-                        <strong>Настройки</strong><br>
-                        Настройки приложения
-                    </div>
-                </div>
-            `;
+    if (bottomLineTrigger && bottomSheet) {
+        bottomLineTrigger.addEventListener('click', () => {
+            closeAllCornerPanels(); // Закрываем угловые панели
+            bottomSheet.classList.toggle('active');
             
-            // Показываем панель
-            bottomSheet.classList.add('active');
-            console.log('Нижняя панель открыта');
+            // Анимация линий
+            const lines = document.querySelectorAll('.line');
+            lines.forEach(line => {
+                line.style.transform = 'scaleX(1.2)';
+                setTimeout(() => {
+                    line.style.transform = '';
+                }, 300);
+            });
+            
+            console.log('Нижняя панель переключена');
         });
     }
 }
 
-// Закрытие панелей
-function initPanelCloses() {
-    const closeRightPanel = document.getElementById('closeRightPanel');
+// Обработчик нижней панели
+function initBottomSheet() {
     const closeBottomSheet = document.getElementById('closeBottomSheet');
-    const rightPanel = document.getElementById('rightPanel');
     const bottomSheet = document.getElementById('bottomSheet');
-    
-    if (closeRightPanel && rightPanel) {
-        closeRightPanel.addEventListener('click', () => {
-            rightPanel.classList.remove('active');
-        });
-    }
     
     if (closeBottomSheet && bottomSheet) {
         closeBottomSheet.addEventListener('click', () => {
             bottomSheet.classList.remove('active');
         });
     }
-    
-    // Закрытие по клику вне панелей
+}
+
+// Закрытие панелей при клике вне
+function initClosePanels() {
     document.addEventListener('click', (event) => {
-        if (rightPanel && rightPanel.classList.contains('active')) {
-            if (!rightPanel.contains(event.target) && 
-                !event.target.closest('.tab-button')) {
-                rightPanel.classList.remove('active');
-            }
+        // Закрытие угловых панелей
+        if (activePanel && !event.target.closest('.side-tab') && 
+            !event.target.closest('.corner-panel')) {
+            closeAllCornerPanels();
         }
         
+        // Закрытие нижней панели
+        const bottomSheet = document.getElementById('bottomSheet');
         if (bottomSheet && bottomSheet.classList.contains('active')) {
             if (!bottomSheet.contains(event.target) && 
-                event.target.id !== 'slideUpBtn') {
+                event.target.id !== 'bottomLineTrigger' &&
+                !event.target.closest('#bottomLineTrigger')) {
+                bottomSheet.classList.remove('active');
+            }
+        }
+    });
+    
+    // Закрытие при нажатии Escape
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAllCornerPanels();
+            const bottomSheet = document.getElementById('bottomSheet');
+            if (bottomSheet) {
                 bottomSheet.classList.remove('active');
             }
         }
     });
 }
 
-// Загрузка тестовых данных
-function loadTestData() {
-    console.log('Тестовые данные загружены:', AppConfig);
-    
-    // Обновление прогресс-баров каждые 5 секунд (для демо)
-    setInterval(() => {
-        const randomChange = () => Math.floor(Math.random() * 10) - 5;
+// Демо: изменение значений прогресс-баров
+setInterval(() => {
+    if (Math.random() > 0.7) { // 30% chance
+        const randomChange = () => Math.floor(Math.random() * 15) - 7;
         
         AppConfig.progressValues.physical = Math.max(0, Math.min(100, 
             AppConfig.progressValues.physical + randomChange()));
@@ -267,13 +257,11 @@ function loadTestData() {
         AppConfig.progressValues.activity = Math.max(0, Math.min(100, 
             AppConfig.progressValues.activity + randomChange()));
         
-        // Обновляем бары
         setProgressValue('physical', AppConfig.progressValues.physical);
         setProgressValue('mental', AppConfig.progressValues.mental);
         setProgressValue('financial', AppConfig.progressValues.financial);
         setProgressValue('activity', AppConfig.progressValues.activity);
-        
-    }, 5000); // Каждые 5 секунд
-}
+    }
+}, 10000); // Каждые 10 секунд
 
-// === КОНЕЦ БЛОКА APP_JS_002 ===
+// === КОНЕЦ БЛОКА APP_JS_003 ===

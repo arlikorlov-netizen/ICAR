@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- === НАЧАЛО БЛОКА MAIN_HTML_002 === -->
+    <!-- === НАЧАЛО БЛОКА MAIN_HTML_003 === -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICAR - Контроль Жизни</title>
+    
+    <!-- Шрифт CrySis Bold -->
+    <style>
+        @font-face {
+            font-family: 'CrySis Bold';
+            src: url('fonts/CrySis-Bold.woff2') format('woff2'),
+                 url('fonts/CrySis-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
+    
     <link rel="stylesheet" href="css/main.css">
     <link rel="manifest" href="manifest.json">
-    <!-- === КОНЕЦ БЛОКА MAIN_HTML_002 === -->
+    <!-- === КОНЕЦ БЛОКА MAIN_HTML_003 === -->
 </head>
 <body>
-    <!-- === НАЧАЛО БЛОКА MAIN_HTML_002 === -->
+    <!-- === НАЧАЛО БЛОКА MAIN_HTML_003 === -->
     <div class="app-container">
         
         <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
@@ -30,10 +42,35 @@
         <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
         <main class="main-content">
             
-            <!-- ЦЕНТРАЛЬНАЯ КАРТИНКА -->
-            <div class="center-image-container">
-                <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
-                <div class="image-label">Нажми для деталей</div>
+            <!-- БЛОК С ФИГУРКОЙ И КНОПКАМИ -->
+            <div class="center-section">
+                <!-- Левая кнопка -->
+                <button class="side-tab left-tab top-tab" data-tab="health">
+                    <span class="tab-icon">❤️</span>
+                </button>
+                
+                <!-- Правая кнопка -->
+                <button class="side-tab right-tab top-tab" data-tab="habits">
+                    <span class="tab-icon">🎯</span>
+                </button>
+
+                <!-- ЦЕНТРАЛЬНАЯ КАРТИНКА -->
+                <div class="center-image-container">
+                    <div class="image-wrapper">
+                        <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
+                        <div class="image-label">Нажми для деталей</div>
+                    </div>
+                </div>
+
+                <!-- Левая нижняя кнопка -->
+                <button class="side-tab left-tab bottom-tab" data-tab="tasks">
+                    <span class="tab-icon">✅</span>
+                </button>
+                
+                <!-- Правая нижняя кнопка -->
+                <button class="side-tab right-tab bottom-tab" data-tab="finance">
+                    <span class="tab-icon">💰</span>
+                </button>
             </div>
 
             <!-- 4 ПОКАЗАТЕЛЯ ПРОГРЕССА -->
@@ -71,53 +108,46 @@
                 </div>
             </div>
 
-            <!-- КНОПКИ-ЗАКЛАДОЧКИ (2 слева, 2 справа) -->
-            <div class="tab-buttons-container">
-                <div class="tab-buttons-left">
-                    <button class="tab-button" id="tabLeft1" data-tab="health">
-                        <span class="tab-icon">❤️</span>
-                        <span class="tab-label">Здоровье</span>
-                    </button>
-                    <button class="tab-button" id="tabLeft2" data-tab="habits">
-                        <span class="tab-icon">🎯</span>
-                        <span class="tab-label">Привычки</span>
-                    </button>
-                </div>
-                
-                <div class="tab-buttons-right">
-                    <button class="tab-button" id="tabRight1" data-tab="tasks">
-                        <span class="tab-icon">✅</span>
-                        <span class="tab-label">Задачи</span>
-                    </button>
-                    <button class="tab-button" id="tabRight2" data-tab="finance">
-                        <span class="tab-icon">💰</span>
-                        <span class="tab-label">Финансы</span>
-                    </button>
-                </div>
-            </div>
-
         </main>
 
-        <!-- ШИРОКАЯ КНОПКА СНИЗУ -->
-        <div class="bottom-sheet-trigger">
-            <button class="slide-up-button" id="slideUpBtn">
-                <span class="slide-icon">⬆️</span>
-                <span class="slide-text">Открыть панель</span>
-            </button>
+        <!-- ДВОЙНАЯ ЛИНИЯ СНИЗУ -->
+        <div class="bottom-line-trigger" id="bottomLineTrigger">
+            <div class="double-line">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
         </div>
 
-        <!-- БОКОВАЯ ПАНЕЛЬ (справа) -->
-        <aside class="side-panel right-panel" id="rightPanel">
+        <!-- ПАНЕЛЬКИ ДЛЯ КАЖДОЙ КНОПКИ -->
+        <div class="corner-panel health-panel" id="healthPanel">
             <div class="panel-content">
-                <button class="panel-close" id="closeRightPanel">✕</button>
-                <h3 class="panel-title" id="panelTitle">Панель</h3>
-                <div class="panel-body" id="panelBody">
-                    <!-- Контент будет динамически заполняться -->
-                </div>
+                <h3>❤️ Здоровье</h3>
+                <p>Сон: 7.5ч<br>Энергия: 3/5<br>Настроение: 4/5</p>
             </div>
-        </aside>
+        </div>
 
-        <!-- ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ СНИЗУ -->
+        <div class="corner-panel habits-panel" id="habitsPanel">
+            <div class="panel-content">
+                <h3>🎯 Привычки</h3>
+                <p>Медитация: ✅<br>Спорт: ✅<br>Чтение: ⚪</p>
+            </div>
+        </div>
+
+        <div class="corner-panel tasks-panel" id="tasksPanel">
+            <div class="panel-content">
+                <h3>✅ Задачи</h3>
+                <p>Купить продукты<br>Позвонить маме<br>Записаться к врачу</p>
+            </div>
+        </div>
+
+        <div class="corner-panel finance-panel" id="financePanel">
+            <div class="panel-content">
+                <h3>💰 Финансы</h3>
+                <p>Расходы: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽</p>
+            </div>
+        </div>
+
+        <!-- ОБЩАЯ ПАНЕЛЬ СНИЗУ -->
         <div class="bottom-sheet" id="bottomSheet">
             <div class="sheet-header">
                 <div class="sheet-handle"></div>
@@ -125,13 +155,17 @@
                 <button class="sheet-close" id="closeBottomSheet">✕</button>
             </div>
             <div class="sheet-body" id="sheetBody">
-                <!-- Контент будет динамически заполняться -->
+                <div class="quick-actions">
+                    <div class="quick-item">📊 Статистика</div>
+                    <div class="quick-item">⚙️ Настройки</div>
+                    <div class="quick-item">📋 Отчёт</div>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script src="js/app.js"></script>
-    <!-- === КОНЕЦ БЛОКА MAIN_HTML_002 === -->
+    <!-- === КОНЕЦ БЛОКА MAIN_HTML_003 === -->
 </body>
 </html>
