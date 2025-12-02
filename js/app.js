@@ -1,14 +1,11 @@
 /*
-  БЛОК 16: app.js v2
-  Изменения:
-  1. Исправлена логика открытия панелей
-  2. Добавлены кнопки закрытия на панелях
-  3. Улучшена анимация
-  4. Добавлена обработка ошибок картинки
-  5. Исправлено закрытие при клике вне
+  БЛОК 26: app.js v4
+  Изменения 1, 8, 10:
+  1. Функция даты
+  2. Клик на фигурку открывает все 4 панели
+  3. Основная логика приложения
 */
 
-// Конфигурация приложения
 const AppConfig = {
     userName: "Алексей",
     userLevel: 7,
@@ -20,31 +17,41 @@ const AppConfig = {
     }
 };
 
-let activePanel = null;
+let activePanels = []; // Теперь массив для нескольких панелей
 
-// 1. Инициализация приложения
+// Функция форматирования даты
+function formatCurrentDate() {
+    const now = new Date();
+    const options = { month: 'long', day: 'numeric' };
+    return now.toLocaleDateString('ru-RU', options);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v2 запущен');
+    console.log('ICAR v4 запущен');
     
+    initDate();
     initUserData();
     initProgressBars();
     initHumanImage();
     initSideTabs();
     initBottomLine();
-    initBottomSheet();
     initAllModulesPanel();
     initSettingsButton();
-    initPanelCloseButtons();
     initClosePanels();
 });
 
-// 2. Данные пользователя
-function initUserData() {
-    document.getElementById('userName').textContent = AppConfig.userName;
-    document.getElementById('userLevel').textContent = `Уровень: ${AppConfig.userLevel}`;
+function initDate() {
+    const dateElement = document.getElementById('currentDate');
+    if (dateElement) {
+        dateElement.textContent = formatCurrentDate();
+    }
 }
 
-// 3. Прогресс-бары
+function initUserData() {
+    document.getElementById('userName').textContent = AppConfig.userName;
+    document.getElementById('userLevel').textContent = `lvl ${AppConfig.userLevel}`;
+}
+
 function initProgressBars() {
     setTimeout(() => {
         setProgressValue('physical', AppConfig.progressValues.physical);
@@ -54,7 +61,6 @@ function initProgressBars() {
     }, 500);
 }
 
-// 4. Установка значения прогресс-бара
 function setProgressValue(type, value) {
     const barElement = document.querySelector(`#progress${type.charAt(0).toUpperCase() + type.slice(1)} .progress-bar`);
     const valueElement = document.getElementById(`value${type.charAt(0).toUpperCase() + type.slice(1)}`);
@@ -67,7 +73,6 @@ function setProgressValue(type, value) {
     barElement.setAttribute('data-value', clampedValue);
     valueElement.textContent = `${clampedValue}%`;
     
-    // Цвет в зависимости от значения
     if (clampedValue < 30) {
         barElement.style.background = 'linear-gradient(90deg, #FF6B6B, #FF8E8E)';
     } else if (clampedValue < 70) {
@@ -77,7 +82,6 @@ function setProgressValue(type, value) {
     }
 }
 
-// 5. Картинка человека
 function initHumanImage() {
     const humanImage = document.getElementById('humanImage');
     const centerImage = document.getElementById('centerImage');
@@ -97,66 +101,64 @@ function initHumanImage() {
     }
     
     if (centerImage) {
-        centerImage.addEventListener('click', openAllModules);
+        // ИЗМЕНЕНИЕ 8: Клик на фигурку открывает ВСЕ 4 панели
+        centerImage.addEventListener('click', openAllCornerPanels);
     }
 }
 
-// 6. Боковые кнопки
 function initSideTabs() {
     document.querySelectorAll('.side-tab').forEach(tab => {
         tab.addEventListener('click', (e) => {
             e.stopPropagation();
             const tabType = tab.getAttribute('data-tab');
-            toggleCornerPanel(tabType, tab);
+            toggleCornerPanel(tabType);
         });
     });
 }
 
-// 7. Переключение панели
-function toggleCornerPanel(panelType, button) {
+function toggleCornerPanel(panelType) {
     const panel = document.getElementById(`${panelType}Panel`);
     if (!panel) return;
     
-    closeAllCornerPanels();
+    const index = activePanels.indexOf(panelType);
     
-    if (activePanel === panelType) {
-        activePanel = null;
+    if (index > -1) {
+        // Если панель уже открыта - закрываем
+        panel.classList.remove('active');
+        activePanels.splice(index, 1);
     } else {
+        // Если панель закрыта - открываем
         panel.classList.add('active');
-        activePanel = panelType;
-        
-        if (button) {
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => { button.style.transform = ''; }, 200);
-        }
+        activePanels.push(panelType);
     }
 }
 
-// 8. Кнопки закрытия панелей
-function initPanelCloseButtons() {
-    document.querySelectorAll('.panel-close').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const panelType = btn.getAttribute('data-close');
+// ИЗМЕНЕНИЕ 8: Функция открытия всех 4 панелей
+function openAllCornerPanels() {
+    const panels = ['health', 'habits', 'tasks', 'finance'];
+    
+    // Закрываем все панели сначала
+    closeAllCornerPanels();
+    
+    // Открываем все панели с небольшой задержкой для анимации
+    panels.forEach((panelType, index) => {
+        setTimeout(() => {
             const panel = document.getElementById(`${panelType}Panel`);
-            
             if (panel) {
-                panel.classList.remove('active');
-                if (activePanel === panelType) activePanel = null;
+                panel.classList.add('active');
+                activePanels.push(panelType);
             }
-        });
+        }, index * 100); // Задержка для последовательного открытия
     });
 }
 
-// 9. Закрытие всех панелей
 function closeAllCornerPanels() {
     document.querySelectorAll('.corner-panel').forEach(panel => {
         panel.classList.remove('active');
     });
-    activePanel = null;
+    activePanels = [];
 }
 
-// 10. Панель всех модулей
 function initAllModulesPanel() {
     const closeBtn = document.getElementById('closeModulesBtn');
     if (closeBtn) {
@@ -172,20 +174,17 @@ function initAllModulesPanel() {
     });
 }
 
-// 11. Открыть все модули
 function openAllModules() {
     closeAllCornerPanels();
     const panel = document.getElementById('allModulesPanel');
     if (panel) panel.classList.add('active');
 }
 
-// 12. Закрыть все модули
 function closeAllModules() {
     const panel = document.getElementById('allModulesPanel');
     if (panel) panel.classList.remove('active');
 }
 
-// 13. Двойная линия
 function initBottomLine() {
     const trigger = document.getElementById('bottomLineTrigger');
     const sheet = document.getElementById('bottomSheet');
@@ -204,19 +203,6 @@ function initBottomLine() {
     }
 }
 
-// 14. Нижняя панель
-function initBottomSheet() {
-    const closeBtn = document.getElementById('closeBottomSheet');
-    const sheet = document.getElementById('bottomSheet');
-    
-    if (closeBtn && sheet) {
-        closeBtn.addEventListener('click', () => {
-            sheet.classList.remove('active');
-        });
-    }
-}
-
-// 15. Кнопка настроек
 function initSettingsButton() {
     const btn = document.getElementById('settingsBtn');
     if (btn) {
@@ -226,20 +212,18 @@ function initSettingsButton() {
     }
 }
 
-// 16. Закрытие при клике вне
+// ИЗМЕНЕНИЕ 9: Закрытие панелей при клике вне
 function initClosePanels() {
     document.addEventListener('click', (e) => {
-        // Не закрывать если клик по кнопке, панели или кнопке закрытия
         const isPanelElement = e.target.closest('.side-tab') || 
-                              e.target.closest('.corner-panel') || 
-                              e.target.closest('.panel-close') ||
-                              e.target.closest('#centerImage');
+                              e.target.closest('.corner-panel') ||
+                              e.target.closest('#centerImage') ||
+                              e.target.closest('.module-card');
         
-        if (activePanel && !isPanelElement) {
+        if (activePanels.length > 0 && !isPanelElement) {
             closeAllCornerPanels();
         }
         
-        // Закрыть панель всех модулей
         const allModules = document.getElementById('allModulesPanel');
         if (allModules && allModules.classList.contains('active')) {
             if (!allModules.contains(e.target) && !e.target.closest('#centerImage')) {
@@ -247,7 +231,6 @@ function initClosePanels() {
             }
         }
         
-        // Закрыть нижнюю панель
         const bottomSheet = document.getElementById('bottomSheet');
         if (bottomSheet && bottomSheet.classList.contains('active')) {
             if (!bottomSheet.contains(e.target) && 
@@ -258,7 +241,6 @@ function initClosePanels() {
         }
     });
     
-    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeAllCornerPanels();
@@ -269,7 +251,7 @@ function initClosePanels() {
     });
 }
 
-// 17. Демо-обновление прогресс-баров
+// Автообновление прогресс-баров
 setInterval(() => {
     if (Math.random() > 0.8) {
         const change = () => Math.floor(Math.random() * 10) - 5;
@@ -279,7 +261,6 @@ setInterval(() => {
         AppConfig.progressValues.financial += change();
         AppConfig.progressValues.activity += change();
         
-        // Ограничиваем значения
         Object.keys(AppConfig.progressValues).forEach(key => {
             AppConfig.progressValues[key] = Math.max(0, Math.min(100, AppConfig.progressValues[key]));
         });
@@ -289,4 +270,4 @@ setInterval(() => {
         setProgressValue('financial', AppConfig.progressValues.financial);
         setProgressValue('activity', AppConfig.progressValues.activity);
     }
-}, 8000);
+}, 10000);
