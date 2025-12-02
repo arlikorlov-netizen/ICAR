@@ -1,9 +1,9 @@
 /*
-  БЛОК 26: app.js v4
-  Изменения 1, 8, 10:
-  1. Функция даты
-  2. Клик на фигурку открывает все 4 панели
-  3. Основная логика приложения
+  БЛОК 33: app.js v5
+  Изменения:
+  1. Формат даты xx.xx.xxxx
+  2. Открытие всех панелей с общим крестиком
+  3. Убрана звездочка из уровня
 */
 
 const AppConfig = {
@@ -17,17 +17,20 @@ const AppConfig = {
     }
 };
 
-let activePanels = []; // Теперь массив для нескольких панелей
+let activePanels = [];
+let allPanelsOpen = false;
 
-// Функция форматирования даты
+// Функция форматирования даты в xx.xx.xxxx
 function formatCurrentDate() {
     const now = new Date();
-    const options = { month: 'long', day: 'numeric' };
-    return now.toLocaleDateString('ru-RU', options);
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    return `${day}.${month}.${year}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v4 запущен');
+    console.log('ICAR v5 запущен');
     
     initDate();
     initUserData();
@@ -37,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBottomLine();
     initAllModulesPanel();
     initSettingsButton();
+    initPanelCloseButtons();
+    initAllPanelsCloseButton();
     initClosePanels();
 });
 
@@ -49,7 +54,7 @@ function initDate() {
 
 function initUserData() {
     document.getElementById('userName').textContent = AppConfig.userName;
-    document.getElementById('userLevel').textContent = `lvl ${AppConfig.userLevel}`;
+    document.getElementById('userLevel').textContent = `lvl ${AppConfig.userLevel}`; // Без звездочки
 }
 
 function initProgressBars() {
@@ -101,8 +106,7 @@ function initHumanImage() {
     }
     
     if (centerImage) {
-        // ИЗМЕНЕНИЕ 8: Клик на фигурку открывает ВСЕ 4 панели
-        centerImage.addEventListener('click', openAllCornerPanels);
+        centerImage.addEventListener('click', openAllCornerPanelsWithEffects);
     }
 }
 
@@ -126,30 +130,68 @@ function toggleCornerPanel(panelType) {
         // Если панель уже открыта - закрываем
         panel.classList.remove('active');
         activePanels.splice(index, 1);
+        hideAllPanelsCloseButton();
     } else {
         // Если панель закрыта - открываем
         panel.classList.add('active');
         activePanels.push(panelType);
+        if (activePanels.length === 4) {
+            showAllPanelsCloseButton();
+            addAllPanelsOpenClass();
+        }
     }
 }
 
-// ИЗМЕНЕНИЕ 8: Функция открытия всех 4 панелей
-function openAllCornerPanels() {
+// Новая функция: открытие всех панелей с эффектами
+function openAllCornerPanelsWithEffects() {
     const panels = ['health', 'habits', 'tasks', 'finance'];
     
     // Закрываем все панели сначала
     closeAllCornerPanels();
     
-    // Открываем все панели с небольшой задержкой для анимации
+    // Добавляем класс для стилей "все панели открыты"
+    addAllPanelsOpenClass();
+    
+    // Открываем все панели
     panels.forEach((panelType, index) => {
         setTimeout(() => {
             const panel = document.getElementById(`${panelType}Panel`);
             if (panel) {
                 panel.classList.add('active');
                 activePanels.push(panelType);
+                
+                // Показываем общий крестик после открытия всех панелей
+                if (index === panels.length - 1) {
+                    setTimeout(() => {
+                        showAllPanelsCloseButton();
+                        allPanelsOpen = true;
+                    }, 300);
+                }
             }
-        }, index * 100); // Задержка для последовательного открытия
+        }, index * 80);
     });
+}
+
+function addAllPanelsOpenClass() {
+    document.body.classList.add('all-panels-open');
+}
+
+function removeAllPanelsOpenClass() {
+    document.body.classList.remove('all-panels-open');
+}
+
+function showAllPanelsCloseButton() {
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.classList.add('active');
+    }
+}
+
+function hideAllPanelsCloseButton() {
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.classList.remove('active');
+    }
 }
 
 function closeAllCornerPanels() {
@@ -157,6 +199,42 @@ function closeAllCornerPanels() {
         panel.classList.remove('active');
     });
     activePanels = [];
+    allPanelsOpen = false;
+    hideAllPanelsCloseButton();
+    removeAllPanelsOpenClass();
+}
+
+// Крестики закрытия на каждой панели
+function initPanelCloseButtons() {
+    document.querySelectorAll('.panel-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const panelType = btn.getAttribute('data-close');
+            const panel = document.getElementById(`${panelType}Panel`);
+            
+            if (panel) {
+                panel.classList.remove('active');
+                const index = activePanels.indexOf(panelType);
+                if (index > -1) activePanels.splice(index, 1);
+                
+                if (activePanels.length < 4) {
+                    hideAllPanelsCloseButton();
+                    removeAllPanelsOpenClass();
+                }
+            }
+        });
+    });
+}
+
+// Общий крестик для закрытия всех панелей
+function initAllPanelsCloseButton() {
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllCornerPanels();
+        });
+    }
 }
 
 function initAllModulesPanel() {
@@ -212,15 +290,16 @@ function initSettingsButton() {
     }
 }
 
-// ИЗМЕНЕНИЕ 9: Закрытие панелей при клике вне
 function initClosePanels() {
     document.addEventListener('click', (e) => {
         const isPanelElement = e.target.closest('.side-tab') || 
                               e.target.closest('.corner-panel') ||
                               e.target.closest('#centerImage') ||
-                              e.target.closest('.module-card');
+                              e.target.closest('.module-card') ||
+                              e.target.closest('.panel-close') ||
+                              e.target.id === 'allPanelsClose';
         
-        if (activePanels.length > 0 && !isPanelElement) {
+        if (activePanels.length > 0 && !isPanelElement && !allPanelsOpen) {
             closeAllCornerPanels();
         }
         

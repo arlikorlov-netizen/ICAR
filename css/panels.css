@@ -1,11 +1,10 @@
 /* 
-  БЛОК 25: panels.css v1
+  БЛОК 30: panels.css v2
   Отдельный файл для стилей панелей
-  Изменения 4, 9:
-  1. Панели адаптированы под формат 19.5:9
-  2. Занимают четверть экрана
-  3. Смыкаются по центру
-  4. Убраны кнопки закрытия
+  Изменения:
+  1. Крестики закрытия на каждой панели
+  2. Общий крестик при открытии всех панелей
+  3. Анимация границ
 */
 
 /* 1. ПАНЕЛИ МОДУЛЕЙ */
@@ -20,7 +19,6 @@
     transition: all 0.3s ease;
     padding: 15px;
     box-shadow: var(--shadow);
-    /* Размер: четверть экрана для 19.5:9 */
     width: calc(50% - 20px);
     height: calc(50% - 100px);
 }
@@ -32,7 +30,7 @@
 
 /* 2. РАСПОЛОЖЕНИЕ КАЖДОЙ ПАНЕЛИ */
 .health-panel {
-    top: 70px; /* Под верхней панелью */
+    top: 70px;
     left: 10px;
     border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
 }
@@ -44,7 +42,7 @@
 }
 
 .tasks-panel {
-    bottom: 70px; /* Над нижней панелью */
+    bottom: 70px;
     left: 10px;
     border-radius: var(--border-radius) var(--border-radius) var(--border-radius) 0;
 }
@@ -55,10 +53,101 @@
     border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
 }
 
-/* 3. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
+/* 3. КРЕСТИКИ ЗАКРЫТИЯ ДЛЯ КАЖДОЙ ПАНЕЛИ */
+.panel-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    background-color: var(--color-close);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 160;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.corner-panel.active .panel-close {
+    opacity: 1;
+    visibility: visible;
+}
+
+.panel-close:hover {
+    background-color: #FF5252;
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* 4. ОБЩИЙ КРЕСТИК ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
+.all-panels-close {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-close);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 160;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+.all-panels-close.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.all-panels-close:hover {
+    background-color: #FF5252;
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* 5. КОГДА ОТКРЫТЫ ВСЕ ПАНЕЛИ - УБИРАЕМ ГРАНИЦЫ МЕЖДУ НИМИ */
+.all-panels-open .corner-panel {
+    border-width: 2px;
+}
+
+.all-panels-open .health-panel {
+    border-right: none;
+    border-bottom: none;
+}
+
+.all-panels-open .habits-panel {
+    border-left: none;
+    border-bottom: none;
+}
+
+.all-panels-open .tasks-panel {
+    border-right: none;
+    border-top: none;
+}
+
+.all-panels-open .finance-panel {
+    border-left: none;
+    border-top: none;
+}
+
+/* 6. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
 .panel-content {
     position: relative;
     height: 100%;
+    padding-top: 5px;
 }
 
 .panel-content h3 {
@@ -75,5 +164,3 @@
     color: var(--color-text-secondary);
     line-height: 1.6;
 }
-
-/* 4. НЕТ КНОПКИ ЗАКРЫТИЯ (убрано) */

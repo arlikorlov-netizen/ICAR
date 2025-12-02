@@ -1,12 +1,11 @@
 <!-- 
-  БЛОК 23: index.html v4
-  Изменения 1-10:
-  1. Верхняя панель: дата, имя и уровень в строку
-  2. Все элементы сдвинуты вверх
-  3. Добавлены контейнеры для линий к ярлычкам
-  4. Изменены имена классов для панелей
-  5. Подключены новые CSS и JS файлы
+  БЛОК 31: index.html v5 (Часть 1/2)
+  Изменения:
+  1. Добавлены крестики закрытия на панелях
+  2. Добавлен общий крестик при открытии всех панелей
+  3. Изменён формат даты
 -->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -36,19 +35,21 @@
             <div class="user-info">
                 <!-- Дата | Имя | Уровень -->
                 <div class="user-details">
-                    <div class="current-date" id="currentDate">11 мая</div>
+                    <div class="current-date" id="currentDate">11.05.2024</div> <!-- Формат xx.xx.xxxx -->
                     <h2 class="user-name" id="userName">Алексей</h2>
                     <div class="user-level">
-                        <span class="level-icon">★</span>
-                        <span class="level-text" id="userLevel">lvl 7</span>
+                        <span class="level-text" id="userLevel">lvl 7</span> <!-- Без звездочки -->
                     </div>
                 </div>
-                <!-- Кнопка настроек (иконка из папки icons/) -->
+                <!-- Кнопка настроек -->
                 <button class="settings-btn" id="settingsBtn">
                     <img src="icons/settings.png" alt="Настройки" class="btn-icon">
                 </button>
             </div>
         </header>
+
+        <!-- ОБЩИЙ КРЕСТИК ДЛЯ ВСЕХ ПАНЕЛЕЙ (скрыт по умолчанию) -->
+        <button class="all-panels-close" id="allPanelsClose" title="Закрыть все панели">×</button>
 
         <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
         <main class="main-content">
@@ -58,13 +59,13 @@
                 <!-- Ломаные линии к ярлычкам -->
                 <svg class="connection-lines" id="connectionLines">
                     <!-- Линия к здоровью (левый верхний) -->
-                    <path id="lineHealth" class="connection-line" d="M160,120 Q120,100 70,70"></path>
+                    <path id="lineHealth" class="connection-line" d="M110,140 Q80,120 40,90"></path>
                     <!-- Линия к привычкам (правый верхний) -->
-                    <path id="lineHabits" class="connection-line" d="M240,100 Q280,80 330,70"></path>
+                    <path id="lineHabits" class="connection-line" d="M170,120 Q200,100 240,90"></path>
                     <!-- Линия к задачам (левый нижний) -->
-                    <path id="lineTasks" class="connection-line" d="M140,280 Q110,300 70,330"></path>
+                    <path id="lineTasks" class="connection-line" d="M100,200 Q70,220 40,250"></path>
                     <!-- Линия к финансам (правый нижний) -->
-                    <path id="lineFinance" class="connection-line" d="M260,300 Q290,320 330,330"></path>
+                    <path id="lineFinance" class="connection-line" d="M180,210 Q210,230 240,250"></path>
                 </svg>
 
                 <!-- Точки на фигурке для линий -->
@@ -75,7 +76,7 @@
                     <div class="dot finance-dot" data-dot="finance"></div>
                 </div>
 
-                <!-- ЯРЛЫЧКИ (приклеены к границам) -->
+                <!-- ЯРЛЫЧКИ -->
                 <!-- Здоровье - левый верхний -->
                 <button class="side-tab health-tab" data-tab="health">
                     <img src="icons/health.png" alt="Здоровье" class="tab-icon-img">
@@ -86,7 +87,7 @@
                     <img src="icons/habits.png" alt="Привычки" class="tab-icon-img">
                 </button>
 
-                <!-- ЦЕНТРАЛЬНАЯ ФИГУРКА -->
+                <!-- ЦЕНТРАЛЬНАЯ ФИГУРКА (уменьшена в 1.2 раза) -->
                 <div class="center-image-container" id="centerImage">
                     <div class="image-wrapper">
                         <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
@@ -149,11 +150,12 @@
             </div>
         </div>
 
-        <!-- ПАНЕЛИ МОДУЛЕЙ (кнопки закрытия убраны) -->
+        <!-- ПАНЕЛИ МОДУЛЕЙ С КРЕСТИКАМИ ЗАКРЫТИЯ -->
         <div class="corner-panel health-panel" id="healthPanel">
             <div class="panel-content">
                 <h3>❤️ Здоровье</h3>
                 <p>Сон: 7.5ч<br>Энергия: 3/5<br>Настроение: 4/5</p>
+                <button class="panel-close" data-close="health">×</button>
             </div>
         </div>
 
@@ -161,6 +163,7 @@
             <div class="panel-content">
                 <h3>🎯 Привычки</h3>
                 <p>Медитация: ✅<br>Спорт: ✅<br>Чтение: ⚪</p>
+                <button class="panel-close" data-close="habits">×</button>
             </div>
         </div>
 
@@ -168,6 +171,7 @@
             <div class="panel-content">
                 <h3>✅ Задачи</h3>
                 <p>Купить продукты<br>Позвонить маме<br>Записаться к врачу</p>
+                <button class="panel-close" data-close="tasks">×</button>
             </div>
         </div>
 
@@ -175,10 +179,10 @@
             <div class="panel-content">
                 <h3>💰 Финансы</h3>
                 <p>Расходы: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽</p>
+                <button class="panel-close" data-close="finance">×</button>
             </div>
         </div>
-
-        <!-- ПАНЕЛЬ ВСЕХ МОДУЛЕЙ -->
+                <!-- ПАНЕЛЬ ВСЕХ МОДУЛЕЙ -->
         <div class="all-modules-panel" id="allModulesPanel">
             <div class="modules-header">
                 <h3>Все модули</h3>
@@ -204,7 +208,7 @@
             </div>
         </div>
 
-        <!-- ОБЩАЯ ПАНЕЛЬ СНИЗУ (кнопка закрытия убрана) -->
+        <!-- ОБЩАЯ ПАНЕЛЬ СНИЗУ -->
         <div class="bottom-sheet" id="bottomSheet">
             <div class="sheet-header">
                 <div class="sheet-handle"></div>
@@ -223,10 +227,10 @@
 
     <!-- Основной JS -->
     <script src="js/app.js"></script>
-    <!-- Отдельные JS файлы для панелей -->
+    <!-- JS для панелей -->
     <script src="js/panels.js"></script>
     
-    <!-- Регистрация Service Worker для PWA -->
+    <!-- Регистрация Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {

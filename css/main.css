@@ -1,11 +1,10 @@
 /* 
-  БЛОК 24: main.css v4
-  Изменения 1-10:
-  1. Цветовая схема: зелёный темнее, текст ярче
-  2. Верхняя панель уменьшена
-  3. Фигурка в 2 раза больше
-  4. Ярлычки у границ экрана
-  5. Формат 19.5:9
+  БЛОК 29: main.css v5 (Часть 1/4)
+  Изменения:
+  1. Убрал aspect-ratio (вернул старое соотношение)
+  2. Фигурка уменьшена в 1.2 раза
+  3. Добавлены крестики для панелей
+  4. Контент сдвинут вниз
 */
 
 /* 1. Сброс и базовые стили */
@@ -15,32 +14,33 @@
     box-sizing: border-box;
 }
 
-/* 2. Шрифт CrySis Bold - ПРОВЕРЕННАЯ ВЕРСИЯ */
+/* 2. Шрифт CrySis Bold - НОВАЯ ВЕРСИЯ */
 @font-face {
     font-family: 'CrySis Bold';
-    src: url('../fonts/CrySis-Bold.ttf') format('truetype');
+    src: url('../fonts/CrySis_Bold_2.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 
-/* 3. ЦВЕТОВАЯ СХЕМА - ЗЕЛЁНЫЙ НА ПОЛТОНА ТЕМНЕЕ, ТЕКСТ ЯРЧЕ */
+/* 3. ЦВЕТОВАЯ СХЕМА */
 :root {
     --color-bg: #0A2A0A;
-    --color-card: #153015; /* Темнее */
-    --color-text: #A0FFA0; /* Ярче */
-    --color-text-secondary: #90FF90; /* Ярче */
-    --color-accent: #2AA52A; /* Темнее */
-    --color-progress-bg: #254025; /* Темнее */
-    --color-button: #1E6B1E; /* Темнее */
-    --color-button-hover: #2A8B2A; /* Темнее */
-    --color-panel: #183018; /* Темнее */
+    --color-card: #153015;
+    --color-text: #A0FFA0;
+    --color-text-secondary: #90FF90;
+    --color-accent: #2AA52A;
+    --color-progress-bg: #254025;
+    --color-button: #1E6B1E;
+    --color-button-hover: #2A8B2A;
+    --color-panel: #183018;
     --color-line: #32CD32;
+    --color-close: #FF6B6B;
     --border-radius: 15px;
-    --shadow: 0 4px 20px rgba(42, 165, 42, 0.3); /* Темнее */
+    --shadow: 0 4px 20px rgba(42, 165, 42, 0.3);
 }
 
-/* 4. Основные стили */
+/* 4. Основные стили - БЕЗ aspect-ratio */
 body {
     font-family: 'CrySis Bold', 'Arial Black', sans-serif;
     background-color: var(--color-bg);
@@ -48,15 +48,12 @@ body {
     line-height: 1.5;
     height: 100vh;
     overflow: hidden;
-    /* Формат 19.5:9 */
-    max-width: 500px;
-    margin: 0 auto;
-    aspect-ratio: 19.5/9;
-    position: relative;
 }
 
 .app-container {
     min-height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
     background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
@@ -64,17 +61,17 @@ body {
     overflow-x: hidden;
 }
 
-/* 6. ВЕРХНЯЯ ПАНЕЛЬ - уменьшена в 2 раза */
+/* 5. ВЕРХНЯЯ ПАНЕЛЬ */
 .top-panel {
-    padding: 8px 15px; /* Уменьшено */
+    padding: 8px 20px;
     background-color: var(--color-card);
-    /* Нет border-bottom */
     text-align: center;
     position: relative;
     z-index: 100;
-    height: 50px; /* Фиксированная малая высота */
+    height: 50px;
     display: flex;
     align-items: center;
+    flex-shrink: 0; /* Фиксированная высота */
 }
 
 .user-info {
@@ -90,38 +87,40 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 20px; /* Увеличен gap для сдвига текста правее */
 }
 
-/* Дата */
+/* Дата - формат xx.xx.xxxx */
 .current-date {
     font-size: 14px;
     color: var(--color-text-secondary);
-    min-width: 70px;
+    min-width: 100px;
     text-align: right;
+    margin-right: 10px; /* Сдвиг правее */
 }
 
-/* Имя и уровень в одну строку */
+/* Имя */
 .user-name {
-    font-size: 18px; /* Чуть меньше */
+    font-size: 18px;
     color: var(--color-text);
     margin: 0;
     letter-spacing: 0.5px;
 }
 
+/* Уровень - БЕЗ звездочки */
 .user-level {
     display: flex;
     align-items: center;
     gap: 5px;
     color: var(--color-text-secondary);
-    font-size: 13px;
-    min-width: 60px;
+    font-size: 14px;
+    min-width: 70px;
     text-align: left;
+    margin-left: 10px; /* Сдвиг правее */
 }
 
 .level-icon {
-    font-size: 12px;
-    color: #FFD700;
+    display: none; /* Убрали звездочку */
 }
 
 /* Кнопка настроек */
@@ -136,7 +135,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    margin-left: 10px;
+    margin-left: auto;
     padding: 0;
 }
 
@@ -148,30 +147,31 @@ body {
 .btn-icon {
     width: 24px;
     height: 24px;
-    filter: brightness(1.2); /* Ярче */
+    filter: brightness(1.2);
 }
 
-/* 7. Основное содержимое - сдвинуто вверх */
+/* 6. Основное содержимое - СДВИНУТО ВНИЗ */
 .main-content {
     flex: 1;
-    padding: 10px 15px 15px; /* Меньше padding */
+    padding: 5px 20px 15px; /* Уменьшен верхний padding для сдвига вниз */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     overflow-y: auto;
+    margin-top: auto; /* Сдвиг вниз */
 }
 
-/* 8. ЦЕНТРАЛЬНЫЙ БЛОК */
+/* 7. ЦЕНТРАЛЬНЫЙ БЛОК */
 .center-section {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 340px; /* Под формат 19.5:9 */
-    margin: 0;
+    height: 320px;
+    margin: 10px 0;
 }
 
-/* 9. ЛИНИИ СВЯЗИ */
+/* 8. ЛИНИИ СВЯЗИ */
 .connection-lines {
     position: absolute;
     top: 0;
@@ -186,7 +186,7 @@ body {
     fill: none;
     stroke: var(--color-line);
     stroke-width: 2;
-    stroke-dasharray: 5, 5; /* Ломаная линия */
+    stroke-dasharray: 5, 5;
     opacity: 0.7;
     transition: opacity 0.3s ease;
 }
@@ -210,31 +210,30 @@ body {
     box-shadow: 0 0 5px rgba(50, 205, 50, 0.8);
 }
 
-/* Позиции точек на фигурке */
 .health-dot {
-    top: 40%;  /* Грудь слева */
+    top: 40%;
     left: 30%;
 }
 
 .habits-dot {
-    top: 30%;  /* Голова справа */
+    top: 30%;
     right: 30%;
 }
 
 .tasks-dot {
-    bottom: 35%;  /* Бедро слева */
+    bottom: 35%;
     left: 32%;
 }
 
 .finance-dot {
-    bottom: 30%;  /* Кисть справа */
+    bottom: 30%;
     right: 28%;
 }
 
-/* 10. ЯРЛЫЧКИ - приклеены к границам экрана */
+/* 9. ЯРЛЫЧКИ */
 .side-tab {
     position: absolute;
-    width: 60px; /* Немного меньше */
+    width: 60px;
     height: 60px;
     background-color: var(--color-button);
     border: none;
@@ -245,7 +244,6 @@ body {
     transition: all 0.3s ease;
     z-index: 50;
     padding: 0;
-    /* Прижато к границам */
     margin: 0;
 }
 
@@ -257,35 +255,35 @@ body {
 .tab-icon-img {
     width: 32px;
     height: 32px;
-    filter: brightness(1.2); /* Ярче */
+    filter: brightness(1.2);
 }
 
-/* Позиции ярлычков - у самых границ */
+/* Позиции ярлычков */
 .health-tab {
-    top: 60px; /* Под верхней панелью */
+    top: 70px;
     left: 0;
     border-radius: 0 15px 15px 0;
 }
 
 .habits-tab {
-    top: 60px;
+    top: 70px;
     right: 0;
     border-radius: 15px 0 0 15px;
 }
 
 .tasks-tab {
-    bottom: 60px; /* Над нижней панелью */
+    bottom: 70px;
     left: 0;
     border-radius: 0 15px 15px 0;
 }
 
 .finance-tab {
-    bottom: 60px;
+    bottom: 70px;
     right: 0;
     border-radius: 15px 0 0 15px;
 }
 
-/* 11. ЦЕНТРАЛЬНАЯ ФИГУРКА - в 2 раза больше */
+/* 10. ЦЕНТРАЛЬНАЯ ФИГУРКА - УМЕНЬШЕНА В 1.2 РАЗА */
 .center-image-container {
     cursor: pointer;
     z-index: 10;
@@ -298,15 +296,15 @@ body {
 }
 
 .human-image {
-    width: 320px; /* В 2 раза больше */
-    height: 400px;
+    width: 220px; /* Было 320px, уменьшил в 1.2 раза */
+    height: 275px; /* Было 400px, уменьшил в 1.2 раза */
     object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4)); /* Темнее */
+    filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4));
 }
 
 .image-placeholder {
-    width: 320px;
-    height: 400px;
+    width: 220px;
+    height: 275px;
     background-color: var(--color-card);
     border-radius: var(--border-radius);
     display: flex;
@@ -316,11 +314,11 @@ body {
 }
 
 .image-placeholder span {
-    font-size: 80px;
+    font-size: 60px;
     color: var(--color-accent);
 }
 
-/* 12. ПРОГРЕСС-БАРЫ - темнее */
+/* 11. ПРОГРЕСС-БАРЫ */
 .progress-indicators {
     display: flex;
     flex-direction: column;
@@ -360,7 +358,7 @@ body {
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--color-accent), #90FF90); /* Ярче */
+    background: linear-gradient(90deg, var(--color-accent), #90FF90);
     width: 0%;
     border-radius: 8px;
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -374,7 +372,7 @@ body {
     color: var(--color-text);
 }
 
-/* 13. ДВОЙНАЯ ЛИНИЯ СНИЗУ */
+/* 12. ДВОЙНАЯ ЛИНИЯ СНИЗУ - СДВИНУТА ВНИЗ */
 .bottom-line-trigger {
     position: fixed;
     bottom: 0;
@@ -409,211 +407,4 @@ body {
 .bottom-line-trigger:hover .line {
     background-color: var(--color-accent);
     width: 60px;
-}
-
-/* 14. Панели модулей стили в panels.css */
-/* 15. Панель всех модулей */
-.all-modules-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 280px;
-    background-color: var(--color-panel);
-    border: 3px solid var(--color-accent);
-    border-radius: var(--border-radius);
-    z-index: 300;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    padding: 0;
-    box-shadow: 0 0 30px rgba(42, 165, 42, 0.4); /* Темнее */
-}
-
-.all-modules-panel.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.modules-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--color-accent);
-}
-
-.modules-header h3 {
-    color: var(--color-text);
-    font-size: 18px;
-}
-
-.close-modules {
-    background: none;
-    border: none;
-    color: var(--color-text);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-}
-
-.close-modules:hover {
-    transform: rotate(90deg);
-}
-
-.modules-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 15px;
-}
-
-.module-card {
-    background-color: var(--color-card);
-    border: 2px solid var(--color-accent);
-    border-radius: var(--border-radius);
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.module-card:hover {
-    background-color: var(--color-button);
-    transform: translateY(-3px) scale(1.03);
-}
-
-.module-icon {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-.module-name {
-    font-size: 12px;
-    color: var(--color-text);
-    font-weight: bold;
-}
-
-/* 16. ОБЩАЯ ПАНЕЛЬ СНИЗУ */
-.bottom-sheet {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    width: 100%;
-    max-width: 500px;
-    height: 50vh;
-    background-color: var(--color-panel);
-    border-top: 3px solid var(--color-accent);
-    border-radius: 20px 20px 0 0;
-    z-index: 250;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    flex-direction: column;
-}
-
-.bottom-sheet.active {
-    transform: translateX(-50%) translateY(0);
-}
-
-.sheet-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--color-accent);
-    position: relative;
-}
-
-.sheet-handle {
-    width: 40px;
-    height: 4px;
-    background-color: var(--color-text-secondary);
-    border-radius: 2px;
-    position: absolute;
-    left: 50%;
-    top: 8px;
-    transform: translateX(-50%);
-}
-
-.sheet-title {
-    color: var(--color-text);
-    font-size: 18px;
-    margin-left: 30px;
-}
-
-.sheet-close {
-    background: none;
-    border: none;
-    color: var(--color-text);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-}
-
-.sheet-close:hover {
-    transform: rotate(90deg);
-}
-
-.sheet-body {
-    padding: 15px;
-    color: var(--color-text-secondary);
-    overflow-y: auto;
-    flex: 1;
-}
-
-.quick-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.quick-item {
-    background-color: var(--color-card);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--color-accent);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.quick-item:hover {
-    background-color: var(--color-button);
-    transform: translateX(5px);
-}
-
-/* 17. АДАПТИВНОСТЬ ДЛЯ 19.5:9 */
-@media (max-width: 500px) {
-    body {
-        aspect-ratio: 19.5/9;
-    }
-    
-    .human-image {
-        width: 280px;
-        height: 350px;
-    }
-    
-    .image-placeholder {
-        width: 280px;
-        height: 350px;
-    }
-    
-    .side-tab {
-        width: 55px;
-        height: 55px;
-    }
-    
-    .tab-icon-img {
-        width: 28px;
-        height: 28px;
-    }
-    
-    .progress-label {
-        min-width: 90px;
-        font-size: 13px;
-    }
 }
