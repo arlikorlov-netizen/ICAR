@@ -1,10 +1,8 @@
 /* 
-  БЛОК 30: panels.css v2
-  Отдельный файл для стилей панелей
+  БЛОК 36: panels.css v3
   Изменения:
-  1. Крестики закрытия на каждой панели
-  2. Общий крестик при открытии всех панелей
-  3. Анимация границ
+  1. Убраны лишние стили для "Все модули"
+  2. Оптимизированы стили панелей
 */
 
 /* 1. ПАНЕЛИ МОДУЛЕЙ */
@@ -19,8 +17,8 @@
     transition: all 0.3s ease;
     padding: 15px;
     box-shadow: var(--shadow);
-    width: calc(50% - 20px);
-    height: calc(50% - 100px);
+    width: calc(50% - 15px);
+    height: calc(50% - 95px);
 }
 
 .corner-panel.active {
@@ -30,120 +28,30 @@
 
 /* 2. РАСПОЛОЖЕНИЕ КАЖДОЙ ПАНЕЛИ */
 .health-panel {
-    top: 70px;
-    left: 10px;
+    top: 65px;
+    left: 5px;
     border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
 }
 
 .habits-panel {
-    top: 70px;
-    right: 10px;
+    top: 65px;
+    right: 5px;
     border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
 }
 
 .tasks-panel {
-    bottom: 70px;
-    left: 10px;
+    bottom: 65px;
+    left: 5px;
     border-radius: var(--border-radius) var(--border-radius) var(--border-radius) 0;
 }
 
 .finance-panel {
-    bottom: 70px;
-    right: 10px;
+    bottom: 65px;
+    right: 5px;
     border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
 }
 
-/* 3. КРЕСТИКИ ЗАКРЫТИЯ ДЛЯ КАЖДОЙ ПАНЕЛИ */
-.panel-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 26px;
-    height: 26px;
-    background-color: var(--color-close);
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 160;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.corner-panel.active .panel-close {
-    opacity: 1;
-    visibility: visible;
-}
-
-.panel-close:hover {
-    background-color: #FF5252;
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* 4. ОБЩИЙ КРЕСТИК ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
-.all-panels-close {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 32px;
-    height: 32px;
-    background-color: var(--color-close);
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 160;
-    opacity: 0;
-    visibility: hidden;
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-}
-
-.all-panels-close.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.all-panels-close:hover {
-    background-color: #FF5252;
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* 5. КОГДА ОТКРЫТЫ ВСЕ ПАНЕЛИ - УБИРАЕМ ГРАНИЦЫ МЕЖДУ НИМИ */
-.all-panels-open .corner-panel {
-    border-width: 2px;
-}
-
-.all-panels-open .health-panel {
-    border-right: none;
-    border-bottom: none;
-}
-
-.all-panels-open .habits-panel {
-    border-left: none;
-    border-bottom: none;
-}
-
-.all-panels-open .tasks-panel {
-    border-right: none;
-    border-top: none;
-}
-
-.all-panels-open .finance-panel {
-    border-left: none;
-    border-top: none;
-}
-
-/* 6. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
+/* 3. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
 .panel-content {
     position: relative;
     height: 100%;
@@ -152,15 +60,16 @@
 
 .panel-content h3 {
     font-size: 18px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     color: var(--color-text);
     text-align: center;
     border-bottom: 1px solid var(--color-accent);
-    padding-bottom: 8px;
+    padding-bottom: 10px;
 }
 
 .panel-content p {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.8;
+    text-align: center;
 }

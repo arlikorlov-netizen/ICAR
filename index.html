@@ -1,9 +1,10 @@
 <!-- 
-  БЛОК 31: index.html v5 (Часть 1/2)
+  БЛОК 37: index.html v6
   Изменения:
-  1. Добавлены крестики закрытия на панелях
-  2. Добавлен общий крестик при открытии всех панелей
-  3. Изменён формат даты
+  1. Убрана панель "Все модули"
+  2. Добавлен фон для всех панелей
+  3. Исправлены позиции линий
+  4. Обновлён крестик закрытия
 -->
 
 <!DOCTYPE html>
@@ -13,12 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICAR - Контроль Жизни</title>
     
-    <!-- PWA настройки для iOS -->
+    <!-- PWA настройки -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="ICAR">
     
-    <!-- Основные стили -->
+    <!-- Стили -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/panels.css">
     <link rel="manifest" href="manifest.json">
@@ -33,42 +34,43 @@
         <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <header class="top-panel">
             <div class="user-info">
-                <!-- Дата | Имя | Уровень -->
                 <div class="user-details">
-                    <div class="current-date" id="currentDate">11.05.2024</div> <!-- Формат xx.xx.xxxx -->
+                    <div class="current-date" id="currentDate">11.05.2024</div>
                     <h2 class="user-name" id="userName">Алексей</h2>
                     <div class="user-level">
-                        <span class="level-text" id="userLevel">lvl 7</span> <!-- Без звездочки -->
+                        <span class="level-text" id="userLevel">lvl 7</span>
                     </div>
                 </div>
-                <!-- Кнопка настроек -->
                 <button class="settings-btn" id="settingsBtn">
                     <img src="icons/settings.png" alt="Настройки" class="btn-icon">
                 </button>
             </div>
         </header>
 
-        <!-- ОБЩИЙ КРЕСТИК ДЛЯ ВСЕХ ПАНЕЛЕЙ (скрыт по умолчанию) -->
+        <!-- ФОН ДЛЯ ВСЕХ ПАНЕЛЕЙ (скрыт по умолчанию) -->
+        <div class="all-panels-background" id="allPanelsBackground"></div>
+
+        <!-- ОБЩИЙ КРЕСТИК ДЛЯ ЗАКРЫТИЯ ВСЕХ ПАНЕЛЕЙ -->
         <button class="all-panels-close" id="allPanelsClose" title="Закрыть все панели">×</button>
 
         <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
         <main class="main-content">
             
-            <!-- ЦЕНТРАЛЬНЫЙ БЛОК С ФИГУРКОЙ И КНОПКАМИ -->
+            <!-- ЦЕНТРАЛЬНЫЙ БЛОК -->
             <div class="center-section">
-                <!-- Ломаные линии к ярлычкам -->
-                <svg class="connection-lines" id="connectionLines">
-                    <!-- Линия к здоровью (левый верхний) -->
-                    <path id="lineHealth" class="connection-line" d="M110,140 Q80,120 40,90"></path>
-                    <!-- Линия к привычкам (правый верхний) -->
-                    <path id="lineHabits" class="connection-line" d="M170,120 Q200,100 240,90"></path>
-                    <!-- Линия к задачам (левый нижний) -->
-                    <path id="lineTasks" class="connection-line" d="M100,200 Q70,220 40,250"></path>
-                    <!-- Линия к финансам (правый нижний) -->
-                    <path id="lineFinance" class="connection-line" d="M180,210 Q210,230 240,250"></path>
+                <!-- ЛИНИИ СВЯЗИ - ИСПРАВЛЕННЫЕ КООРДИНАТЫ -->
+                <svg class="connection-lines" id="connectionLines" viewBox="0 0 300 400">
+                    <!-- Линия к здоровью (грудь слева) -->
+                    <path id="lineHealth" class="connection-line" d="M100,150 Q70,130 30,100"></path>
+                    <!-- Линия к привычкам (голова справа) -->
+                    <path id="lineHabits" class="connection-line" d="M200,130 Q230,110 270,100"></path>
+                    <!-- Линия к задачам (бедро слева) -->
+                    <path id="lineTasks" class="connection-line" d="M110,250 Q80,270 30,300"></path>
+                    <!-- Линия к финансам (кисть справа) -->
+                    <path id="lineFinance" class="connection-line" d="M190,260 Q220,280 270,300"></path>
                 </svg>
 
-                <!-- Точки на фигурке для линий -->
+                <!-- КРУЖКИ НА ФИГУРКЕ -->
                 <div class="connection-dots">
                     <div class="dot health-dot" data-dot="health"></div>
                     <div class="dot habits-dot" data-dot="habits"></div>
@@ -76,73 +78,69 @@
                     <div class="dot finance-dot" data-dot="finance"></div>
                 </div>
 
-                <!-- ЯРЛЫЧКИ -->
-                <!-- Здоровье - левый верхний -->
+                <!-- ЯРЛЫЧКИ (меньше и прижаты к границам) -->
                 <button class="side-tab health-tab" data-tab="health">
                     <img src="icons/health.png" alt="Здоровье" class="tab-icon-img">
                 </button>
                 
-                <!-- Привычки - правый верхний -->
                 <button class="side-tab habits-tab" data-tab="habits">
                     <img src="icons/habits.png" alt="Привычки" class="tab-icon-img">
                 </button>
 
-                <!-- ЦЕНТРАЛЬНАЯ ФИГУРКА (уменьшена в 1.2 раза) -->
+                <!-- ФИГУРКА ЧЕЛОВЕКА -->
                 <div class="center-image-container" id="centerImage">
                     <div class="image-wrapper">
                         <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
                     </div>
                 </div>
 
-                <!-- Задачи - левый нижний -->
                 <button class="side-tab tasks-tab" data-tab="tasks">
                     <img src="icons/tasks.png" alt="Задачи" class="tab-icon-img">
                 </button>
                 
-                <!-- Финансы - правый нижний -->
                 <button class="side-tab finance-tab" data-tab="finance">
                     <img src="icons/finance.png" alt="Финансы" class="tab-icon-img">
                 </button>
             </div>
 
-            <!-- 4 ПОКАЗАТЕЛЯ ПРОГРЕССА -->
+            <!-- ПОКАЗАТЕЛИ ПРОГРЕССА (как на скриншоте) -->
             <div class="progress-indicators">
                 <div class="progress-item" id="progressPhysical">
                     <div class="progress-label">Физ. здоровье</div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-value="65"></div>
+                        <div class="progress-bar" data-value="56"></div>
                     </div>
-                    <div class="progress-value" id="valuePhysical">65%</div>
+                    <div class="progress-value" id="valuePhysical">56%</div>
                 </div>
                 
                 <div class="progress-item" id="progressMental">
                     <div class="progress-label">Мент. здоровье</div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-value="80"></div>
+                        <div class="progress-bar" data-value="81"></div>
                     </div>
-                    <div class="progress-value" id="valueMental">80%</div>
+                    <div class="progress-value" id="valueMental">81%</div>
                 </div>
                 
                 <div class="progress-item" id="progressFinancial">
                     <div class="progress-label">Финансы</div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-value="45"></div>
+                        <div class="progress-bar" data-value="41"></div>
                     </div>
-                    <div class="progress-value" id="valueFinancial">45%</div>
+                    <div class="progress-value" id="valueFinancial">41%</div>
                 </div>
                 
                 <div class="progress-item" id="progressActivity">
                     <div class="progress-label">Активность</div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar" data-value="70"></div>
+                        <div class="progress-bar" data-value="72"></div>
                     </div>
-                    <div class="progress-value" id="valueActivity">70%</div>
+                    <div class="progress-value" id="valueActivity">72%</div>
                 </div>
             </div>
 
         </main>
 
-        <!-- ДВОЙНАЯ ЛИНИЯ СНИЗУ -->
+        <!-- НИЖНИЙ ЯЗЫЧОК -->
         <div class="bottom-line-trigger" id="bottomLineTrigger">
             <div class="double-line">
                 <div class="line"></div>
@@ -150,10 +148,10 @@
             </div>
         </div>
 
-        <!-- ПАНЕЛИ МОДУЛЕЙ С КРЕСТИКАМИ ЗАКРЫТИЯ -->
+        <!-- ПАНЕЛИ МОДУЛЕЙ С КРЕСТИКАМИ -->
         <div class="corner-panel health-panel" id="healthPanel">
             <div class="panel-content">
-                <h3>❤️ Здоровье</h3>
+                <h3>Здоровье</h3>
                 <p>Сон: 7.5ч<br>Энергия: 3/5<br>Настроение: 4/5</p>
                 <button class="panel-close" data-close="health">×</button>
             </div>
@@ -161,7 +159,7 @@
 
         <div class="corner-panel habits-panel" id="habitsPanel">
             <div class="panel-content">
-                <h3>🎯 Привычки</h3>
+                <h3>Привычки</h3>
                 <p>Медитация: ✅<br>Спорт: ✅<br>Чтение: ⚪</p>
                 <button class="panel-close" data-close="habits">×</button>
             </div>
@@ -169,7 +167,7 @@
 
         <div class="corner-panel tasks-panel" id="tasksPanel">
             <div class="panel-content">
-                <h3>✅ Задачи</h3>
+                <h3>Задачи</h3>
                 <p>Купить продукты<br>Позвонить маме<br>Записаться к врачу</p>
                 <button class="panel-close" data-close="tasks">×</button>
             </div>
@@ -177,34 +175,9 @@
 
         <div class="corner-panel finance-panel" id="financePanel">
             <div class="panel-content">
-                <h3>💰 Финансы</h3>
+                <h3>Финансы</h3>
                 <p>Расходы: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽</p>
                 <button class="panel-close" data-close="finance">×</button>
-            </div>
-        </div>
-                <!-- ПАНЕЛЬ ВСЕХ МОДУЛЕЙ -->
-        <div class="all-modules-panel" id="allModulesPanel">
-            <div class="modules-header">
-                <h3>Все модули</h3>
-                <button class="close-modules" id="closeModulesBtn">✕</button>
-            </div>
-            <div class="modules-grid">
-                <div class="module-card" data-module="health">
-                    <div class="module-icon">❤️</div>
-                    <div class="module-name">Здоровье</div>
-                </div>
-                <div class="module-card" data-module="habits">
-                    <div class="module-icon">🎯</div>
-                    <div class="module-name">Привычки</div>
-                </div>
-                <div class="module-card" data-module="tasks">
-                    <div class="module-icon">✅</div>
-                    <div class="module-name">Задачи</div>
-                </div>
-                <div class="module-card" data-module="finance">
-                    <div class="module-icon">💰</div>
-                    <div class="module-name">Финансы</div>
-                </div>
             </div>
         </div>
 
@@ -225,12 +198,10 @@
 
     </div>
 
-    <!-- Основной JS -->
+    <!-- JavaScript -->
     <script src="js/app.js"></script>
-    <!-- JS для панелей -->
     <script src="js/panels.js"></script>
     
-    <!-- Регистрация Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
