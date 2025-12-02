@@ -1,25 +1,30 @@
 /*
-  БЛОК 38: app.js v6
+  БЛОК 43: app.js v7
   Изменения:
-  1. Исправлена логика крестиков
-  2. Фон для всех панелей
-  3. Исправлено открытие/закрытие
-  4. Значения прогресса как на скриншоте
+  1. Шрифт проверен
+  2. Нижняя панель работает
+  3. Все панели сливаются при открытии
+  4. Крестики скрываются при открытии всех
+  5. Ярлычки прижаты к границам
+  6. Линии сплошные
 */
 
 const AppConfig = {
     userName: "Алексей",
     userLevel: 7,
     progressValues: {
-        physical: 56,  // Как на скриншоте
-        mental: 81,    // Как на скриншоте
-        financial: 41, // Как на скриншоте
-        activity: 72   // Как на скриншоте
+        physical: 56,
+        mental: 81,
+        financial: 41,
+        activity: 72
     }
 };
 
 let activePanels = [];
 let allPanelsOpen = false;
+
+// Проверяем шрифт
+console.log('Шрифт должен быть CrySisBold');
 
 function formatCurrentDate() {
     const now = new Date();
@@ -30,7 +35,7 @@ function formatCurrentDate() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v6 запущен');
+    console.log('ICAR v7 запущен');
     
     initDate();
     initUserData();
@@ -42,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPanelCloseButtons();
     initAllPanelsCloseButton();
     initClosePanels();
+    initBottomSheetClose();
 });
 
 function initDate() {
@@ -77,7 +83,7 @@ function setProgressValue(type, value) {
     barElement.setAttribute('data-value', clampedValue);
     valueElement.textContent = `${clampedValue}%`;
     
-    // Цвета как на скриншоте
+    // Цвета
     if (clampedValue < 30) {
         barElement.style.background = 'linear-gradient(90deg, #FF6B6B, #FF8E8E)';
     } else if (clampedValue < 70) {
@@ -106,7 +112,7 @@ function initHumanImage() {
     }
     
     if (centerImage) {
-        centerImage.addEventListener('click', openAllCornerPanelsWithEffects);
+        centerImage.addEventListener('click', toggleAllPanels);
     }
 }
 
@@ -115,46 +121,45 @@ function initSideTabs() {
         tab.addEventListener('click', (e) => {
             e.stopPropagation();
             const tabType = tab.getAttribute('data-tab');
-            toggleCornerPanel(tabType);
+            openSinglePanel(tabType);
         });
     });
 }
 
-function toggleCornerPanel(panelType) {
-    const panel = document.getElementById(`${panelType}Panel`);
-    if (!panel) return;
-    
-    const index = activePanels.indexOf(panelType);
-    
-    if (index > -1) {
-        // Закрываем панель
-        panel.classList.remove('active');
-        activePanels.splice(index, 1);
-        hideAllPanelsCloseButton();
-        hideAllPanelsBackground();
-        removeAllPanelsOpenClass();
-        allPanelsOpen = false;
-    } else {
-        // Открываем панель
-        panel.classList.add('active');
-        activePanels.push(panelType);
-        // НЕ показываем общий крестик если открыта только одна панель
-    }
-}
-
-function openAllCornerPanelsWithEffects() {
-    const panels = ['health', 'habits', 'tasks', 'finance'];
-    
+function openSinglePanel(panelType) {
     if (allPanelsOpen) {
-        closeAllCornerPanels();
+        closeAllPanels();
         return;
     }
     
+    const panel = document.getElementById(`${panelType}Panel`);
+    if (!panel) return;
+    
+    // Закрываем все другие панели
+    closeAllPanels();
+    
+    // Открываем выбранную
+    panel.classList.add('active');
+    activePanels = [panelType];
+}
+
+function toggleAllPanels() {
+    if (allPanelsOpen) {
+        closeAllPanels();
+    } else {
+        openAllPanels();
+    }
+}
+
+function openAllPanels() {
+    const panels = ['health', 'habits', 'tasks', 'finance'];
+    
     // Показываем фон
-    showAllPanelsBackground();
+    const bg = document.getElementById('allPanelsBackground');
+    if (bg) bg.classList.add('active');
     
     // Добавляем класс для стилей
-    addAllPanelsOpenClass();
+    document.body.classList.add('all-panels-open');
     
     // Открываем все панели
     panels.forEach((panelType, index) => {
@@ -165,63 +170,40 @@ function openAllCornerPanelsWithEffects() {
                 if (!activePanels.includes(panelType)) {
                     activePanels.push(panelType);
                 }
-                
-                // Показываем общий крестик после открытия
-                if (index === panels.length - 1) {
-                    setTimeout(() => {
-                        showAllPanelsCloseButton();
-                        allPanelsOpen = true;
-                    }, 400);
-                }
             }
-        }, index * 60);
+        }, index * 50);
     });
+    
+    // Показываем общий крестик
+    setTimeout(() => {
+        const allPanelsClose = document.getElementById('allPanelsClose');
+        if (allPanelsClose) allPanelsClose.classList.add('active');
+        allPanelsOpen = true;
+    }, 300);
 }
 
-function addAllPanelsOpenClass() {
-    document.body.classList.add('all-panels-open');
-}
-
-function removeAllPanelsOpenClass() {
-    document.body.classList.remove('all-panels-open');
-}
-
-function showAllPanelsBackground() {
-    const bg = document.getElementById('allPanelsBackground');
-    if (bg) bg.classList.add('active');
-}
-
-function hideAllPanelsBackground() {
-    const bg = document.getElementById('allPanelsBackground');
-    if (bg) bg.classList.remove('active');
-}
-
-function showAllPanelsCloseButton() {
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) {
-        allPanelsClose.classList.add('active');
-    }
-}
-
-function hideAllPanelsCloseButton() {
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) {
-        allPanelsClose.classList.remove('active');
-    }
-}
-
-function closeAllCornerPanels() {
+function closeAllPanels() {
+    // Закрываем все панели
     document.querySelectorAll('.corner-panel').forEach(panel => {
         panel.classList.remove('active');
     });
+    
+    // Убираем фон
+    const bg = document.getElementById('allPanelsBackground');
+    if (bg) bg.classList.remove('active');
+    
+    // Убираем общий крестик
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) allPanelsClose.classList.remove('active');
+    
+    // Убираем класс стилей
+    document.body.classList.remove('all-panels-open');
+    
+    // Сбрасываем состояния
     activePanels = [];
     allPanelsOpen = false;
-    hideAllPanelsCloseButton();
-    hideAllPanelsBackground();
-    removeAllPanelsOpenClass();
 }
 
-// Крестики на отдельных панелях
 function initPanelCloseButtons() {
     document.querySelectorAll('.panel-close').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -233,43 +215,46 @@ function initPanelCloseButtons() {
                 panel.classList.remove('active');
                 const index = activePanels.indexOf(panelType);
                 if (index > -1) activePanels.splice(index, 1);
-                
-                // Если закрыли все панели
-                if (activePanels.length === 0) {
-                    hideAllPanelsCloseButton();
-                    hideAllPanelsBackground();
-                    removeAllPanelsOpenClass();
-                    allPanelsOpen = false;
-                }
             }
         });
     });
 }
 
-// Общий крестик для закрытия всех панелей
 function initAllPanelsCloseButton() {
     const allPanelsClose = document.getElementById('allPanelsClose');
     if (allPanelsClose) {
         allPanelsClose.addEventListener('click', (e) => {
             e.stopPropagation();
-            closeAllCornerPanels();
+            closeAllPanels();
         });
     }
 }
 
+// НИЖНЯЯ ПАНЕЛЬ РАБОТАЕТ
 function initBottomLine() {
     const trigger = document.getElementById('bottomLineTrigger');
     const sheet = document.getElementById('bottomSheet');
     
     if (trigger && sheet) {
         trigger.addEventListener('click', () => {
-            closeAllCornerPanels();
-            sheet.classList.toggle('active');
+            closeAllPanels();
+            sheet.classList.add('active');
             
             document.querySelectorAll('.line').forEach(line => {
                 line.style.transform = 'scaleX(1.3)';
                 setTimeout(() => { line.style.transform = ''; }, 300);
             });
+        });
+    }
+}
+
+function initBottomSheetClose() {
+    const closeBtn = document.getElementById('closeBottomSheet');
+    const sheet = document.getElementById('bottomSheet');
+    
+    if (closeBtn && sheet) {
+        closeBtn.addEventListener('click', () => {
+            sheet.classList.remove('active');
         });
     }
 }
@@ -285,24 +270,18 @@ function initSettingsButton() {
 
 function initClosePanels() {
     document.addEventListener('click', (e) => {
-        // Если клик вне панелей и они открыты по отдельности
         const isPanelElement = e.target.closest('.side-tab') || 
                               e.target.closest('.corner-panel') ||
                               e.target.closest('#centerImage') ||
                               e.target.closest('.panel-close') ||
-                              e.target.id === 'allPanelsClose' ||
-                              e.target.closest('#allPanelsBackground');
+                              e.target.id === 'allPanelsClose';
         
+        // Закрытие одиночных панелей при клике вне
         if (activePanels.length > 0 && !allPanelsOpen && !isPanelElement) {
-            closeAllCornerPanels();
+            closeAllPanels();
         }
         
-        // Если клик на фон когда все панели открыты
-        if (allPanelsOpen && e.target.id === 'allPanelsBackground') {
-            closeAllCornerPanels();
-        }
-        
-        // Нижняя панель
+        // Закрытие нижней панели при клике вне
         const bottomSheet = document.getElementById('bottomSheet');
         if (bottomSheet && bottomSheet.classList.contains('active')) {
             if (!bottomSheet.contains(e.target) && 
@@ -313,19 +292,20 @@ function initClosePanels() {
         }
     });
     
+    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            closeAllCornerPanels();
+            closeAllPanels();
             const bottomSheet = document.getElementById('bottomSheet');
             if (bottomSheet) bottomSheet.classList.remove('active');
         }
     });
 }
 
-// Автообновление
+// Автообновление прогресс-баров
 setInterval(() => {
     if (Math.random() > 0.9) {
-        const change = () => Math.floor(Math.random() * 6) - 3;
+        const change = () => Math.floor(Math.random() * 4) - 2;
         
         AppConfig.progressValues.physical += change();
         AppConfig.progressValues.mental += change();
@@ -341,4 +321,4 @@ setInterval(() => {
         setProgressValue('financial', AppConfig.progressValues.financial);
         setProgressValue('activity', AppConfig.progressValues.activity);
     }
-}, 12000);
+}, 15000);

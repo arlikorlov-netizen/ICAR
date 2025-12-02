@@ -1,8 +1,9 @@
 /* 
-  БЛОК 36: panels.css v3
+  БЛОК 42: panels.css v4
   Изменения:
-  1. Убраны лишние стили для "Все модули"
-  2. Оптимизированы стили панелей
+  1. Панели адаптированы под слияние
+  2. Крестики скрыты при открытии всех панелей
+  3. Границы убраны при слиянии
 */
 
 /* 1. ПАНЕЛИ МОДУЛЕЙ */
@@ -17,7 +18,7 @@
     transition: all 0.3s ease;
     padding: 15px;
     box-shadow: var(--shadow);
-    width: calc(50% - 15px);
+    width: calc(50% - 10px);
     height: calc(50% - 95px);
 }
 
@@ -26,7 +27,7 @@
     visibility: visible;
 }
 
-/* 2. РАСПОЛОЖЕНИЕ КАЖДОЙ ПАНЕЛИ */
+/* 2. РАСПОЛОЖЕНИЕ ПАНЕЛЕЙ */
 .health-panel {
     top: 65px;
     left: 5px;
@@ -48,10 +49,76 @@
 .finance-panel {
     bottom: 65px;
     right: 5px;
-    border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
+    border-radius: var(--color-panel) var(--border-radius) 0 var(--border-radius);
 }
 
-/* 3. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
+/* 3. КОГДА ВСЕ ПАНЕЛИ ОТКРЫТЫ - СЛИВАЕМ */
+.all-panels-open .corner-panel {
+    border-width: 0;
+    box-shadow: none;
+    border-radius: 0 !important;
+    padding: 20px;
+}
+
+.all-panels-open .health-panel {
+    border-right: 1px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+}
+
+.all-panels-open .habits-panel {
+    border-left: 1px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+}
+
+.all-panels-open .tasks-panel {
+    border-right: 1px solid rgba(42, 165, 42, 0.3);
+    border-top: 1px solid rgba(42, 165, 42, 0.3);
+}
+
+.all-panels-open .finance-panel {
+    border-left: 1px solid rgba(42, 165, 42, 0.3);
+    border-top: 1px solid rgba(42, 165, 42, 0.3);
+}
+
+/* 4. КРЕСТИКИ НА ПАНЕЛЯХ */
+.panel-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 160;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.corner-panel.active .panel-close {
+    opacity: 1;
+    visibility: visible;
+}
+
+.panel-close:hover {
+    background-color: var(--color-button-hover);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* 5. КРЕСТИКИ СКРЫТЫ ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
+.all-panels-open .panel-close {
+    display: none !important;
+}
+
+/* 6. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
 .panel-content {
     position: relative;
     height: 100%;

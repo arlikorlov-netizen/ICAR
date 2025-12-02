@@ -1,33 +1,226 @@
 /* 
-  БЛОК 35: main.css v6
+  БЛОК 41: main.css v7
   Изменения:
-  1. Исправлен шрифт (100% рабочая версия)
-  2. Ярлычки меньше и прижаты к границам
-  3. Иконки в ярлычках меньше
-  4. Кружки для линий увеличены
-  5. Убран "Все модули" с главного экрана
+  1. Шрифт ИСПРАВЛЕН (новая попытка)
+  2. Кнопки правильного цвета (тёмно-зелёные)
+  3. Ярлычки прижаты к границам
+  4. Линии сплошные, не пунктирные
+  5. Кружки увеличены
+  6. Нижняя панель работает
 */
 
-/* 1. ШРИФТ - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+/* 1. ШРИФТ - ФИНАЛЬНАЯ ПОПЫТКА */
 @font-face {
-    font-family: 'CrySis';
+    font-family: 'CrySisBold';
     src: url('../fonts/CrySis_Bold_2.ttf') format('truetype');
-    font-weight: 700;
+    font-weight: normal;
     font-style: normal;
-    font-display: block; /* Важно для iOS */
 }
 
-/* Принудительно применяем шрифт ко всем элементам */
+body {
+    font-family: 'CrySisBold', 'Arial Black', sans-serif;
+    background-color: #0A2A0A;
+    color: #A0FFA0;
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 * {
-    font-family: 'CrySis', 'Arial Black', sans-serif !important;
+    font-family: 'CrySisBold', 'Arial Black', sans-serif;
 }
 
-/* 2. ЯРЛЫЧКИ - МЕНЬШЕ И ПРИЖАТЫ К ГРАНИЦАМ */
+/* 2. ЦВЕТА */
+:root {
+    --color-bg: #0A2A0A;
+    --color-card: #153015;
+    --color-text: #A0FFA0;
+    --color-text-secondary: #90FF90;
+    --color-accent: #2AA52A;
+    --color-progress-bg: #254025;
+    --color-button: #1E6B1E;
+    --color-button-hover: #2A8B2A;
+    --color-panel: #183018;
+    --color-line: #32CD32;
+    --border-radius: 15px;
+    --shadow: 0 4px 20px rgba(42, 165, 42, 0.3);
+}
+
+/* 3. ОСНОВНОЙ КОНТЕЙНЕР */
+.app-container {
+    min-height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 4. ВЕРХНЯЯ ПАНЕЛЬ */
+.top-panel {
+    padding: 8px 20px;
+    background-color: var(--color-card);
+    text-align: center;
+    position: relative;
+    z-index: 100;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.current-date {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    min-width: 100px;
+    text-align: right;
+}
+
+.user-name {
+    font-size: 18px;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.user-level {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    min-width: 70px;
+    text-align: left;
+}
+
+/* 5. КНОПКА НАСТРОЕК - ТЁМНО-ЗЕЛЁНАЯ */
+.settings-btn {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    padding: 0;
+}
+
+.settings-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(1.2);
+}
+
+/* 6. ОСНОВНОЕ СОДЕРЖИМОЕ */
+.main-content {
+    flex: 1;
+    padding: 10px 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    margin-top: auto;
+}
+
+/* 7. ЦЕНТРАЛЬНЫЙ БЛОК */
+.center-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    margin: 10px 0;
+}
+
+/* 8. ЛИНИИ СВЯЗИ - СПЛОШНЫЕ */
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.connection-line {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: 2;
+    stroke-dasharray: 0; /* УБРАН ПУНКТИР */
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* 9. КРУЖКИ НА ФИГУРКЕ - БОЛЬШИЕ */
+.connection-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.dot {
+    position: absolute;
+    width: 14px; /* БОЛЬШЕ */
+    height: 14px;
+    background-color: var(--color-line);
+    border-radius: 50%;
+    border: 2px solid var(--color-card);
+    box-shadow: 0 0 8px rgba(50, 205, 50, 0.9);
+}
+
+.health-dot {
+    top: 40%;
+    left: 35%;
+}
+
+.habits-dot {
+    top: 30%;
+    right: 35%;
+}
+
+.tasks-dot {
+    bottom: 40%;
+    left: 35%;
+}
+
+.finance-dot {
+    bottom: 30%;
+    right: 35%;
+}
+
+/* 10. ЯРЛЫЧКИ - ПРИЖАТЫ К ГРАНИЦАМ */
 .side-tab {
     position: absolute;
-    width: 50px; /* Было 60px */
-    height: 50px; /* Было 60px */
-    background-color: var(--color-button);
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-button); /* ТЁМНО-ЗЕЛЁНЫЕ */
     border: none;
     cursor: pointer;
     display: flex;
@@ -37,9 +230,6 @@
     z-index: 50;
     padding: 0;
     margin: 0;
-    /* Прижимаем к самым границам */
-    top: 70px !important;
-    bottom: 70px !important;
 }
 
 .side-tab:hover {
@@ -48,60 +238,163 @@
 }
 
 .tab-icon-img {
-    width: 24px; /* Было 32px */
-    height: 24px;
+    width: 26px;
+    height: 26px;
     filter: brightness(1.2);
 }
 
-/* Переопределяем позиции для прижатия к границам */
+/* ПРИЖИМАЕМ К САМЫМ ГРАНИЦАМ */
 .health-tab {
-    left: 0 !important;
-    border-radius: 0 10px 10px 0;
+    top: 70px;
+    left: 0;
+    border-radius: 0 12px 12px 0;
 }
 
 .habits-tab {
-    right: 0 !important;
-    border-radius: 10px 0 0 10px;
+    top: 70px;
+    right: 0;
+    border-radius: 12px 0 0 12px;
 }
 
 .tasks-tab {
-    left: 0 !important;
-    border-radius: 0 10px 10px 0;
+    bottom: 70px;
+    left: 0;
+    border-radius: 0 12px 12px 0;
 }
 
 .finance-tab {
-    right: 0 !important;
-    border-radius: 10px 0 0 10px;
+    bottom: 70px;
+    right: 0;
+    border-radius: 12px 0 0 12px;
 }
 
-/* 3. КРУЖКИ ДЛЯ ЛИНИЙ - БОЛЬШЕ */
-.dot {
-    position: absolute;
-    width: 12px; /* Было 8px */
-    height: 12px;
-    background-color: var(--color-line);
-    border-radius: 50%;
-    border: 2px solid var(--color-card);
-    box-shadow: 0 0 8px rgba(50, 205, 50, 0.9);
-    z-index: 20;
+/* 11. ЦЕНТРАЛЬНАЯ ФИГУРКА */
+.center-image-container {
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
 }
 
-/* 4. ЛИНИИ - СПЛОШНЫЕ, ЛОМАНЫЕ */
-.connection-line {
-    fill: none;
-    stroke: var(--color-line);
-    stroke-width: 2;
-    stroke-dasharray: none !important; /* Убираем пунктир */
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+.image-wrapper {
+    text-align: center;
+    position: relative;
 }
 
-/* 5. УБИРАЕМ "ВСЕ МОДУЛИ" С ГЛАВНОГО ЭКРАНА */
-.all-modules-panel {
-    display: none !important; /* Скрываем полностью */
+.human-image {
+    width: 220px;
+    height: 275px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4));
 }
 
-/* 6. ПАНЕЛЬ ВСЕХ ПАНЕЛЕЙ - ФОН */
+.image-placeholder {
+    width: 220px;
+    height: 275px;
+    background-color: var(--color-card);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.image-placeholder span {
+    font-size: 60px;
+    color: var(--color-accent);
+}
+
+/* 12. ПРОГРЕСС-БАРЫ */
+.progress-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--color-card);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.progress-item:hover {
+    transform: translateX(3px);
+    box-shadow: var(--shadow);
+}
+
+.progress-label {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text);
+    min-width: 100px;
+}
+
+.progress-bar-container {
+    flex: 2;
+    height: 16px;
+    background-color: var(--color-progress-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent), #90FF90);
+    width: 0%;
+    border-radius: 8px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.progress-value {
+    min-width: 45px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+/* 13. НИЖНИЙ ЯЗЫЧОК */
+.bottom-line-trigger {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 0;
+    background-color: var(--color-card);
+    border-top: 2px solid var(--color-accent);
+    border-radius: 15px 15px 0 0;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.double-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.line {
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.bottom-line-trigger:hover .line {
+    background-color: var(--color-accent);
+    width: 60px;
+}
+
+/* 14. ФОН ДЛЯ ВСЕХ ПАНЕЛЕЙ */
 .all-panels-background {
     position: fixed;
     top: 0;
@@ -109,7 +402,7 @@
     width: 100%;
     height: 100%;
     background-color: var(--color-panel);
-    z-index: 149;
+    z-index: 140;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
@@ -120,14 +413,14 @@
     visibility: visible;
 }
 
-/* 7. КРЕСТИК ЗАКРЫТИЯ - ТЁМНО-ЗЕЛЁНЫЙ */
+/* 15. ОБЩИЙ КРЕСТИК */
 .all-panels-close {
     position: fixed;
     top: 15px;
     right: 15px;
     width: 32px;
     height: 32px;
-    background-color: var(--color-button); /* Тёмно-зелёный */
+    background-color: var(--color-button);
     border: 2px solid var(--color-accent);
     border-radius: 50%;
     color: var(--color-text);
@@ -154,86 +447,108 @@
     transform: rotate(90deg) scale(1.1);
 }
 
-/* 8. КРЕСТИКИ НА БОКОВЫХ ПАНЕЛЯХ - ТЁМНО-ЗЕЛЁНЫЕ */
-.panel-close {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 26px;
-    height: 26px;
-    background-color: var(--color-button); /* Тёмно-зелёный */
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    color: var(--color-text);
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+/* 16. НИЖНЯЯ ПАНЕЛЬ (РАБОТАЕТ) */
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    max-width: 500px;
+    height: 50vh;
+    background-color: var(--color-panel);
+    border-top: 3px solid var(--color-accent);
+    border-radius: 20px 20px 0 0;
+    z-index: 250;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-sheet.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.sheet-header {
+    padding: 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--color-accent);
+    position: relative;
+}
+
+.sheet-handle {
+    width: 40px;
+    height: 4px;
+    background-color: var(--color-text-secondary);
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+}
+
+.sheet-title {
+    color: var(--color-text);
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+.sheet-close {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.sheet-close:hover {
+    transform: rotate(90deg);
+}
+
+.sheet-body {
+    padding: 15px;
+    color: var(--color-text-secondary);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quick-item {
+    background-color: var(--color-card);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 160;
-    opacity: 0;
-    visibility: hidden;
+    font-size: 14px;
 }
 
-.corner-panel.active .panel-close {
-    opacity: 1;
-    visibility: visible;
+.quick-item:hover {
+    background-color: var(--color-button);
+    transform: translateX(5px);
 }
 
-.panel-close:hover {
-    background-color: var(--color-button-hover);
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* 9. КОГДА ВСЕ ПАНЕЛИ ОТКРЫТЫ - УБИРАЕМ ПУСТОТУ */
-.all-panels-open .corner-panel {
-    border-width: 0;
-    box-shadow: none;
-}
-
-.all-panels-open .health-panel {
-    border-right: 2px solid var(--color-accent);
-    border-bottom: 2px solid var(--color-accent);
-    border-radius: 0;
-}
-
-.all-panels-open .habits-panel {
-    border-left: 2px solid var(--color-accent);
-    border-bottom: 2px solid var(--color-accent);
-    border-radius: 0;
-}
-
-.all-panels-open .tasks-panel {
-    border-right: 2px solid var(--color-accent);
-    border-top: 2px solid var(--color-accent);
-    border-radius: 0;
-}
-
-.all-panels-open .finance-panel {
-    border-left: 2px solid var(--color-accent);
-    border-top: 2px solid var(--color-accent);
-    border-radius: 0;
-}
-
-/* Скрываем крестики на панелях когда открыты все */
-.all-panels-open .panel-close {
-    display: none;
-}
-
-/* 10. АДАПТИВНОСТЬ */
+/* 17. АДАПТИВНОСТЬ */
 @media (max-width: 500px) {
     .side-tab {
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         top: 65px !important;
         bottom: 65px !important;
     }
     
     .tab-icon-img {
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
     }
     
     .human-image {
@@ -242,7 +557,12 @@
     }
     
     .dot {
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .progress-label {
+        min-width: 90px;
+        font-size: 13px;
     }
 }
