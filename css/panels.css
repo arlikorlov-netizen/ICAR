@@ -1,12 +1,12 @@
 /* 
-  БЛОК 42: panels.css v4
+  БЛОК 46: panels.css v5
   Изменения:
-  1. Панели адаптированы под слияние
-  2. Крестики скрыты при открытии всех панелей
-  3. Границы убраны при слиянии
+  1. Крестики в круглешках подняты
+  2. Размер четвертинок уменьшен по вертикали
+  3. Граница по центру вертикали
 */
 
-/* 1. ПАНЕЛИ МОДУЛЕЙ */
+/* ПАНЕЛИ МОДУЛЕЙ - УМЕНЬШЕНЫ ПО ВЕРТИКАЛИ */
 .corner-panel {
     position: fixed;
     background-color: var(--color-panel);
@@ -19,7 +19,7 @@
     padding: 15px;
     box-shadow: var(--shadow);
     width: calc(50% - 10px);
-    height: calc(50% - 95px);
+    height: calc(45% - 95px); /* УМЕНЬШЕНА ВЫСОТА */
 }
 
 .corner-panel.active {
@@ -27,7 +27,7 @@
     visibility: visible;
 }
 
-/* 2. РАСПОЛОЖЕНИЕ ПАНЕЛЕЙ */
+/* РАСПОЛОЖЕНИЕ ПАНЕЛЕЙ С ЦЕНТРАЛЬНОЙ ВЕРТИКАЛЬНОЙ ГРАНИЦЕЙ */
 .health-panel {
     top: 65px;
     left: 5px;
@@ -49,10 +49,10 @@
 .finance-panel {
     bottom: 65px;
     right: 5px;
-    border-radius: var(--color-panel) var(--border-radius) 0 var(--border-radius);
+    border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
 }
 
-/* 3. КОГДА ВСЕ ПАНЕЛИ ОТКРЫТЫ - СЛИВАЕМ */
+/* КОГДА ВСЕ ПАНЕЛИ ОТКРЫТЫ - ЦЕНТРАЛЬНАЯ ГРАНИЦА */
 .all-panels-open .corner-panel {
     border-width: 0;
     box-shadow: none;
@@ -63,27 +63,31 @@
 .all-panels-open .health-panel {
     border-right: 1px solid rgba(42, 165, 42, 0.3);
     border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px); /* СООТВЕТСТВУЕТ ВЕРХНИМ */
 }
 
 .all-panels-open .habits-panel {
     border-left: 1px solid rgba(42, 165, 42, 0.3);
     border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
 }
 
 .all-panels-open .tasks-panel {
     border-right: 1px solid rgba(42, 165, 42, 0.3);
     border-top: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px); /* ТАКАЯ ЖЕ ВЫСОТА КАК У ВЕРХНИХ */
 }
 
 .all-panels-open .finance-panel {
     border-left: 1px solid rgba(42, 165, 42, 0.3);
     border-top: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
 }
 
-/* 4. КРЕСТИКИ НА ПАНЕЛЯХ */
+/* КРЕСТИКИ НА ПАНЕЛЯХ - ПОДНЯТЫ */
 .panel-close {
     position: absolute;
-    top: 8px;
+    top: 5px; /* ПОДНЯТ ВЫШЕ (было 8px) */
     right: 8px;
     width: 26px;
     height: 26px;
@@ -101,6 +105,9 @@
     z-index: 160;
     opacity: 0;
     visibility: hidden;
+    /* Центрирование крестика в кружке */
+    line-height: 1;
+    padding-bottom: 2px; /* ПОДНЯТ КРЕСТИК ВНУТРИ КРУГА */
 }
 
 .corner-panel.active .panel-close {
@@ -113,16 +120,16 @@
     transform: rotate(90deg) scale(1.1);
 }
 
-/* 5. КРЕСТИКИ СКРЫТЫ ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
+/* КРЕСТИКИ СКРЫТЫ ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
 .all-panels-open .panel-close {
     display: none !important;
 }
 
-/* 6. СОДЕРЖИМОЕ ПАНЕЛЕЙ */
+/* СОДЕРЖИМОЕ ПАНЕЛЕЙ */
 .panel-content {
     position: relative;
     height: 100%;
-    padding-top: 5px;
+    padding-top: 10px; /* УВЕЛИЧЕНО ДЛЯ КРЕСТИКА */
 }
 
 .panel-content h3 {

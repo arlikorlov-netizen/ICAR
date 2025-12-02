@@ -1,12 +1,9 @@
 /*
-  БЛОК 43: app.js v7
+  БЛОК 48: app.js v8
   Изменения:
-  1. Шрифт проверен
-  2. Нижняя панель работает
-  3. Все панели сливаются при открытии
-  4. Крестики скрываются при открытии всех
-  5. Ярлычки прижаты к границам
-  6. Линии сплошные
+  1. Управление всеми 4 ярлычками
+  2. Корректное открытие/закрытие панелей
+  3. Фиксированные размеры четвертинок
 */
 
 const AppConfig = {
@@ -23,8 +20,7 @@ const AppConfig = {
 let activePanels = [];
 let allPanelsOpen = false;
 
-// Проверяем шрифт
-console.log('Шрифт должен быть CrySisBold');
+console.log('ICAR v8 запущен - все 4 ярлычка на месте');
 
 function formatCurrentDate() {
     const now = new Date();
@@ -35,7 +31,7 @@ function formatCurrentDate() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ICAR v7 запущен');
+    console.log('Загрузка завершена');
     
     initDate();
     initUserData();
@@ -83,7 +79,6 @@ function setProgressValue(type, value) {
     barElement.setAttribute('data-value', clampedValue);
     valueElement.textContent = `${clampedValue}%`;
     
-    // Цвета
     if (clampedValue < 30) {
         barElement.style.background = 'linear-gradient(90deg, #FF6B6B, #FF8E8E)';
     } else if (clampedValue < 70) {
@@ -121,6 +116,7 @@ function initSideTabs() {
         tab.addEventListener('click', (e) => {
             e.stopPropagation();
             const tabType = tab.getAttribute('data-tab');
+            console.log('Нажата кнопка:', tabType);
             openSinglePanel(tabType);
         });
     });
@@ -144,6 +140,7 @@ function openSinglePanel(panelType) {
 }
 
 function toggleAllPanels() {
+    console.log('Нажата фигурка, текущее состояние:', allPanelsOpen);
     if (allPanelsOpen) {
         closeAllPanels();
     } else {
@@ -153,6 +150,7 @@ function toggleAllPanels() {
 
 function openAllPanels() {
     const panels = ['health', 'habits', 'tasks', 'finance'];
+    console.log('Открываем все 4 панели');
     
     // Показываем фон
     const bg = document.getElementById('allPanelsBackground');
@@ -161,17 +159,18 @@ function openAllPanels() {
     // Добавляем класс для стилей
     document.body.classList.add('all-panels-open');
     
+    // Закрываем все сначала
+    closeAllPanels();
+    
     // Открываем все панели
     panels.forEach((panelType, index) => {
         setTimeout(() => {
             const panel = document.getElementById(`${panelType}Panel`);
             if (panel) {
                 panel.classList.add('active');
-                if (!activePanels.includes(panelType)) {
-                    activePanels.push(panelType);
-                }
+                activePanels.push(panelType);
             }
-        }, index * 50);
+        }, index * 60);
     });
     
     // Показываем общий крестик
@@ -179,10 +178,13 @@ function openAllPanels() {
         const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose) allPanelsClose.classList.add('active');
         allPanelsOpen = true;
+        console.log('Все панели открыты');
     }, 300);
 }
 
 function closeAllPanels() {
+    console.log('Закрываем все панели');
+    
     // Закрываем все панели
     document.querySelectorAll('.corner-panel').forEach(panel => {
         panel.classList.remove('active');
@@ -209,12 +211,23 @@ function initPanelCloseButtons() {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const panelType = btn.getAttribute('data-close');
-            const panel = document.getElementById(`${panelType}Panel`);
+            console.log('Закрываем панель:', panelType);
             
+            const panel = document.getElementById(`${panelType}Panel`);
             if (panel) {
                 panel.classList.remove('active');
                 const index = activePanels.indexOf(panelType);
                 if (index > -1) activePanels.splice(index, 1);
+                
+                // Если закрыли последнюю панель
+                if (activePanels.length === 0 && allPanelsOpen) {
+                    allPanelsOpen = false;
+                    const bg = document.getElementById('allPanelsBackground');
+                    if (bg) bg.classList.remove('active');
+                    const allPanelsClose = document.getElementById('allPanelsClose');
+                    if (allPanelsClose) allPanelsClose.classList.remove('active');
+                    document.body.classList.remove('all-panels-open');
+                }
             }
         });
     });
@@ -225,18 +238,19 @@ function initAllPanelsCloseButton() {
     if (allPanelsClose) {
         allPanelsClose.addEventListener('click', (e) => {
             e.stopPropagation();
+            console.log('Нажат общий крестик');
             closeAllPanels();
         });
     }
 }
 
-// НИЖНЯЯ ПАНЕЛЬ РАБОТАЕТ
 function initBottomLine() {
     const trigger = document.getElementById('bottomLineTrigger');
     const sheet = document.getElementById('bottomSheet');
     
     if (trigger && sheet) {
         trigger.addEventListener('click', () => {
+            console.log('Открываем нижнюю панель');
             closeAllPanels();
             sheet.classList.add('active');
             
@@ -254,6 +268,7 @@ function initBottomSheetClose() {
     
     if (closeBtn && sheet) {
         closeBtn.addEventListener('click', () => {
+            console.log('Закрываем нижнюю панель');
             sheet.classList.remove('active');
         });
     }
@@ -278,6 +293,11 @@ function initClosePanels() {
         
         // Закрытие одиночных панелей при клике вне
         if (activePanels.length > 0 && !allPanelsOpen && !isPanelElement) {
+            closeAllPanels();
+        }
+        
+        // Закрытие при клике на фон когда все панели открыты
+        if (allPanelsOpen && e.target.id === 'allPanelsBackground') {
             closeAllPanels();
         }
         
