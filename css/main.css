@@ -25,23 +25,13 @@ body {
     line-height: 1.5;
     height: 100vh;
     overflow: hidden;
-    font-size: 20px;
+    font-size: 16px; /* ← ВОЗВРАЩАЕМ стандартный размер */
 }
 
 * {
     font-family: 'CrySisBold', 'Arial Black', sans-serif;
 }
 
-/* Тестовый класс для проверки шрифта - БЛОК 16.1 */
-.test-font-check {
-    font-family: 'CrySisBold', 'Arial Black', sans-serif;
-    font-size: 30px;
-    color: red;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-}
 /* === БЛОК 16.2: Цветовая схема === */
 :root {
     --color-bg: #0A2A0A;
@@ -99,21 +89,21 @@ body {
 }
 
 .current-date {
-    font-size: 21px;
+    font-size: 14px;
     color: var(--color-text-secondary);
     min-width: 100px;
     text-align: right;
 }
 
 .user-name {
-    font-size: 27px;
+    font-size: 18px;
     color: var(--color-text);
     margin: 0;
 }
 
 .user-level {
     color: var(--color-text-secondary);
-    font-size: 21px;
+    font-size: 14px;
     min-width: 70px;
     text-align: left;
 }
