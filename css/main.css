@@ -12,11 +12,21 @@ body {
     height: 100vh;
     overflow: hidden;
     /* Увеличиваем базовый размер шрифта в 1.5 раза */
-    font-size: 24px; /* Было ~16px, стало 24px (16 * 1.5 = 24) */
+    font-size: 20px; /* Было ~16px, стало 24px (16 * 1.5 = 24) */
 }
 
 * {
     font-family: 'CrySisBold', 'Arial Black', sans-serif;
+}
+/* Тестовый класс для проверки шрифта - БЛОК 16.1 */
+.test-font-check {
+    font-family: 'CrySisBold', 'Arial Black', sans-serif;
+    font-size: 30px;
+    color: red;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
 }
 
 /* === БЛОК 16.2: Цветовая схема === */
