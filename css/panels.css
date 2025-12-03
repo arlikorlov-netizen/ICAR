@@ -249,7 +249,7 @@
 }
 
 .panel-content h3 {
-    font-size: 18px;
+    font-size: 27px;
     margin-bottom: 15px;
     color: var(--color-text);
     text-align: center;
@@ -258,7 +258,7 @@
 }
 
 .panel-content p {
-    font-size: 16px;
+    font-size: 24px;
     color: var(--color-text-secondary);
     line-height: 1.8;
     text-align: center;

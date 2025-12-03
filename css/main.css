@@ -76,21 +76,21 @@ body {
 }
 
 .current-date {
-    font-size: 14px;
+    font-size: 21px;
     color: var(--color-text-secondary);
     min-width: 100px;
     text-align: right;
 }
 
 .user-name {
-    font-size: 18px;
+    font-size: 27px;
     color: var(--color-text);
     margin: 0;
 }
 
 .user-level {
     color: var(--color-text-secondary);
-    font-size: 14px;
+    font-size: 21px;
     min-width: 70px;
     text-align: left;
 }
