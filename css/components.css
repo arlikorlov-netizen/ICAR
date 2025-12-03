@@ -60,25 +60,25 @@
 
 /* Позиции ярлычков */
 .health-tab {
-    top: 70px;
+    top: 50px;
     left: 0;
     border-radius: 0 12px 12px 0;
 }
 
 .habits-tab {
-    top: 70px;
+    top: 50px;
     right: 0;
     border-radius: 12px 0 0 12px;
 }
 
 .tasks-tab {
-    bottom: 70px;
+    bottom: 50px;
     left: 0;
     border-radius: 0 12px 12px 0;
 }
 
 .finance-tab {
-    bottom: 70px;
+    bottom: 50px;
     right: 0;
     border-radius: 12px 0 0 12px;
 }
@@ -149,18 +149,19 @@
 }
 
 .progress-bar-container {
-    flex: 3;
-    height: 16px;
+    flex: 2;
+    height: 20px; /* Было 16px - увеличиваем высоту */
     background-color: var(--color-progress-bg);
-    border-radius: 8px;
+    border-radius: 10px; /* Было 8px - увеличиваем радиус */
     overflow: hidden;
+    border: 1px solid var(--color-accent); /* Добавляем рамку */
 }
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--color-accent), #90FF90);
+    background: var(--color-accent); /* Убираем градиент, только зелёный */
     width: 0%;
-    border-radius: 8px;
+    border-radius: 10px; /* Было 8px - увеличиваем радиус */
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

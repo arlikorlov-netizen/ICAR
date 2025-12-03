@@ -6,7 +6,7 @@
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
     userName: "Алексей",
-    userLevel: 9,
+    userLevel: 10,
     progressValues: {
         physical: 56,
         mental: 81,
@@ -71,13 +71,7 @@ function setProgressValue(type, value) {
     barElement.setAttribute('data-value', clampedValue);
     valueElement.textContent = `${clampedValue}%`;
     
-    if (clampedValue < 30) {
-        barElement.style.background = 'linear-gradient(90deg, #FF6B6B, #FF8E8E)';
-    } else if (clampedValue < 70) {
-        barElement.style.background = 'linear-gradient(90deg, #FFD166, #FFE8A0)';
-    } else {
-        barElement.style.background = 'linear-gradient(90deg, #06D6A0, #7CFC7C)';
-    }
+ barElement.style.background = 'var(--color-accent)';
 }
 
 function initHumanImage() {
