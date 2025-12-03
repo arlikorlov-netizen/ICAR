@@ -142,19 +142,18 @@
 }
 
 .progress-label {
-    flex: 0.8; /* Было 1, стало 0.8 - занимает меньше места */
+    flex: 1;
     font-size: 14px;
     color: var(--color-text);
-    min-width: 90px; /* Было 100px, стало 90px */
+    min-width: 100px;
 }
 
 .progress-bar-container {
-    flex: 3; /* Было 2, стало 3 - занимает больше места */
+    flex: 3;
     height: 16px;
     background-color: var(--color-progress-bg);
     border-radius: 8px;
     overflow: hidden;
-    margin: 0 5px; /* Добавляем отступы слева и справа */
 }
 
 .progress-bar {

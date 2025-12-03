@@ -111,7 +111,7 @@ body {
 /* === БЛОК 16.5: Основное содержимое === */
 .main-content {
     flex: 1;
-    padding: 10px 20px 15px;
+    padding: 10px 10px 15px; /* Было 20px по бокам, стало 10px */
     display: flex;
     flex-direction: column;
     gap: 20px;
