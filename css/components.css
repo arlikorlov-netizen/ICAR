@@ -128,7 +128,7 @@
 .progress-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px; /* Уменьшаем gap с 12px до 8px */
     padding: 12px;
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
@@ -142,18 +142,19 @@
 }
 
 .progress-label {
-    flex: 1;
+    flex: 0.8; /* Было 1, стало 0.8 - занимает меньше места */
     font-size: 14px;
     color: var(--color-text);
-    min-width: 100px;
+    min-width: 90px; /* Было 100px, стало 90px */
 }
 
 .progress-bar-container {
-    flex: 2;
+    flex: 3; /* Было 2, стало 3 - занимает больше места */
     height: 16px;
     background-color: var(--color-progress-bg);
     border-radius: 8px;
     overflow: hidden;
+    margin: 0 5px; /* Добавляем отступы слева и справа */
 }
 
 .progress-bar {
