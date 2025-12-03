@@ -1,111 +1,118 @@
-/*
-  БЛОК 27: panels.js v1
-  Отдельный файл для логики панелей
-  Изменения 4, 9:
-  1. Управление панелями модулей
-  2. Закрытие при клике вне панели (уже в app.js)
-  3. Анимации открытия/закрытия
+/* 
+  БЛОК 20: panels.js - Логика управления панелями
+  Содержит: открытие/закрытие панелей, ярлычки, крестики
 */
 
-class PanelManager {
-    constructor() {
-        this.panels = {
-            health: document.getElementById('healthPanel'),
-            habits: document.getElementById('habitsPanel'),
-            tasks: document.getElementById('tasksPanel'),
-            finance: document.getElementById('financePanel')
-        };
-        this.activePanels = new Set();
-    }
-    
-    // Открыть одну панель
-    openPanel(panelName) {
-        const panel = this.panels[panelName];
-        if (panel && !this.activePanels.has(panelName)) {
-            panel.classList.add('active');
-            this.activePanels.add(panelName);
-            this.animateLine(panelName, true);
-        }
-    }
-    
-    // Закрыть одну панель
-    closePanel(panelName) {
-        const panel = this.panels[panelName];
-        if (panel && this.activePanels.has(panelName)) {
-            panel.classList.remove('active');
-            this.activePanels.delete(panelName);
-            this.animateLine(panelName, false);
-        }
-    }
-    
-    // Открыть все панели
-    openAllPanels() {
-        Object.keys(this.panels).forEach(panelName => {
-            this.openPanel(panelName);
+// === БЛОК 20.1: Инициализация панелей ===
+document.addEventListener('DOMContentLoaded', () => {
+    initSideTabs();
+    initPanelCloseButtons();
+    initAllPanelsCloseButton();
+    initCenterImageClick();
+});
+
+// === БЛОК 20.2: Ярлычки (4 штуки) ===
+function initSideTabs() {
+    document.querySelectorAll('.side-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tabType = tab.getAttribute('data-tab');
+            openSinglePanel(tabType);
         });
+    });
+}
+
+function openSinglePanel(panelType) {
+    if (allPanelsOpen) {
+        closeAllPanels();
+        return;
     }
     
-    // Закрыть все панели
-    closeAllPanels() {
-        Object.keys(this.panels).forEach(panelName => {
-            this.closePanel(panelName);
-        });
-    }
+    const panel = document.getElementById(`${panelType}Panel`);
+    if (!panel) return;
     
-    // Переключить панель
-    togglePanel(panelName) {
-        if (this.activePanels.has(panelName)) {
-            this.closePanel(panelName);
-        } else {
-            this.openPanel(panelName);
-        }
-    }
+    closeAllPanels();
     
-    // Анимация линии при открытии/закрытии
-    animateLine(panelName, isOpening) {
-        const lineId = `line${panelName.charAt(0).toUpperCase() + panelName.slice(1)}`;
-        const line = document.getElementById(lineId);
-        
-        if (line) {
-            if (isOpening) {
-                line.style.strokeDashoffset = '0';
-                line.style.opacity = '1';
-            } else {
-                line.style.strokeDashoffset = '10';
-                line.style.opacity = '0.5';
-            }
-        }
-    }
-    
-    // Проверить, является ли элемент частью панели
-    isPanelElement(element) {
-        return element.closest('.corner-panel') || 
-               element.closest('.side-tab') ||
-               element.closest('.module-card');
+    panel.classList.add('active');
+    activePanels = [panelType];
+}
+
+// === БЛОК 20.3: Фигурка (открытие всех панелей) ===
+function initCenterImageClick() {
+    const centerImage = document.getElementById('centerImage');
+    if (centerImage) {
+        centerImage.addEventListener('click', toggleAllPanels);
     }
 }
 
-// Инициализация PanelManager
-let panelManager;
+function toggleAllPanels() {
+    if (allPanelsOpen) {
+        closeAllPanels();
+    } else {
+        openAllPanels();
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    panelManager = new PanelManager();
+function openAllPanels() {
+    const panels = ['health', 'habits', 'tasks', 'finance'];
     
-    // Переопределяем функции из app.js для использования PanelManager
-    window.toggleCornerPanel = function(panelType) {
-        panelManager.togglePanel(panelType);
-    };
+    const bg = document.getElementById('allPanelsBackground');
+    if (bg) bg.classList.add('active');
     
-    window.openAllCornerPanels = function() {
-        panelManager.openAllPanels();
-    };
+    document.body.classList.add('all-panels-open');
     
-    window.closeAllCornerPanels = function() {
-        panelManager.closeAllPanels();
-    };
+    closeAllPanels();
     
-    // Обновляем activePanels для совместимости
-    setInterval(() => {
-        window.activePanels = Array.from(panelManager.activePanels);
-    }, 100);
-});
+    panels.forEach((panelType, index) => {
+        setTimeout(() => {
+            const panel = document.getElementById(`${panelType}Panel`);
+            if (panel) {
+                panel.classList.add('active');
+                activePanels.push(panelType);
+            }
+        }, index * 60);
+    });
+    
+    setTimeout(() => {
+        const allPanelsClose = document.getElementById('allPanelsClose');
+        if (allPanelsClose) allPanelsClose.classList.add('active');
+        allPanelsOpen = true;
+    }, 300);
+}
+
+// === БЛОК 20.4: Крестики на панелях ===
+function initPanelCloseButtons() {
+    document.querySelectorAll('.panel-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const panelType = btn.getAttribute('data-close');
+            
+            const panel = document.getElementById(`${panelType}Panel`);
+            if (panel) {
+                panel.classList.remove('active');
+                const index = activePanels.indexOf(panelType);
+                if (index > -1) activePanels.splice(index, 1);
+                
+                if (activePanels.length === 0 && allPanelsOpen) {
+                    allPanelsOpen = false;
+                    const bg = document.getElementById('allPanelsBackground');
+                    if (bg) bg.classList.remove('active');
+                    const allPanelsClose = document.getElementById('allPanelsClose');
+                    if (allPanelsClose) allPanelsClose.classList.remove('active');
+                    document.body.classList.remove('all-panels-open');
+                }
+            }
+        });
+    });
+}
+
+// === БЛОК 20.5: Общий крестик ===
+function initAllPanelsCloseButton() {
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllPanels();
+        });
+    }
+}

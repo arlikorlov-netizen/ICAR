@@ -1,10 +1,7 @@
 <!-- 
-  БЛОК 47: index.html v8
-  Изменения:
-  1. Нижние ярлычки явно прописаны
-  2. Структура без изменений, всё на месте
+  БЛОК 1: index.html - Главный файл
+  Собирает все компоненты и подключает блоки
 -->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,24 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICAR - Контроль Жизни</title>
     
-    <!-- PWA настройки -->
+    <!-- PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="ICAR">
     
-    <!-- Стили -->
+    <!-- Стили (блоки 1-20) -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/panels.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/components.css">
     
-    <!-- Иконки -->
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icons/icon-192.png" type="image/png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
     <div class="app-container">
         
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <!-- БЛОК 2: Верхняя панель -->
         <header class="top-panel">
             <div class="user-info">
                 <div class="user-details">
@@ -45,30 +43,26 @@
             </div>
         </header>
 
-        <!-- ФОН ДЛЯ ВСЕХ ПАНЕЛЕЙ -->
+        <!-- БЛОК 3: Фон для всех панелей -->
         <div class="all-panels-background" id="allPanelsBackground"></div>
 
-        <!-- ОБЩИЙ КРЕСТИК ДЛЯ ВСЕХ ПАНЕЛЕЙ -->
+        <!-- БЛОК 4: Общий крестик -->
         <button class="all-panels-close" id="allPanelsClose" title="Закрыть все панели">×</button>
 
-        <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
+        <!-- БЛОК 5: Основной контент -->
         <main class="main-content">
             
-            <!-- ЦЕНТРАЛЬНЫЙ БЛОК -->
+            <!-- БЛОК 6: Центральный блок -->
             <div class="center-section">
-                <!-- ЛИНИИ СВЯЗИ -->
+                <!-- БЛОК 7: Линии связи -->
                 <svg class="connection-lines" id="connectionLines">
-                    <!-- Линия к здоровью -->
                     <path id="lineHealth" class="connection-line" d="M80,150 Q50,130 0,80"></path>
-                    <!-- Линия к привычкам -->
                     <path id="lineHabits" class="connection-line" d="M180,120 Q210,100 250,80"></path>
-                    <!-- Линия к задачам -->
                     <path id="lineTasks" class="connection-line" d="M90,220 Q60,240 0,270"></path>
-                    <!-- Линия к финансам -->
                     <path id="lineFinance" class="connection-line" d="M170,230 Q200,250 250,270"></path>
                 </svg>
 
-                <!-- КРУЖКИ НА ФИГУРКЕ -->
+                <!-- БЛОК 8: Точки на фигурке -->
                 <div class="connection-dots">
                     <div class="dot health-dot" data-dot="health"></div>
                     <div class="dot habits-dot" data-dot="habits"></div>
@@ -76,7 +70,7 @@
                     <div class="dot finance-dot" data-dot="finance"></div>
                 </div>
 
-                <!-- ЯРЛЫЧКИ (ВСЕ 4 НА МЕСТЕ) -->
+                <!-- БЛОК 9: Ярлычки (4 штуки) -->
                 <button class="side-tab health-tab" data-tab="health">
                     <img src="icons/health.png" alt="Здоровье" class="tab-icon-img">
                 </button>
@@ -85,14 +79,13 @@
                     <img src="icons/habits.png" alt="Привычки" class="tab-icon-img">
                 </button>
 
-                <!-- ФИГУРКА ЧЕЛОВЕКА -->
+                <!-- БЛОК 10: Фигурка человека -->
                 <div class="center-image-container" id="centerImage">
                     <div class="image-wrapper">
                         <img src="assets/human-figure.png" alt="Статус жизни" class="human-image" id="humanImage">
                     </div>
                 </div>
 
-                <!-- НИЖНИЕ ЯРЛЫЧКИ (ВЕРНУЛИСЬ) -->
                 <button class="side-tab tasks-tab" data-tab="tasks">
                     <img src="icons/tasks.png" alt="Задачи" class="tab-icon-img">
                 </button>
@@ -102,7 +95,7 @@
                 </button>
             </div>
 
-            <!-- ПОКАЗАТЕЛИ ПРОГРЕССА -->
+            <!-- БЛОК 11: Прогресс-бары -->
             <div class="progress-indicators">
                 <div class="progress-item" id="progressPhysical">
                     <div class="progress-label">Физ. здоровье</div>
@@ -139,7 +132,7 @@
 
         </main>
 
-        <!-- НИЖНИЙ ЯЗЫЧОК -->
+        <!-- БЛОК 12: Нижний язычок -->
         <div class="bottom-line-trigger" id="bottomLineTrigger">
             <div class="double-line">
                 <div class="line"></div>
@@ -147,7 +140,7 @@
             </div>
         </div>
 
-        <!-- ПАНЕЛИ МОДУЛЕЙ -->
+        <!-- БЛОК 13: Панели модулей (4 штуки) -->
         <div class="corner-panel health-panel" id="healthPanel">
             <div class="panel-content">
                 <h3>Здоровье</h3>
@@ -180,7 +173,7 @@
             </div>
         </div>
 
-        <!-- ОБЩАЯ ПАНЕЛЬ СНИЗУ -->
+        <!-- БЛОК 14: Нижняя выдвижная панель -->
         <div class="bottom-sheet" id="bottomSheet">
             <div class="sheet-header">
                 <div class="sheet-handle"></div>
@@ -198,10 +191,12 @@
 
     </div>
 
-    <!-- JavaScript -->
-    <script src="js/app.js"></script>
+    <!-- JavaScript блоки (21-35) -->
+    <script src="js/core.js"></script>
+    <script src="js/panels.js"></script>
+    <script src="js/utils.js"></script>
     
-    <!-- Service Worker -->
+    <!-- БЛОК 15: Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {

@@ -1,0 +1,300 @@
+/* 
+  БЛОК 17: components.css - Компоненты интерфейса
+  Содержит: кнопки, иконки, прогресс-бары, нижнюю панель
+*/
+
+/* === БЛОК 17.1: Кнопка настроек === */
+.settings-btn {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    padding: 0;
+}
+
+.settings-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(1.2);
+}
+
+/* === БЛОК 17.2: Ярлычки (4 штуки) === */
+.side-tab {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-button);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 50;
+    padding: 0;
+    margin: 0;
+}
+
+.side-tab:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+}
+
+.tab-icon-img {
+    width: 26px;
+    height: 26px;
+    filter: brightness(1.2);
+}
+
+/* Позиции ярлычков */
+.health-tab {
+    top: 70px;
+    left: 0;
+    border-radius: 0 12px 12px 0;
+}
+
+.habits-tab {
+    top: 70px;
+    right: 0;
+    border-radius: 12px 0 0 12px;
+}
+
+.tasks-tab {
+    bottom: 70px;
+    left: 0;
+    border-radius: 0 12px 12px 0;
+}
+
+.finance-tab {
+    bottom: 70px;
+    right: 0;
+    border-radius: 12px 0 0 12px;
+}
+
+/* === БЛОК 17.3: Центральная фигурка === */
+.center-image-container {
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+}
+
+.image-wrapper {
+    text-align: center;
+    position: relative;
+}
+
+.human-image {
+    width: 220px;
+    height: 275px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4));
+}
+
+.image-placeholder {
+    width: 220px;
+    height: 275px;
+    background-color: var(--color-card);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.image-placeholder span {
+    font-size: 60px;
+    color: var(--color-accent);
+}
+
+/* === БЛОК 17.4: Прогресс-бары === */
+.progress-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.progress-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--color-card);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+}
+
+.progress-item:hover {
+    transform: translateX(3px);
+    box-shadow: var(--shadow);
+}
+
+.progress-label {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text);
+    min-width: 100px;
+}
+
+.progress-bar-container {
+    flex: 2;
+    height: 16px;
+    background-color: var(--color-progress-bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent), #90FF90);
+    width: 0%;
+    border-radius: 8px;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.progress-value {
+    min-width: 45px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+/* === БЛОК 17.5: Нижний язычок === */
+.bottom-line-trigger {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 0;
+    background-color: var(--color-card);
+    border-top: 2px solid var(--color-accent);
+    border-radius: 15px 15px 0 0;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.double-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.line {
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.bottom-line-trigger:hover .line {
+    background-color: var(--color-accent);
+    width: 60px;
+}
+
+/* === БЛОК 17.6: Нижняя выдвижная панель === */
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    max-width: 500px;
+    height: 50vh;
+    background-color: var(--color-panel);
+    border-top: 3px solid var(--color-accent);
+    border-radius: 20px 20px 0 0;
+    z-index: 250;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-sheet.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.sheet-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--color-accent);
+    position: relative;
+}
+
+.sheet-handle {
+    width: 40px;
+    height: 4px;
+    background-color: var(--color-text-secondary);
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+}
+
+.sheet-title {
+    color: var(--color-text);
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+.sheet-close {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.sheet-close:hover {
+    transform: rotate(90deg);
+}
+
+.sheet-body {
+    padding: 15px;
+    color: var(--color-text-secondary);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quick-item {
+    background-color: var(--color-card);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.quick-item:hover {
+    background-color: var(--color-button);
+    transform: translateX(5px);
+}

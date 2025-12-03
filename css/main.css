@@ -1,12 +1,15 @@
 /* 
-  БЛОК 45: main.css v8
-  Изменения:
-  1. Ярлычки нижние вернулись
-  2. Крестики в круглешках подняты
-  3. Размер четвертинок уменьшен по вертикали
+  БЛОК 16: main.css - Базовые стили
+  Содержит: сброс, шрифты, цвета, основную структуру
 */
 
-/* ШРИФТ */
+/* === БЛОК 16.1: Сброс и шрифт === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: 'CrySisBold';
     src: url('../fonts/CrySis_Bold_2.ttf') format('truetype');
@@ -21,15 +24,13 @@ body {
     line-height: 1.5;
     height: 100vh;
     overflow: hidden;
-    margin: 0;
-    padding: 0;
 }
 
 * {
     font-family: 'CrySisBold', 'Arial Black', sans-serif;
 }
 
-/* ЦВЕТА */
+/* === БЛОК 16.2: Цветовая схема === */
 :root {
     --color-bg: #0A2A0A;
     --color-card: #153015;
@@ -45,7 +46,7 @@ body {
     --shadow: 0 4px 20px rgba(42, 165, 42, 0.3);
 }
 
-/* ОСНОВНОЙ КОНТЕЙНЕР */
+/* === БЛОК 16.3: Основной контейнер === */
 .app-container {
     min-height: 100vh;
     max-width: 500px;
@@ -57,7 +58,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ВЕРХНЯЯ ПАНЕЛЬ */
+/* === БЛОК 16.4: Верхняя панель === */
 .top-panel {
     padding: 8px 20px;
     background-color: var(--color-card);
@@ -105,34 +106,7 @@ body {
     text-align: left;
 }
 
-/* КНОПКА НАСТРОЕК */
-.settings-btn {
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-button);
-    border: 2px solid var(--color-accent);
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    margin-left: auto;
-    padding: 0;
-}
-
-.settings-btn:hover {
-    background-color: var(--color-button-hover);
-    transform: scale(1.05);
-}
-
-.btn-icon {
-    width: 24px;
-    height: 24px;
-    filter: brightness(1.2);
-}
-
-/* ОСНОВНОЕ СОДЕРЖИМОЕ */
+/* === БЛОК 16.5: Основное содержимое === */
 .main-content {
     flex: 1;
     padding: 10px 20px 15px;
@@ -141,425 +115,4 @@ body {
     gap: 20px;
     overflow-y: auto;
     margin-top: auto;
-}
-
-/* ЦЕНТРАЛЬНЫЙ БЛОК */
-.center-section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 320px;
-    margin: 10px 0;
-}
-
-/* ЛИНИИ СВЯЗИ */
-.connection-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.connection-line {
-    fill: none;
-    stroke: var(--color-line);
-    stroke-width: 2;
-    stroke-dasharray: 0;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-/* КРУЖКИ НА ФИГУРКЕ */
-.connection-dots {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 15;
-    pointer-events: none;
-}
-
-.dot {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    background-color: var(--color-line);
-    border-radius: 50%;
-    border: 2px solid var(--color-card);
-    box-shadow: 0 0 8px rgba(50, 205, 50, 0.9);
-}
-
-.health-dot {
-    top: 40%;
-    left: 35%;
-}
-
-.habits-dot {
-    top: 30%;
-    right: 35%;
-}
-
-.tasks-dot {
-    bottom: 40%;
-    left: 35%;
-}
-
-.finance-dot {
-    bottom: 30%;
-    right: 35%;
-}
-
-/* ЯРЛЫЧКИ - НИЖНИЕ ВЕРНУЛИСЬ */
-.side-tab {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: var(--color-button);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 50;
-    padding: 0;
-    margin: 0;
-}
-
-.side-tab:hover {
-    background-color: var(--color-button-hover);
-    transform: scale(1.05);
-}
-
-.tab-icon-img {
-    width: 26px;
-    height: 26px;
-    filter: brightness(1.2);
-}
-
-/* ЯВНО ПРОПИСЫВАЕМ ВСЕ 4 ПОЗИЦИИ */
-.health-tab {
-    top: 70px;
-    left: 0;
-    border-radius: 0 12px 12px 0;
-}
-
-.habits-tab {
-    top: 70px;
-    right: 0;
-    border-radius: 12px 0 0 12px;
-}
-
-.tasks-tab {
-    bottom: 70px; /* ВЕРНУЛИСЬ НИЖНИЕ */
-    left: 0;
-    border-radius: 0 12px 12px 0;
-}
-
-.finance-tab {
-    bottom: 70px; /* ВЕРНУЛИСЬ НИЖНИЕ */
-    right: 0;
-    border-radius: 12px 0 0 12px;
-}
-
-/* ЦЕНТРАЛЬНАЯ ФИГУРКА */
-.center-image-container {
-    cursor: pointer;
-    z-index: 10;
-    position: relative;
-}
-
-.image-wrapper {
-    text-align: center;
-    position: relative;
-}
-
-.human-image {
-    width: 220px;
-    height: 275px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4));
-}
-
-.image-placeholder {
-    width: 220px;
-    height: 275px;
-    background-color: var(--color-card);
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-.image-placeholder span {
-    font-size: 60px;
-    color: var(--color-accent);
-}
-
-/* ПРОГРЕСС-БАРЫ */
-.progress-indicators {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.progress-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px;
-    background-color: var(--color-card);
-    border: 2px solid var(--color-accent);
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-}
-
-.progress-item:hover {
-    transform: translateX(3px);
-    box-shadow: var(--shadow);
-}
-
-.progress-label {
-    flex: 1;
-    font-size: 14px;
-    color: var(--color-text);
-    min-width: 100px;
-}
-
-.progress-bar-container {
-    flex: 2;
-    height: 16px;
-    background-color: var(--color-progress-bg);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-accent), #90FF90);
-    width: 0%;
-    border-radius: 8px;
-    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.progress-value {
-    min-width: 45px;
-    text-align: right;
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--color-text);
-}
-
-/* НИЖНИЙ ЯЗЫЧОК */
-.bottom-line-trigger {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 500px;
-    padding: 10px 0;
-    background-color: var(--color-card);
-    border-top: 2px solid var(--color-accent);
-    border-radius: 15px 15px 0 0;
-    cursor: pointer;
-    z-index: 200;
-    box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.3);
-}
-
-.double-line {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-}
-
-.line {
-    width: 50px;
-    height: 2px;
-    background-color: var(--color-text);
-    border-radius: 1px;
-    transition: all 0.3s ease;
-}
-
-.bottom-line-trigger:hover .line {
-    background-color: var(--color-accent);
-    width: 60px;
-}
-
-/* ФОН ДЛЯ ВСЕХ ПАНЕЛЕЙ */
-.all-panels-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-panel);
-    z-index: 140;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease;
-}
-
-.all-panels-background.active {
-    opacity: 0.95;
-    visibility: visible;
-}
-
-/* ОБЩИЙ КРЕСТИК */
-.all-panels-close {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 32px;
-    height: 32px;
-    background-color: var(--color-button);
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    color: var(--color-text);
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 160;
-    opacity: 0;
-    visibility: hidden;
-    box-shadow: 0 0 10px rgba(42, 165, 42, 0.5);
-}
-
-.all-panels-close.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.all-panels-close:hover {
-    background-color: var(--color-button-hover);
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* НИЖНЯЯ ПАНЕЛЬ */
-.bottom-sheet {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    width: 100%;
-    max-width: 500px;
-    height: 50vh;
-    background-color: var(--color-panel);
-    border-top: 3px solid var(--color-accent);
-    border-radius: 20px 20px 0 0;
-    z-index: 250;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex;
-    flex-direction: column;
-}
-
-.bottom-sheet.active {
-    transform: translateX(-50%) translateY(0);
-}
-
-.sheet-header {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--color-accent);
-    position: relative;
-}
-
-.sheet-handle {
-    width: 40px;
-    height: 4px;
-    background-color: var(--color-text-secondary);
-    border-radius: 2px;
-    position: absolute;
-    left: 50%;
-    top: 8px;
-    transform: translateX(-50%);
-}
-
-.sheet-title {
-    color: var(--color-text);
-    font-size: 18px;
-    margin-left: 30px;
-}
-
-.sheet-close {
-    background: none;
-    border: none;
-    color: var(--color-text);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-}
-
-.sheet-close:hover {
-    transform: rotate(90deg);
-}
-
-.sheet-body {
-    padding: 15px;
-    color: var(--color-text-secondary);
-    overflow-y: auto;
-    flex: 1;
-}
-
-.quick-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.quick-item {
-    background-color: var(--color-card);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--color-accent);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.quick-item:hover {
-    background-color: var(--color-button);
-    transform: translateX(5px);
-}
-
-/* АДАПТИВНОСТЬ */
-@media (max-width: 500px) {
-    .side-tab {
-        width: 48px;
-        height: 48px;
-        top: 65px !important;
-        bottom: 65px !important;
-    }
-    
-    .tab-icon-img {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .human-image {
-        width: 200px;
-        height: 250px;
-    }
-    
-    .dot {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .progress-label {
-        min-width: 90px;
-        font-size: 13px;
-    }
 }

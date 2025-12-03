@@ -1,12 +1,129 @@
 /* 
-  БЛОК 46: panels.css v5
-  Изменения:
-  1. Крестики в круглешках подняты
-  2. Размер четвертинок уменьшен по вертикали
-  3. Граница по центру вертикали
+  БЛОК 18: panels.css - Стили для панелей
+  Содержит: стили панелей, крестиков, фона
 */
 
-/* ПАНЕЛИ МОДУЛЕЙ - УМЕНЬШЕНЫ ПО ВЕРТИКАЛИ */
+/* === БЛОК 18.1: Центральный блок и линии === */
+.center-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    margin: 10px 0;
+}
+
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.connection-line {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: 2;
+    stroke-dasharray: 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.connection-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-line);
+    border-radius: 50%;
+    border: 2px solid var(--color-card);
+    box-shadow: 0 0 8px rgba(50, 205, 50, 0.9);
+}
+
+.health-dot {
+    top: 40%;
+    left: 35%;
+}
+
+.habits-dot {
+    top: 30%;
+    right: 35%;
+}
+
+.tasks-dot {
+    bottom: 40%;
+    left: 35%;
+}
+
+.finance-dot {
+    bottom: 30%;
+    right: 35%;
+}
+
+/* === БЛОК 18.2: Фон для всех панелей === */
+.all-panels-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-panel);
+    z-index: 140;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.all-panels-background.active {
+    opacity: 0.95;
+    visibility: visible;
+}
+
+/* === БЛОК 18.3: Общий крестик === */
+.all-panels-close {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-text);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 160;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 0 10px rgba(42, 165, 42, 0.5);
+}
+
+.all-panels-close.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.all-panels-close:hover {
+    background-color: var(--color-button-hover);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* === БЛОК 18.4: Панели модулей === */
 .corner-panel {
     position: fixed;
     background-color: var(--color-panel);
@@ -19,7 +136,7 @@
     padding: 15px;
     box-shadow: var(--shadow);
     width: calc(50% - 10px);
-    height: calc(45% - 95px); /* УМЕНЬШЕНА ВЫСОТА */
+    height: calc(45% - 95px);
 }
 
 .corner-panel.active {
@@ -27,7 +144,7 @@
     visibility: visible;
 }
 
-/* РАСПОЛОЖЕНИЕ ПАНЕЛЕЙ С ЦЕНТРАЛЬНОЙ ВЕРТИКАЛЬНОЙ ГРАНИЦЕЙ */
+/* Расположение панелей */
 .health-panel {
     top: 65px;
     left: 5px;
@@ -52,42 +169,10 @@
     border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
 }
 
-/* КОГДА ВСЕ ПАНЕЛИ ОТКРЫТЫ - ЦЕНТРАЛЬНАЯ ГРАНИЦА */
-.all-panels-open .corner-panel {
-    border-width: 0;
-    box-shadow: none;
-    border-radius: 0 !important;
-    padding: 20px;
-}
-
-.all-panels-open .health-panel {
-    border-right: 1px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px); /* СООТВЕТСТВУЕТ ВЕРХНИМ */
-}
-
-.all-panels-open .habits-panel {
-    border-left: 1px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
-}
-
-.all-panels-open .tasks-panel {
-    border-right: 1px solid rgba(42, 165, 42, 0.3);
-    border-top: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px); /* ТАКАЯ ЖЕ ВЫСОТА КАК У ВЕРХНИХ */
-}
-
-.all-panels-open .finance-panel {
-    border-left: 1px solid rgba(42, 165, 42, 0.3);
-    border-top: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
-}
-
-/* КРЕСТИКИ НА ПАНЕЛЯХ - ПОДНЯТЫ */
+/* === БЛОК 18.5: Крестики на панелях === */
 .panel-close {
     position: absolute;
-    top: 5px; /* ПОДНЯТ ВЫШЕ (было 8px) */
+    top: 5px;
     right: 8px;
     width: 26px;
     height: 26px;
@@ -105,9 +190,8 @@
     z-index: 160;
     opacity: 0;
     visibility: hidden;
-    /* Центрирование крестика в кружке */
     line-height: 1;
-    padding-bottom: 2px; /* ПОДНЯТ КРЕСТИК ВНУТРИ КРУГА */
+    padding-bottom: 2px;
 }
 
 .corner-panel.active .panel-close {
@@ -120,16 +204,48 @@
     transform: rotate(90deg) scale(1.1);
 }
 
-/* КРЕСТИКИ СКРЫТЫ ПРИ ОТКРЫТИИ ВСЕХ ПАНЕЛЕЙ */
+/* === БЛОК 18.6: Состояние "все панели открыты" === */
+.all-panels-open .corner-panel {
+    border-width: 0;
+    box-shadow: none;
+    border-radius: 0 !important;
+    padding: 20px;
+}
+
+.all-panels-open .health-panel {
+    border-right: 1px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
+}
+
+.all-panels-open .habits-panel {
+    border-left: 1px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
+}
+
+.all-panels-open .tasks-panel {
+    border-right: 1px solid rgba(42, 165, 42, 0.3);
+    border-top: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
+}
+
+.all-panels-open .finance-panel {
+    border-left: 1px solid rgba(42, 165, 42, 0.3);
+    border-top: 1px solid rgba(42, 165, 42, 0.3);
+    height: calc(45% - 95px);
+}
+
+/* Скрываем крестики на панелях когда все открыты */
 .all-panels-open .panel-close {
     display: none !important;
 }
 
-/* СОДЕРЖИМОЕ ПАНЕЛЕЙ */
+/* === БЛОК 18.7: Содержимое панелей === */
 .panel-content {
     position: relative;
     height: 100%;
-    padding-top: 10px; /* УВЕЛИЧЕНО ДЛЯ КРЕСТИКА */
+    padding-top: 10px;
 }
 
 .panel-content h3 {
@@ -146,4 +262,34 @@
     color: var(--color-text-secondary);
     line-height: 1.8;
     text-align: center;
+}
+
+/* === БЛОК 18.8: Адаптивность === */
+@media (max-width: 500px) {
+    .side-tab {
+        width: 48px;
+        height: 48px;
+        top: 65px !important;
+        bottom: 65px !important;
+    }
+    
+    .tab-icon-img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .human-image {
+        width: 200px;
+        height: 250px;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .progress-label {
+        min-width: 90px;
+        font-size: 13px;
+    }
 }
