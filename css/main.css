@@ -4,19 +4,6 @@
 */
 
 /* === БЛОК 16.1: Сброс и шрифт === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-@font-face {
-    font-family: 'CrySisBold';
-    src: url('../fonts/CrySis_Bold_2.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
     font-family: 'CrySisBold', 'Arial Black', sans-serif;
     background-color: #0A2A0A;
@@ -24,6 +11,8 @@ body {
     line-height: 1.5;
     height: 100vh;
     overflow: hidden;
+    /* Увеличиваем базовый размер шрифта в 1.5 раза */
+    font-size: 24px; /* Было ~16px, стало 24px (16 * 1.5 = 24) */
 }
 
 * {
