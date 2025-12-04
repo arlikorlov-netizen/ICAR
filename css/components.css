@@ -167,13 +167,13 @@
 }
 
 .progress-bar-container {
-    width: 50%;
+    width: 60%; /* Увеличиваем с 50% до 60% */
     height: 20px;
     background-color: var(--color-progress-bg);
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
-    /* Убираем background-color */
+    flex-shrink: 1; /* Разрешаем сжатие при необходимости */
 }
 
 .progress-bar {
