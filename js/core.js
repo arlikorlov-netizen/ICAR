@@ -51,12 +51,19 @@ function initUserData() {
 }
 
 function initProgressBars() {
+    // Сначала устанавливаем начальные значения сразу
+    setProgressValue('physical', AppConfig.progressValues.physical);
+    setProgressValue('mental', AppConfig.progressValues.mental);
+    setProgressValue('financial', AppConfig.progressValues.financial);
+    setProgressValue('activity', AppConfig.progressValues.activity);
+    
+    // Потом анимируем (если нужно)
     setTimeout(() => {
         setProgressValue('physical', AppConfig.progressValues.physical);
         setProgressValue('mental', AppConfig.progressValues.mental);
         setProgressValue('financial', AppConfig.progressValues.financial);
         setProgressValue('activity', AppConfig.progressValues.activity);
-    }, 500);
+    }, 100);
 }
 
 function setProgressValue(type, value) {
