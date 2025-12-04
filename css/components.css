@@ -127,8 +127,8 @@
 
 .progress-item {
     display: flex;
-    flex-direction: column; /* Возвращаем вертикальное расположение */
-    gap: 8px; /* Отступ между заголовком и строкой с ползунком */
+    flex-direction: column;
+    gap: 8px;
     padding: 12px;
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
@@ -154,17 +154,17 @@
     font-size: 14px;
     color: var(--color-text);
     font-weight: bold;
+    margin-bottom: 4px;
 }
 
 
 .progress-bar-container {
-    flex: 1; /* Занимает всё доступное пространство */
+    flex: 1;
     height: 20px;
     background-color: var(--color-progress-bg);
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
-    position: relative;
 }
 
 .progress-bar {
@@ -181,14 +181,13 @@
     font-size: 14px;
     font-weight: bold;
     color: var(--color-text);
-    /* margin-left убран, так как gap в .progress-row */
 }
 
-/* Строка с ползунком и процентами */
+/* НОВЫЙ КУСОЧЕК: Строка с ползунком и процентами */
 .progress-row {
     display: flex;
     align-items: center;
-    gap: 12px; /* Отступ между ползунком и процентами */
+    gap: 12px;
     width: 100%;
 }
 
