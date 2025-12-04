@@ -158,12 +158,12 @@
     /* Убираем flex свойства, так как теперь это просто заголовок */
 }
 
-/* НОВЫЙ КУСОЧЕК: Строка с ползунком и процентами */
 .progress-bottom-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* Распределяем пространство между элементами */
+    align-items: flex-start; /* Изменяем с center на flex-start */
+    justify-content: space-between;
     width: 100%;
+    height: 20px; /* Фиксируем высоту строки */
 }
 
 .progress-bar-container {
@@ -187,7 +187,8 @@
     font-size: 14px;
     font-weight: bold;
     color: var(--color-text);
-    /* Проценты автоматически прижимаются к правому краю благодаря justify-content: space-between */
+    line-height: 20px; /* Высота текста равна высоте ползунка */
+    margin-top: 0; /* Убираем возможный отступ сверху */
 }
 
 /* === БЛОК 17.5: Нижний язычок === */
