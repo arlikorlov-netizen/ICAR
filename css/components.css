@@ -127,8 +127,8 @@
 
 .progress-item {
     display: flex;
-    flex-direction: column; /* Меняем на колонку */
-    gap: 6px; /* Уменьшаем общий gap */
+    flex-direction: column; /* Возвращаем вертикальное расположение */
+    gap: 8px; /* Отступ между заголовком и строкой с ползунком */
     padding: 12px;
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
@@ -142,7 +142,7 @@
     box-shadow: var(--shadow);
 }
 
-/* Новый контейнер для заголовка и значения */
+/* Заголовок над всем */
 .progress-header {
     display: flex;
     justify-content: space-between;
@@ -151,36 +151,45 @@
 }
 
 .progress-label {
-    flex: 1;
     font-size: 14px;
     color: var(--color-text);
-    /* Убираем min-width */
+    font-weight: bold;
 }
 
 
 .progress-bar-container {
-    width: 100%; /* Занимает всю ширину */
+    flex: 1; /* Занимает всё доступное пространство */
     height: 20px;
     background-color: var(--color-progress-bg);
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
-    margin-top: 4px; /* Добавляем отступ сверху */
+    position: relative;
 }
 
 .progress-bar {
     height: 100%;
-    background: var(--color-accent); /* Убираем градиент, только зелёный */
+    background: var(--color-accent);
     width: 0%;
-    border-radius: 10px; /* Было 8px - увеличиваем радиус */
+    border-radius: 10px;
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .progress-value {
+    min-width: 45px;
+    text-align: right;
     font-size: 14px;
     font-weight: bold;
     color: var(--color-text);
-    /* Убираем text-align и min-width */
+    /* margin-left убран, так как gap в .progress-row */
+}
+
+/* Строка с ползунком и процентами */
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Отступ между ползунком и процентами */
+    width: 100%;
 }
 
 /* === БЛОК 17.5: Нижний язычок === */
