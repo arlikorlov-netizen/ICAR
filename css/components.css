@@ -158,21 +158,23 @@
     /* Убираем flex свойства, так как теперь это просто заголовок */
 }
 
+/* ВРЕМЕННЫЙ: визуализируем блоки */
 .progress-bottom-row {
     display: flex;
-    align-items: flex-start; /* Изменяем с center на flex-start */
     justify-content: space-between;
     width: 100%;
-    height: 20px; /* Фиксируем высоту строки */
+    background-color: rgba(255, 0, 0, 0.2); /* ← Красный фон для контейнера */
+    height: 30px; /* Увеличиваем высоту для наглядности */
 }
 
 .progress-bar-container {
-    width: 50%; /* Занимает левую половину экрана */
+    width: 50%;
     height: 20px;
     background-color: var(--color-progress-bg);
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
+    background-color: rgba(0, 255, 0, 0.2); /* ← Зелёный фон для ползунка */
 }
 
 .progress-bar {
@@ -187,8 +189,8 @@
     font-size: 14px;
     font-weight: bold;
     color: var(--color-text);
-    line-height: 20px; /* Высота текста равна высоте ползунка */
-    margin-top: 0; /* Убираем возможный отступ сверху */
+    background-color: rgba(0, 0, 255, 0.2); /* ← Синий фон для процентов */
+    border: 1px solid blue; /* ← Синяя рамка */
 }
 
 /* === БЛОК 17.5: Нижний язычок === */
