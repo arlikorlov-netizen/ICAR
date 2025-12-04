@@ -127,70 +127,50 @@
 
 .progress-item {
     display: flex;
-    flex-direction: column; /* Делаем вертикальное расположение */
-    gap: 6px; /* Меньший отступ между строками */
+    align-items: center;
+    gap: 8px; /* Уменьшаем gap с 12px до 8px */
     padding: 12px;
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
     border-radius: var(--border-radius);
     transition: all 0.3s ease;
-    position: relative;
 }
-
 
 .progress-item:hover {
     transform: translateX(3px);
     box-shadow: var(--shadow);
 }
 
-/* Заголовок над всем */
-.progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
 .progress-label {
+    flex: 1;
     font-size: 14px;
     color: var(--color-text);
-    font-weight: bold;
-    /* Убираем flex свойства, так как теперь это просто заголовок */
-}
-
-.progress-bottom-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    /* Убираем background-color и увеличиваем height */
-    height: auto;
+    min-width: 100px;
 }
 
 .progress-bar-container {
-    width: 60%; /* Увеличиваем с 50% до 60% */
-    height: 20px;
+    flex: 2;
+    height: 20px; /* Было 16px - увеличиваем высоту */
     background-color: var(--color-progress-bg);
-    border-radius: 10px;
+    border-radius: 10px; /* Было 8px - увеличиваем радиус */
     overflow: hidden;
-    border: 1px solid var(--color-accent);
-    flex-shrink: 1; /* Разрешаем сжатие при необходимости */
+    border: 1px solid var(--color-accent); /* Добавляем рамку */
 }
 
 .progress-bar {
     height: 100%;
-    background: var(--color-accent);
-    width: 56%; /* Начальное значение, JS потом обновит */
-    border-radius: 10px;
+    background: var(--color-accent); /* Убираем градиент, только зелёный */
+    width: 0%;
+    border-radius: 10px; /* Было 8px - увеличиваем радиус */
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .progress-value {
+    min-width: 45px;
+    text-align: right;
     font-size: 14px;
     font-weight: bold;
     color: var(--color-text);
-    display: inline-block; /* Меняем с block на inline-block */
-    width: auto; /* Убираем возможную ширину 100% */
-    white-space: nowrap; /* Запрещаем перенос текста */
 }
 
 /* === БЛОК 17.5: Нижний язычок === */
