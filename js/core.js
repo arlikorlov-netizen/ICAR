@@ -6,7 +6,7 @@
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
     userName: "Алексей",
-    userLevel: 11,
+    userLevel: 12,
     progressValues: {
         physical: 56,
         mental: 81,

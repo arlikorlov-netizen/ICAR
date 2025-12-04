@@ -159,20 +159,22 @@
 }
 
 
+/* ВРЕМЕННЫЙ: для отладки */
 .progress-bar-container {
-    flex: 1; /* Занимает всё доступное пространство */
+    flex: 1;
     height: 20px;
     background-color: var(--color-progress-bg);
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
     position: relative;
+    background-color: red; /* ← ВРЕМЕННО! Увидим контейнер */
 }
 
 .progress-bar {
     height: 100%;
     background: var(--color-accent);
-    width: 0%;
+    width: 56%; /* ← ВРЕМЕННО! Фиксированная ширина для первого */
     border-radius: 10px;
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
