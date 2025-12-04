@@ -173,6 +173,11 @@
     color: var(--color-text);
 }
 
+/* НОВЫЙ КУСОЧЕК: Поднимаем прогресс-бары на 10px выше */
+.progress-indicators {
+    margin-top: -10px; /* Поднимаем всю группу прогресс-баров */
+}
+
 /* === БЛОК 17.5: Нижний язычок === */
 .bottom-line-trigger {
     position: fixed;
