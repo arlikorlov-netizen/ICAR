@@ -162,7 +162,7 @@
 .progress-bar-container {
     flex: 3;
     height: 20px;
-    background-color: var(--color-progress-bg);
+    background-color: var(--color-progress-bg); /* ← Возвращаем нормальный цвет */
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--color-accent);
