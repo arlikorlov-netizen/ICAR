@@ -269,7 +269,7 @@
     .app-container .tasks-tab, 
     .app-container .finance-tab {
         top: auto !important;
-        bottom: 17px !important; /* Возвращаем к первому смещению */
+        bottom: 27px !important; /* Возвращаем к первому смещению */
     }
 
 
