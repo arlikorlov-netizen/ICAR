@@ -124,18 +124,15 @@ body {
 /* Обновляем .system-label */
 .system-label {
     position: absolute;
-    top: 0; /* Меняем bottom на top */
-    left: 0;
-    right: 0;
-    text-align: center;
+    bottom: -15px; /* Поднимаем ближе */
+    left: 20px; /* Отступ слева как у панели */
+    text-align: left; /* Выравнивание по левому краю */
     font-size: 7px;
     color: var(--color-text-secondary);
     opacity: 0.7;
     letter-spacing: 0.6px;
     white-space: nowrap;
     z-index: 101;
-    margin: 0 auto;
-    width: 100%;
 }
 
 /* === БЛОК 16.5: Основное содержимое === */
