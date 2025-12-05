@@ -269,13 +269,18 @@
     .side-tab {
         width: 48px;
         height: 48px;
-        /* УБИРАЕМ top и bottom для общего правила */
     }
     
-    /* Оставляем только для верхних ярлычков */
+    /* Верхние ярлычки: выше на размер ярлычка (48px) */
     .health-tab, .habits-tab {
-        top: 65px !important;
-        bottom: auto !important; /* Сбрасываем bottom */
+        top: 17px !important; /* Было 65px, стало 65px - 48px = 17px */
+        bottom: auto !important;
+    }
+    
+    /* Нижние ярлычки: ниже на размер ярлычка (48px) */
+    .tasks-tab, .finance-tab {
+        top: auto !important;
+        bottom: 17px !important; /* Было 65px, стало 65px - 48px = 17px */
     }
     
     /* Добавляем для нижних ярлычков */
