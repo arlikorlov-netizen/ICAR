@@ -280,7 +280,7 @@
     /* Нижние ярлычки: ниже на размер ярлычка (48px) */
     .tasks-tab, .finance-tab {
         top: auto !important;
-        bottom: 17px !important; /* Было 65px, стало 65px - 48px = 17px */
+        bottom: -31px !important; /* Было 17px, стало 17px - 48px = -31px */
     }
     
     /* Добавляем для нижних ярлычков */
