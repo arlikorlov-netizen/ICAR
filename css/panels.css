@@ -34,10 +34,12 @@
 
 .connection-dots {
     position: absolute;
-    width: 100%;
+    width: 100%; /* 100% от .image-wrapper */
     height: 100%;
     z-index: 15;
     pointer-events: none;
+    top: 0;
+    left: 0;
 }
 
 .dot {
@@ -51,23 +53,23 @@
 }
 
 .health-dot {
-    top: 40%;
-    left: 35%;
+    top: 50%;
+    left: 50%;
 }
 
 .habits-dot {
-    top: 30%;
-    right: 35%;
+    top: 5%;
+    right: 5%;
 }
 
 .tasks-dot {
-    bottom: 40%;
-    left: 35%;
+    bottom: 5%;
+    left: 5%;
 }
 
 .finance-dot {
-    bottom: 30%;
-    right: 35%;
+    bottom: 5%;
+    right: 5%;
 }
 
 /* === БЛОК 18.2: Фон для всех панелей === */
