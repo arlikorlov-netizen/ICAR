@@ -266,10 +266,12 @@
 
 /* === БЛОК 18.8: Адаптивность === */
 @media (max-width: 500px) {
-    .side-tab {
-        width: 48px;
-        height: 48px;
+    .app-container .tasks-tab, 
+    .app-container .finance-tab {
+        top: auto !important;
+        bottom: -31px !important;
     }
+
     
     /* Верхние ярлычки: выше на размер ярлычка (48px) */
     .health-tab, .habits-tab {
