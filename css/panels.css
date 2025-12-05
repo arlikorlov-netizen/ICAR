@@ -269,8 +269,9 @@
     .app-container .tasks-tab, 
     .app-container .finance-tab {
         top: auto !important;
-        bottom: -31px !important;
+        bottom: 17px !important; /* Возвращаем к первому смещению */
     }
+
 
     
     /* Верхние ярлычки: выше на размер ярлычка (48px) */
