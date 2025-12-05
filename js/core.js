@@ -7,7 +7,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.6", // ← Добавляем версию
+    version: "1.0.7", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initSettingsButton();
     initClosePanels();
     initBottomSheetClose();
-    initCommitHash(); // ← НОВАЯ ФУНКЦИЯ
+    initCommitHash();
+    // Линии будут обновлены через setTimeout в updateConnectionLines
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -230,3 +231,70 @@ setInterval(() => {
         setProgressValue('activity', AppConfig.progressValues.activity);
     }
 }, 15000);
+
+// === БЛОК 19.8: Линии соединения ===
+function updateConnectionLines() {
+    const dots = {
+        health: document.querySelector('.health-dot'),
+        habits: document.querySelector('.habits-dot'),
+        tasks: document.querySelector('.tasks-dot'),
+        finance: document.querySelector('.finance-dot')
+    };
+    
+    const tabs = {
+        health: document.querySelector('.health-tab'),
+        habits: document.querySelector('.habits-tab'),
+        tasks: document.querySelector('.tasks-tab'),
+        finance: document.querySelector('.finance-tab')
+    };
+    
+    const svg = document.getElementById('connectionLines');
+    if (!svg) return;
+    
+    const svgRect = svg.getBoundingClientRect();
+    
+    Object.keys(dots).forEach(type => {
+        const dot = dots[type];
+        const tab = tabs[type];
+        if (!dot || !tab) return;
+        
+        const dotRect = dot.getBoundingClientRect();
+        const tabRect = tab.getBoundingClientRect();
+        
+        // Координаты центра круглешка
+        const dotX = dotRect.left + dotRect.width/2 - svgRect.left;
+        const dotY = dotRect.top + dotRect.height/2 - svgRect.top;
+        
+        // Координаты середины стороны ярлычка (ближайшей к круглешку)
+        let tabX, tabY;
+        
+        if (type === 'health' || type === 'tasks') {
+            // Левые ярлычки - правая сторона
+            tabX = tabRect.right - svgRect.left;
+            tabY = tabRect.top + tabRect.height/2 - svgRect.top;
+        } else {
+            // Правые ярлычки - левая сторона
+            tabX = tabRect.left - svgRect.left;
+            tabY = tabRect.top + tabRect.height/2 - svgRect.top;
+        }
+        
+        // Обновляем линию
+        const line = document.getElementById(`line${type.charAt(0).toUpperCase() + type.slice(1)}`);
+        if (line) {
+            line.setAttribute('d', `M${dotX},${dotY} L${tabX},${tabY}`);
+            line.style.stroke = 'var(--color-line)';
+            line.style.strokeWidth = '2';
+            line.style.opacity = '0.8';
+        }
+    });
+}
+
+// Инициализация при загрузке
+window.addEventListener('load', () => {
+    // Ждём немного для отрисовки всех элементов
+    setTimeout(updateConnectionLines, 100);
+    setTimeout(updateConnectionLines, 500); // Двойная проверка
+});
+
+// Обновление при изменении размера
+window.addEventListener('resize', updateConnectionLines);
