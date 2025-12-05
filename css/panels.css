@@ -44,9 +44,9 @@
     position: absolute;
     width: 14px;
     height: 14px;
-    background-color: var(--color-line);
+    background-color: transparent; /* Убираем заливку */
     border-radius: 50%;
-    border: 2px solid var(--color-card);
+    border: 2px solid var(--color-line); /* Контур цветом линии */
     box-shadow: 0 0 8px rgba(50, 205, 50, 0.9);
 }
 
