@@ -5,8 +5,10 @@
 
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
-    userName: "ICAR",
-    userLevel: 36,
+    userName: "Алексей",
+    userLevel: 10,
+    version: "1.0.1", // ← Добавляем версию
+    commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
         mental: 81,
@@ -141,11 +143,10 @@ function initCommitHash() {
     const commitElement = document.getElementById('commitHash');
     if (!commitElement) return;
     
-    // Для GitHub Pages можно использовать переменную окружения
-    // Или фиксированный хэш для начала
-    const commitHash = 'a1b2c3d'; // ← ЗАМЕНИ НА РЕАЛЬНЫЙ ХЭШ КОММИТА
+    // Используем версию и хэш из конфига
+    const versionText = `VER. ${AppConfig.version} #${AppConfig.commitHash}`;
+    commitElement.textContent = versionText;
     
-    commitElement.textContent = `#${commitHash}`;
     commitElement.style.fontSize = '9px';
     commitElement.style.opacity = '0.6';
     commitElement.style.marginLeft = '3px';
