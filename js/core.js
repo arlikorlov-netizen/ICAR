@@ -7,7 +7,7 @@
 const AppConfig = {
     userName: "Алексей",
     userLevel: 10,
-    version: "1.0.4", // ← Добавляем версию
+    version: "1.0.5", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
