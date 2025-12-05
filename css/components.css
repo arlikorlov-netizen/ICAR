@@ -142,7 +142,7 @@
     padding: 12px;
     background-color: var(--color-card);
     border: 2px solid var(--color-accent);
-    border-radius: var(--border-radius) !important; /* Возвращаем */
+    border-radius: 15px !important; /* Возвращаем */
     transition: all 0.3s ease;
 }
 
