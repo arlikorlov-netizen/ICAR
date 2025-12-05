@@ -118,6 +118,7 @@
 .all-panels-close.active {
     opacity: 1;
     visibility: visible;
+    
 }
 
 .all-panels-close:hover {
@@ -130,7 +131,7 @@
     position: fixed;
     background-color: var(--color-panel);
     border: 3px solid var(--color-accent);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); /* Возвращаем */
     z-index: 150;
     opacity: 0;
     visibility: hidden;

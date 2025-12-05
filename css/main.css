@@ -83,6 +83,7 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    position: relative;
 }
 
 .user-details {
@@ -133,6 +134,21 @@ body {
     letter-spacing: 0.6px;
     white-space: nowrap;
     z-index: 101;
+}
+
+.settings-btn {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: auto; /* ← Это прижимает кнопку вправо */
+    padding: 0;
 }
 
 /* === БЛОК 16.5: Основное содержимое === */
