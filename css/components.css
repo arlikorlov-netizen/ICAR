@@ -96,8 +96,8 @@
 }
 
 .human-image {
-    width: 220px;
-    height: 275px;
+    width: 231px; /* 220px + 5% = 231px */
+    height: 288.75px; /* 275px + 5% = 288.75px */
     object-fit: contain;
     filter: drop-shadow(0 0 15px rgba(42, 165, 42, 0.4));
 }

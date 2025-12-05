@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSettingsButton();
     initClosePanels();
     initBottomSheetClose();
+    initCommitHash(); // ← НОВАЯ ФУНКЦИЯ
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -133,6 +134,21 @@ function initSettingsButton() {
             alert('Раздел настроек в разработке!');
         });
     }
+}
+
+// === НОВАЯ ФУНКЦИЯ: Отображение хэша коммита ===
+function initCommitHash() {
+    const commitElement = document.getElementById('commitHash');
+    if (!commitElement) return;
+    
+    // Для GitHub Pages можно использовать переменную окружения
+    // Или фиксированный хэш для начала
+    const commitHash = 'a1b2c3d'; // ← ЗАМЕНИ НА РЕАЛЬНЫЙ ХЭШ КОММИТА
+    
+    commitElement.textContent = `#${commitHash}`;
+    commitElement.style.fontSize = '9px';
+    commitElement.style.opacity = '0.6';
+    commitElement.style.marginLeft = '3px';
 }
 
 // === БЛОК 19.5: Закрытие панелей по клику вне ===
