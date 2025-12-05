@@ -44,7 +44,7 @@ body {
     --color-button-hover: #2A8B2A;
     --color-panel: #183018;
     --color-line: #32CD32;
-    --border-radius: 15px;
+    --border-radius: 0px; /* Было 15px, стало 0px */
     --shadow: 0 4px 20px rgba(42, 165, 42, 0.3);
 }
 
