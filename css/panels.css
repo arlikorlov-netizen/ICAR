@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     height: 320px;
-    margin: 10px 0;
+    margin: 0; /* Убираем отступы */
 }
 
 .connection-lines {
@@ -53,8 +53,8 @@
 }
 
 .health-dot {
-    top: 25%;
-    left: 45%;
+    top: 24%;
+    left: 44.5%;
 }
 
 .habits-dot {
@@ -70,11 +70,6 @@
 .finance-dot {
     bottom: 5%;
     right: 5%;
-}
-
-/* ВРЕМЕННЫЙ: для отладки */
-.center-section {
-    outline: 2px solid green;
 }
 
 /* === БЛОК 18.2: Фон для всех панелей === */
