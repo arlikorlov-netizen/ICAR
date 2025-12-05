@@ -155,7 +155,6 @@
     background-color: var(--color-progress-bg);
     border: 1px solid var(--color-accent);
     position: relative;
-    overflow: hidden;
     border-radius: 10px; /* Возвращаем */
 }
 
