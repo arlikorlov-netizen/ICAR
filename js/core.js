@@ -261,19 +261,28 @@ function updateConnectionLines() {
         const dotRect = dot.getBoundingClientRect();
         const tabRect = tab.getBoundingClientRect();
         
-        // Координаты центра круглешка
-        const dotX = dotRect.left + dotRect.width/2 - svgRect.left;
-        const dotY = dotRect.top + dotRect.height/2 - svgRect.top;
+        // Координаты ТОЧКИ ВЫХОДА из круглешка (на его границе)
+        let dotX, dotY;
         
-        // Координаты середины стороны ярлычка (ближайшей к круглешку)
+        if (type === 'health' || type === 'tasks') {
+            // Левые круглешки - линия выходит из ЛЕВОЙ стороны
+            dotX = dotRect.left - svgRect.left;
+            dotY = dotRect.top + dotRect.height/2 - svgRect.top;
+        } else {
+            // Правые круглешки - линия выходит из ПРАВОЙ стороны
+            dotX = dotRect.right - svgRect.left;
+            dotY = dotRect.top + dotRect.height/2 - svgRect.top;
+        }
+        
+        // Координаты точки входа в ярлычок (на его границе)
         let tabX, tabY;
         
         if (type === 'health' || type === 'tasks') {
-            // Левые ярлычки - правая сторона
+            // Левые ярлычки - линия входит в ПРАВУЮ сторону
             tabX = tabRect.right - svgRect.left;
             tabY = tabRect.top + tabRect.height/2 - svgRect.top;
         } else {
-            // Правые ярлычки - левая сторона
+            // Правые ярлычки - линия входит в ЛЕВУЮ сторону
             tabX = tabRect.left - svgRect.left;
             tabY = tabRect.top + tabRect.height/2 - svgRect.top;
         }
@@ -282,9 +291,6 @@ function updateConnectionLines() {
         const line = document.getElementById(`line${type.charAt(0).toUpperCase() + type.slice(1)}`);
         if (line) {
             line.setAttribute('d', `M${dotX},${dotY} L${tabX},${tabY}`);
-            line.style.stroke = 'var(--color-line)';
-            line.style.strokeWidth = '2';
-            line.style.opacity = '0.8';
         }
     });
 }
