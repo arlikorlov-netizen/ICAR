@@ -6,7 +6,7 @@
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
     userName: "ICAR",
-    userLevel: 33,
+    userLevel: 34,
     progressValues: {
         physical: 56,
         mental: 81,
