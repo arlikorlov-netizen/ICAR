@@ -72,6 +72,11 @@
     right: 5%;
 }
 
+/* ВРЕМЕННЫЙ: для отладки */
+.center-section {
+    outline: 2px solid green;
+}
+
 /* === БЛОК 18.2: Фон для всех панелей === */
 .all-panels-background {
     position: fixed;
