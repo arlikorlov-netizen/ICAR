@@ -160,12 +160,12 @@
 
 /* Обновляем .progress-bar-container */
 .progress-bar-container {
-    flex: 3; /* Занимает больше места */
+    flex: 1;
     height: 20px;
     background-color: var(--color-progress-bg);
+    border-radius: 0;
+    overflow: hidden;
     border: 1px solid var(--color-accent);
-    border-radius: 10px !important;
-    overflow: hidden; /* Оставляем для корректного отображения */
     position: relative;
 }
 
@@ -174,9 +174,9 @@
 .progress-bar {
     height: 100%;
     background: var(--color-accent);
-    width: 56%; /* JS обновит */
+    width: 56%;
+    border-radius: 0;
     transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-radius: 10px !important;
 }
 
 .progress-value {
