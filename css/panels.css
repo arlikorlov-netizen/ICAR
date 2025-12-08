@@ -217,23 +217,23 @@
 }
 
 .all-panels-open .health-panel {
-    border-right: 1px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2);
 }
 
 .all-panels-open .habits-panel {
-    border-left: 1px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 1px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2);
 }
 
 .all-panels-open .tasks-panel {
-    border-right: 1px solid rgba(42, 165, 42, 0.3);
-    border-top: 1px solid rgba(42, 165, 42, 0.3);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.2);
 }
 
 .all-panels-open .finance-panel {
-    border-left: 1px solid rgba(42, 165, 42, 0.3);
-    border-top: 1px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.2);
 }
 
 /* Скрываем крестики на панелях когда все открыты */
