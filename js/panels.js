@@ -54,10 +54,6 @@ function toggleAllPanels() {
 }
 
 function openAllPanels() {
-    function openAllPanels() {
-    console.log('openAllPanels вызвана'); // ← Добавляем
-    // ... остальной код
-
     const panels = ['health', 'habits', 'tasks', 'finance'];
     
     const bg = document.getElementById('allPanelsBackground');
@@ -81,7 +77,7 @@ function openAllPanels() {
         const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose) allPanelsClose.classList.add('active');
         allPanelsOpen = true;
-    }, 300);}
+    }, 300);
 }
 
 // === БЛОК 20.4: Крестики на панелях ===
