@@ -35,6 +35,12 @@ function openSinglePanel(panelType) {
     
     panel.classList.add('active');
     activePanels = [panelType];
+    
+    // Показываем крестик на открытой панели
+    const panelCloseBtn = panel.querySelector('.panel-close');
+    if (panelCloseBtn) {
+        panelCloseBtn.style.display = 'flex';
+    }
 }
 
 // === БЛОК 20.3: Фигурка (открытие всех панелей) ===
