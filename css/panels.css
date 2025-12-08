@@ -94,7 +94,7 @@
 /* === БЛОК 18.3: Общий крестик === */
 .all-panels-close {
     position: fixed;
-    top: 15px;
+    top: 10px; /* Было 15px - поднимаем выше */
     right: 15px;
     width: 32px;
     height: 32px;
@@ -102,7 +102,7 @@
     border: 2px solid var(--color-accent);
     border-radius: 50%;
     color: var(--color-text);
-    font-size: 22px; /* Немного больше для лучшего центрирования */
+    font-size: 22px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -115,6 +115,11 @@
     line-height: 1;
     padding: 0;
     margin: 0;
+    transition: transform 0.3s ease;
+}
+
+.all-panels-close:hover {
+    transform: rotate(90deg) scale(1.1); /* Без смещения, только вращение и масштаб */
 }
 
 .all-panels-close.active {
@@ -177,8 +182,8 @@
 /* === БЛОК 18.5: Крестики на панелях === */
 .panel-close {
     position: absolute;
-    top: 0; /* В самый угол */
-    right: 0; /* В самый угол */
+    top: 0;
+    right: 0;
     width: 30px;
     height: 30px;
     background-color: var(--color-button);
@@ -194,10 +199,15 @@
     z-index: 160;
     opacity: 0;
     visibility: hidden;
-    transform: translate(50%, -50%); /* Сдвигаем на половину размера чтобы висил на углу */
+    transform: translate(50%, -50%);
     line-height: 1;
     padding: 0;
     margin: 0;
+    transition: transform 0.3s ease; /* Добавляем плавность только для transform */
+}
+
+.panel-close:hover {
+    transform: translate(50%, -50%) scale(1.1); /* Сохраняем позицию, только масштаб */
 }
 
 .corner-panel.active .panel-close {
