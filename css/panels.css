@@ -208,32 +208,39 @@
 }
 
 .all-panels-open .corner-panel {
-    border-width: 0;
+    border-width: 0.5px; /* ← Тонкая рамка вместо 3px */
+    border-color: rgba(42, 165, 42, 0.3); /* Полупрозрачная */
     box-shadow: none;
     border-radius: 0 !important;
     padding: 20px;
-    width: 50%; /* Сохраняем */
-    height: 50%; /* Сохраняем */
 }
 
 .all-panels-open .health-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.2);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
 }
 
 .all-panels-open .habits-panel {
-    border-left: 0.5px solid rgba(42, 165, 42, 0.2);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
 }
 
 .all-panels-open .tasks-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.2);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
 }
 
 .all-panels-open .finance-panel {
-    border-left: 0.5px solid rgba(42, 165, 42, 0.2);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.2);
+    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
 }
 
 /* Скрываем крестики на панелях когда все открыты */
