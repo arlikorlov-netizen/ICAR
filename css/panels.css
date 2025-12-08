@@ -131,15 +131,16 @@
     position: fixed;
     background-color: var(--color-panel);
     border: 3px solid var(--color-accent);
-    border-radius: var(--border-radius); /* Возвращаем */
+    border-radius: var(--border-radius);
     z-index: 150;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
     padding: 15px;
     box-shadow: var(--shadow);
-    width: calc(50% - 10px);
-    height: calc(45% - 95px);
+    width: 50%; /* Ровно половина ширины */
+    height: 50%; /* Ровно половина высоты */
+    margin: 0; /* Убираем все отступы */
 }
 
 .corner-panel.active {
@@ -147,29 +148,28 @@
     visibility: visible;
 }
 
-/* Расположение панелей */
 .health-panel {
-    top: 65px;
-    left: 5px;
-    border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
+    top: 0;
+    left: 0;
+    border-radius: 0 0 var(--border-radius) 0; /* Правый нижний угол скруглён */
 }
 
 .habits-panel {
-    top: 65px;
-    right: 5px;
-    border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 var(--border-radius); /* Левый нижний угол скруглён */
 }
 
 .tasks-panel {
-    bottom: 65px;
-    left: 5px;
-    border-radius: var(--border-radius) var(--border-radius) var(--border-radius) 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 var(--border-radius) 0 0; /* Правый верхний угол скруглён */
 }
 
 .finance-panel {
-    bottom: 65px;
-    right: 5px;
-    border-radius: var(--border-radius) var(--border-radius) 0 var(--border-radius);
+    bottom: 0;
+    right: 0;
+    border-radius: var(--border-radius) 0 0 0; /* Левый верхний угол скруглён */
 }
 
 /* === БЛОК 18.5: Крестики на панелях === */
@@ -207,36 +207,33 @@
     transform: rotate(90deg) scale(1.1);
 }
 
-/* === БЛОК 18.6: Состояние "все панели открыты" === */
 .all-panels-open .corner-panel {
     border-width: 0;
     box-shadow: none;
     border-radius: 0 !important;
     padding: 20px;
+    width: 50%; /* Сохраняем */
+    height: 50%; /* Сохраняем */
 }
 
 .all-panels-open .health-panel {
     border-right: 1px solid rgba(42, 165, 42, 0.3);
     border-bottom: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
 }
 
 .all-panels-open .habits-panel {
     border-left: 1px solid rgba(42, 165, 42, 0.3);
     border-bottom: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
 }
 
 .all-panels-open .tasks-panel {
     border-right: 1px solid rgba(42, 165, 42, 0.3);
     border-top: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
 }
 
 .all-panels-open .finance-panel {
     border-left: 1px solid rgba(42, 165, 42, 0.3);
     border-top: 1px solid rgba(42, 165, 42, 0.3);
-    height: calc(45% - 95px);
 }
 
 /* Скрываем крестики на панелях когда все открыты */
