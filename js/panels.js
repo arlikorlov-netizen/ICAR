@@ -59,7 +59,8 @@ function openAllPanels() {
     const bg = document.getElementById('allPanelsBackground');
     if (bg) bg.classList.add('active');
     
-    document.body.classList.add('all-panels-open'); // ← ЭТА СТРОКА ДОЛЖНА БЫТЬ
+    // Добавляем класс к body
+    document.body.classList.add('all-panels-open');
     
     closeAllPanels();
     
@@ -77,6 +78,11 @@ function openAllPanels() {
         const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose) allPanelsClose.classList.add('active');
         allPanelsOpen = true;
+        
+        // Скрываем крестики на панелях при открытии всех
+        document.querySelectorAll('.panel-close').forEach(btn => {
+            btn.style.display = 'none';
+        });
     }, 300);
 }
 
