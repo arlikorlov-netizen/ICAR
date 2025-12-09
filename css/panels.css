@@ -145,9 +145,10 @@
     transition: all 0.3s ease;
     padding: 0;
     box-shadow: var(--shadow);
-    width: 50%;
-    height: 50%;
+    width: calc(50% - 3px); /* Вычитаем правую рамку */
+    height: calc(50% - 3px); /* Вычитаем нижнюю рамку */
     margin: 0;
+    box-sizing: content-box;
 }
 
 .corner-panel.active {
@@ -158,39 +159,39 @@
 .health-panel {
     top: 0;
     left: 0;
-    border-radius: 0 0 var(--border-radius) 0; /* Правый нижний угол скруглён */
+    border-radius: 0 0 var(--border-radius) 0;
 }
 
 .habits-panel {
     top: 0;
     right: 0;
-    border-radius: 0 0 0 var(--border-radius); /* Левый нижний угол скруглён */
+    border-radius: 0 0 0 var(--border-radius);
 }
 
 .tasks-panel {
     bottom: 0;
     left: 0;
-    border-radius: 0 var(--border-radius) 0 0; /* Правый верхний угол скруглён */
+    border-radius: 0 var(--border-radius) 0 0;
 }
 
 .finance-panel {
     bottom: 0;
     right: 0;
-    border-radius: var(--border-radius) 0 0 0; /* Левый верхний угол скруглён */
+    border-radius: var(--border-radius) 0 0 0;
 }
 
 /* === БЛОК 18.5: Крестики на панелях === */
 .panel-close {
     position: absolute;
-    top: 15px; /* Отступ от верха .panel-content */
-    right: 15px; /* Отступ от правого края .panel-content */
-    width: 26px; /* Исходный размер */
+    top: 15px;
+    right: 15px;
+    width: 26px;
     height: 26px;
     background-color: var(--color-button);
     border: 2px solid var(--color-accent);
     border-radius: 50%;
     color: var(--color-text);
-    font-size: 16px; /* Исходный размер */
+    font-size: 20px; /* Увеличиваем для заполнения */
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -202,11 +203,13 @@
     line-height: 1;
     padding: 0;
     margin: 0;
-    transition: transform 0.3s ease;
+    padding-bottom: 2px; /* Небольшая корректировка по вертикали */
 }
 
+/* Убираем hover эффект */
 .panel-close:hover {
-    transform: scale(1.1) rotate(90deg); /* Только масштаб и вращение */
+    background-color: var(--color-button-hover);
+    /* transform убрана */
 }
 
 .corner-panel.active .panel-close {
