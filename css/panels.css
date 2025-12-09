@@ -5,7 +5,7 @@
 /* САМЫЕ ПЕРВЫЕ СТРОКИ ФАЙЛА panels.css */
 .panel-close,
 .all-panels-close {
-    display: none !important;
+    display: none;
 }
 /* === БЛОК 18.1: Центральный блок и линии === */
 .center-section {
@@ -343,4 +343,14 @@
         height: 36px;
         font-size: 26px;
     }
+}
+
+
+/* В конец panels.css */
+body .corner-panel.active .panel-close {
+    display: flex !important;
+}
+
+body .all-panels-close.active {
+    display: flex !important;
 }
