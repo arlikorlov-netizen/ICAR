@@ -221,23 +221,32 @@
 
 /* === БЛОК 18.6: Состояние "все панели открыты" === */
 .all-panels-open .corner-panel {
-    border-width: 0.5px; /* Тонкая рамка вместо 3px */
-    border-color: rgba(42, 165, 42, 0.3); /* Полупрозрачная */
+    border-width: 0; /* Убираем внешнюю рамку полностью */
     box-shadow: none;
     border-radius: 0 !important;
-    padding: 20px;
+    padding: 0; /* Убираем padding */
 }
 
-.all-panels-open .health-panel,
-.all-panels-open .habits-panel,
-.all-panels-open .tasks-panel,
+/* Вертикальная и горизонтальная тонкие линии между панелями */
+.all-panels-open .health-panel {
+    border-right: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия справа */
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия снизу */
+}
+
+.all-panels-open .habits-panel {
+    border-left: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия слева */
+    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия снизу */
+}
+
+.all-panels-open .tasks-panel {
+    border-right: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия справа */
+    border-top: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия сверху */
+}
+
 .all-panels-open .finance-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
+    border-left: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия слева */
+    border-top: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия сверху */
 }
-
 /* Скрываем крестики на панелях когда все открыты */
 .all-panels-open .panel-close {
     display: none !important;
