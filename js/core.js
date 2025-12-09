@@ -7,7 +7,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.114", // ← Добавляем версию
+    version: "1.0.115", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initClosePanels();
     initBottomSheetClose();
     initCommitHash();
-    // Линии будут обновлены через setTimeout в updateConnectionLines
+    initVisibility(); // ← ДОБАВЛЯЕМ ВЫЗОВ НОВОЙ ФУНКЦИИ
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -153,6 +153,33 @@ function initCommitHash() {
     commitElement.style.marginLeft = '3px';
 }
 
+// === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
+function initVisibility() {
+    // Скрываем все крестики на панелях изначально
+    document.querySelectorAll('.panel-close').forEach(btn => {
+        btn.style.display = 'none';
+    });
+    
+    // Скрываем общий крестик изначально
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.style.display = 'none';
+    }
+    
+    // Показываем только активные элементы
+    setTimeout(() => {
+        // Если есть активные панели, показываем их крестики
+        document.querySelectorAll('.corner-panel.active .panel-close').forEach(btn => {
+            btn.style.display = 'flex';
+        });
+        
+        // Если общий крестик активен, показываем его
+        if (allPanelsClose && allPanelsClose.classList.contains('active')) {
+            allPanelsClose.style.display = 'flex';
+        }
+    }, 50);
+}
+
 // === БЛОК 19.5: Закрытие панелей по клику вне ===
 function initClosePanels() {
     document.addEventListener('click', (e) => {
@@ -215,6 +242,21 @@ function closeAllPanels() {
     activePanels = [];
     allPanelsOpen = false;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('ICAR запущен');
+    
+    initDate();
+    initUserData();
+    initProgressBars();
+    initHumanImage();
+    initBottomLine();
+    initSettingsButton();
+    initClosePanels();
+    initBottomSheetClose();
+    initCommitHash();
+    initVisibility(); // ← ДОБАВЛЯЕМ ВЫЗОВ НОВОЙ ФУНКЦИИ
+});
 
 // === БЛОК 19.7: Автообновление прогресс-баров ===
 setInterval(() => {
