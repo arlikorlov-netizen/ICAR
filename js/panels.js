@@ -35,12 +35,6 @@ function openSinglePanel(panelType) {
     
     panel.classList.add('active');
     activePanels = [panelType];
-    
-    // УБЕРИ ЭТИ СТРОКИ если есть:
-    // const panelCloseBtn = panel.querySelector('.panel-close');
-    // if (panelCloseBtn) {
-    //     panelCloseBtn.style.display = 'flex';
-    // }
 }
 
 // === БЛОК 20.3: Фигурка (открытие всех панелей) ===
@@ -83,11 +77,6 @@ function openAllPanels() {
         const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose) allPanelsClose.classList.add('active');
         allPanelsOpen = true;
-        
-        // УБЕРИ ЭТИ СТРОКИ если есть:
-        // document.querySelectorAll('.panel-close').forEach(btn => {
-        //     btn.style.display = 'none';
-        // });
     }, 300);
 }
 

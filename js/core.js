@@ -22,7 +22,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.118", // ← Добавляем версию
+    version: "1.0.119", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -246,11 +246,6 @@ function closeAllPanels() {
     if (allPanelsClose) allPanelsClose.classList.remove('active');
     
     document.body.classList.remove('all-panels-open');
-    
-    // УБЕРИ ЭТИ СТРОКИ если есть:
-    // document.querySelectorAll('.panel-close').forEach(btn => {
-    //     btn.style.display = 'flex';
-    // });
     
     activePanels = [];
     allPanelsOpen = false;
