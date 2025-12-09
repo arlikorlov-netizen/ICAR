@@ -148,7 +148,6 @@
     width: 50%;
     height: 50%;
     margin: 0;
-    position: relative; /* ← ДОБАВЛЯЕМ */
 }
 
 .corner-panel.active {
@@ -249,8 +248,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
     padding: 15px;
     box-sizing: border-box;
     overflow-y: auto;
