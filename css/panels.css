@@ -250,7 +250,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 15px;
     box-sizing: border-box;
     overflow-y: auto;
 }
@@ -260,10 +259,12 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding-bottom: 10px;
+    padding: 15px 15px 10px 15px; /* Padding переносим сюда */
     border-bottom: 1px solid var(--color-accent);
-    position: relative;
-    padding-right: 35px; /* Место для крестика */
+}
+
+.panel-body {
+    padding: 0 15px 15px 15px; /* Padding переносим сюда */
 }
 
 .panel-content h3 {
@@ -271,10 +272,6 @@
     color: var(--color-text);
     margin: 0;
     flex: 1;
-}
-
-.panel-body {
-    padding-top: 10px;
 }
 
 .panel-content p {
