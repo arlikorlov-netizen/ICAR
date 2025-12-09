@@ -2,7 +2,11 @@
   БЛОК 18: panels.css - Стили для панелей
   Содержит: стили панелей, крестиков, фона
 */
-
+/* САМЫЕ ПЕРВЫЕ СТРОКИ ФАЙЛА panels.css */
+.panel-close,
+.all-panels-close {
+    display: none !important;
+}
 /* === БЛОК 18.1: Центральный блок и линии === */
 .center-section {
     position: relative;
@@ -109,8 +113,6 @@
     align-items: center;
     justify-content: center;
     z-index: 160;
-    opacity: 0;
-    visibility: hidden;
     box-shadow: 0 0 10px rgba(42, 165, 42, 0.5);
     line-height: 1;
     padding: 0;
@@ -124,9 +126,7 @@
 }
 
 .all-panels-close.active {
-    opacity: 1;
-    visibility: visible;
-    
+    display: flex;    
 }
 
 .all-panels-close:hover {
@@ -199,8 +199,6 @@
     align-items: center;
     justify-content: center;
     z-index: 160;
-    opacity: 0;
-    visibility: hidden;
     line-height: 1;
     padding: 0;
     margin: 0;
@@ -214,8 +212,7 @@
 }
 
 .corner-panel.active .panel-close {
-    opacity: 1;
-    visibility: visible;
+    display: flex;
 }
 
 .panel-close:hover {

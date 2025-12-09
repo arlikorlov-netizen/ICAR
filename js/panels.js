@@ -36,12 +36,11 @@ function openSinglePanel(panelType) {
     panel.classList.add('active');
     activePanels = [panelType];
     
-    // Показываем крестик на открытой панели
-    const panelCloseBtn = panel.querySelector('.panel-close');
-    if (panelCloseBtn) {
-        panelCloseBtn.style.visibility = 'visible';
-        panelCloseBtn.style.opacity = '1';
-    }
+    // УБЕРИ ЭТИ СТРОКИ если есть:
+    // const panelCloseBtn = panel.querySelector('.panel-close');
+    // if (panelCloseBtn) {
+    //     panelCloseBtn.style.display = 'flex';
+    // }
 }
 
 // === БЛОК 20.3: Фигурка (открытие всех панелей) ===
@@ -70,12 +69,6 @@ function openAllPanels() {
     
     closeAllPanels();
     
-    // Скрываем крестики на панелях
-    document.querySelectorAll('.panel-close').forEach(btn => {
-        btn.style.visibility = 'hidden';
-        btn.style.opacity = '0';
-    });
-    
     panels.forEach((panelType, index) => {
         setTimeout(() => {
             const panel = document.getElementById(`${panelType}Panel`);
@@ -88,12 +81,13 @@ function openAllPanels() {
     
     setTimeout(() => {
         const allPanelsClose = document.getElementById('allPanelsClose');
-        if (allPanelsClose) {
-            allPanelsClose.classList.add('active');
-            allPanelsClose.style.visibility = 'visible';
-            allPanelsClose.style.opacity = '1';
-        }
+        if (allPanelsClose) allPanelsClose.classList.add('active');
         allPanelsOpen = true;
+        
+        // УБЕРИ ЭТИ СТРОКИ если есть:
+        // document.querySelectorAll('.panel-close').forEach(btn => {
+        //     btn.style.display = 'none';
+        // });
     }, 300);
 }
 
