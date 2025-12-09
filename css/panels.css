@@ -262,26 +262,41 @@
 }
 
 /* === БЛОК 18.7: Содержимое панелей === */
-.panel-content {
-    position: relative;
-    height: 100%;
-    padding-top: 10px;
+/* НОВЫЙ КУСОЧЕК: Структура панели */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-accent);
 }
 
 .panel-content h3 {
     font-size: 18px;
-    margin-bottom: 15px;
     color: var(--color-text);
-    text-align: center;
-    border-bottom: 1px solid var(--color-accent);
-    padding-bottom: 10px;
+    margin: 0;
+}
+
+.panel-body {
+    padding-top: 10px;
 }
 
 .panel-content p {
     font-size: 16px;
     color: var(--color-text-secondary);
     line-height: 1.8;
-    text-align: center;
+    text-align: left;
+    margin: 0;
+}
+
+/* Крестик в заголовке */
+.panel-header .panel-close {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    margin: 0;
 }
 
 /* === БЛОК 18.8: Адаптивность === */
