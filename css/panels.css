@@ -228,24 +228,11 @@
 }
 
 /* Вертикальная и горизонтальная тонкие линии между панелями */
-.all-panels-open .health-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия справа */
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия снизу */
-}
-
-.all-panels-open .habits-panel {
-    border-left: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия слева */
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия снизу */
-}
-
-.all-panels-open .tasks-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия справа */
-    border-top: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия сверху */
-}
-
+.all-panels-open .health-panel,
+.all-panels-open .habits-panel,
+.all-panels-open .tasks-panel,
 .all-panels-open .finance-panel {
-    border-left: 0.5px solid rgba(42, 165, 42, 0.2); /* Вертикальная линия слева */
-    border-top: 0.5px solid rgba(42, 165, 42, 0.2); /* Горизонтальная линия сверху */
+    border: none; /* Убираем ВСЕ границы */
 }
 /* Скрываем крестики на панелях когда все открыты */
 .all-panels-open .panel-close {
