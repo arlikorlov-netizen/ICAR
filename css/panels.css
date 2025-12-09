@@ -182,15 +182,15 @@
 /* === БЛОК 18.5: Крестики на панелях === */
 .panel-close {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 30px;
-    height: 30px;
+    top: 15px; /* Отступ от верха .panel-content */
+    right: 15px; /* Отступ от правого края .panel-content */
+    width: 26px; /* Исходный размер */
+    height: 26px;
     background-color: var(--color-button);
     border: 2px solid var(--color-accent);
     border-radius: 50%;
     color: var(--color-text);
-    font-size: 20px;
+    font-size: 16px; /* Исходный размер */
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -199,15 +199,14 @@
     z-index: 160;
     opacity: 0;
     visibility: hidden;
-    transform: translate(50%, -50%);
     line-height: 1;
     padding: 0;
     margin: 0;
-    transition: transform 0.3s ease; /* Добавляем плавность только для transform */
+    transition: transform 0.3s ease;
 }
 
 .panel-close:hover {
-    transform: translate(50%, -50%) scale(1.1); /* Сохраняем позицию, только масштаб */
+    transform: scale(1.1) rotate(90deg); /* Только масштаб и вращение */
 }
 
 .corner-panel.active .panel-close {
@@ -220,35 +219,18 @@
     transform: rotate(90deg) scale(1.1);
 }
 
+/* === БЛОК 18.6: Состояние "все панели открыты" === */
 .all-panels-open .corner-panel {
-    border-width: 0.5px; /* ← Тонкая рамка вместо 3px */
+    border-width: 0.5px; /* Тонкая рамка вместо 3px */
     border-color: rgba(42, 165, 42, 0.3); /* Полупрозрачная */
     box-shadow: none;
     border-radius: 0 !important;
     padding: 20px;
 }
 
-.all-panels-open .health-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
-}
-
-.all-panels-open .habits-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
-}
-
-.all-panels-open .tasks-panel {
-    border-right: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-left: 0.5px solid rgba(42, 165, 42, 0.3);
-    border-top: 0.5px solid rgba(42, 165, 42, 0.3);
-}
-
+.all-panels-open .health-panel,
+.all-panels-open .habits-panel,
+.all-panels-open .tasks-panel,
 .all-panels-open .finance-panel {
     border-right: 0.5px solid rgba(42, 165, 42, 0.3);
     border-bottom: 0.5px solid rgba(42, 165, 42, 0.3);
@@ -262,7 +244,17 @@
 }
 
 /* === БЛОК 18.7: Содержимое панелей === */
-/* НОВЫЙ КУСОЧЕК: Структура панели */
+.panel-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
 .panel-header {
     display: flex;
     justify-content: space-between;
@@ -270,12 +262,15 @@
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--color-accent);
+    position: relative;
+    padding-right: 35px; /* Место для крестика */
 }
 
 .panel-content h3 {
     font-size: 18px;
     color: var(--color-text);
     margin: 0;
+    flex: 1;
 }
 
 .panel-body {
@@ -287,15 +282,6 @@
     color: var(--color-text-secondary);
     line-height: 1.8;
     text-align: left;
-    margin: 0;
-}
-
-/* Крестик в заголовке */
-.panel-header .panel-close {
-    position: relative;
-    top: auto;
-    right: auto;
-    transform: none;
     margin: 0;
 }
 
