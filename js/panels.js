@@ -39,7 +39,8 @@ function openSinglePanel(panelType) {
     // Показываем крестик на открытой панели
     const panelCloseBtn = panel.querySelector('.panel-close');
     if (panelCloseBtn) {
-        panelCloseBtn.style.display = 'flex';
+        panelCloseBtn.style.visibility = 'visible';
+        panelCloseBtn.style.opacity = '1';
     }
 }
 
@@ -65,10 +66,15 @@ function openAllPanels() {
     const bg = document.getElementById('allPanelsBackground');
     if (bg) bg.classList.add('active');
     
-    // Добавляем класс к body
     document.body.classList.add('all-panels-open');
     
     closeAllPanels();
+    
+    // Скрываем крестики на панелях
+    document.querySelectorAll('.panel-close').forEach(btn => {
+        btn.style.visibility = 'hidden';
+        btn.style.opacity = '0';
+    });
     
     panels.forEach((panelType, index) => {
         setTimeout(() => {
@@ -82,13 +88,12 @@ function openAllPanels() {
     
     setTimeout(() => {
         const allPanelsClose = document.getElementById('allPanelsClose');
-        if (allPanelsClose) allPanelsClose.classList.add('active');
+        if (allPanelsClose) {
+            allPanelsClose.classList.add('active');
+            allPanelsClose.style.visibility = 'visible';
+            allPanelsClose.style.opacity = '1';
+        }
         allPanelsOpen = true;
-        
-        // Скрываем крестики на панелях при открытии всех
-        document.querySelectorAll('.panel-close').forEach(btn => {
-            btn.style.display = 'none';
-        });
     }, 300);
 }
 

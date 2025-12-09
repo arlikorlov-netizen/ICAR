@@ -93,7 +93,6 @@
 
 /* === БЛОК 18.3: Общий крестик === */
 .all-panels-close {
-    display: none;
     position: fixed;
     top: 5px;
     right: 10px;
@@ -184,7 +183,6 @@
 
 /* === БЛОК 18.5: Крестики на панелях === */
 .panel-close {
-    display: none;
     position: absolute;
     top: 5px;
     right: 15px;

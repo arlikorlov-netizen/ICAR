@@ -2,12 +2,27 @@
   БЛОК 19: core.js - Ядро приложения
   Содержит: конфигурацию, инициализацию, общие функции
 */
-
+// === ПРЕДВАРИТЕЛЬНОЕ СКРЫТИЕ ЭЛЕМЕНТОВ ===
+(function hideElementsBeforeLoad() {
+    // Этот код выполнится ДО загрузки DOM
+    if (document.readyState === 'loading') {
+        // Создаём стиль который скроет элементы сразу
+        const style = document.createElement('style');
+        style.textContent = `
+            .panel-close, 
+            .all-panels-close {
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+})();
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.115", // ← Добавляем версию
+    version: "1.0.116", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -155,29 +170,27 @@ function initCommitHash() {
 
 // === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
 function initVisibility() {
-    // Скрываем все крестики на панелях изначально
-    document.querySelectorAll('.panel-close').forEach(btn => {
-        btn.style.display = 'none';
-    });
-    
-    // Скрываем общий крестик изначально
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) {
-        allPanelsClose.style.display = 'none';
+    // Убираем скрывающие стили
+    const hiddenStyle = document.querySelector('style[data-hide-elements]');
+    if (hiddenStyle) {
+        hiddenStyle.remove();
     }
     
-    // Показываем только активные элементы
+    // Теперь показываем элементы как нужно
     setTimeout(() => {
-        // Если есть активные панели, показываем их крестики
+        // Показываем крестики на активных панелях
         document.querySelectorAll('.corner-panel.active .panel-close').forEach(btn => {
-            btn.style.display = 'flex';
+            btn.style.visibility = 'visible';
+            btn.style.opacity = '1';
         });
         
-        // Если общий крестик активен, показываем его
+        // Показываем общий крестик если активен
+        const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose && allPanelsClose.classList.contains('active')) {
-            allPanelsClose.style.display = 'flex';
+            allPanelsClose.style.visibility = 'visible';
+            allPanelsClose.style.opacity = '1';
         }
-    }, 50);
+    }, 100);
 }
 
 // === БЛОК 19.5: Закрытие панелей по клику вне ===
