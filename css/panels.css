@@ -348,11 +348,11 @@
 }
 
 
-/* В конец panels.css */
-body .corner-panel.active .panel-close {
-    display: flex !important;
-}
-
-body .all-panels-close.active {
-    display: flex !important;
+/* ФОРСИРУЕМ отображение крестиков */
+#healthPanel.active .panel-close,
+#habitsPanel.active .panel-close,
+#tasksPanel.active .panel-close,
+#financePanel.active .panel-close {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
