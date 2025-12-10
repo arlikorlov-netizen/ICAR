@@ -99,13 +99,18 @@
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 24px;
+    font-size: 28px; /* увеличили */
     cursor: pointer;
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
-    padding: 5px;
+    padding: 8px; /* увеличили */
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* добавили фиксированную ширину */
+    height: 40px; /* добавили фиксированную высоту */
 }
 
 .all-panels-close.active {
@@ -113,14 +118,8 @@
     visibility: visible;
 }
 
-.all-panels-close:hover {
-    background-color: var(--color-button-hover);
-    /* transform убрана */
-}
-
 
 .all-panels-close:hover {
-    background-color: var(--color-button-hover);
     transform: rotate(90deg) scale(1.1);
 }
 
@@ -179,13 +178,18 @@
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 20px;
+    font-size: 24px; /* увеличили */
     cursor: pointer;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    padding: 5px;
+    padding: 8px; /* увеличили */
     transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* добавили фиксированную ширину */
+    height: 40px; /* добавили фиксированную высоту */
 }
 
 .corner-panel.active .panel-close {

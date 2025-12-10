@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.133", // ← Добавляем версию
+    version: "1.0.134", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -202,7 +202,11 @@ function closeAllPanels() {
     if (bg) bg.classList.remove('active');
     
     const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) allPanelsClose.classList.remove('active');
+    if (allPanelsClose) {
+        allPanelsClose.classList.remove('active');
+        allPanelsClose.style.opacity = '';
+        allPanelsClose.style.visibility = '';
+    }
     
     document.body.classList.remove('all-panels-open');
     
