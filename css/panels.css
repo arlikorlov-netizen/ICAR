@@ -102,8 +102,8 @@
     font-size: 20px;
     cursor: pointer;
     z-index: 1001;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     padding: 5px;
     transition: transform 0.3s ease;
 }
@@ -129,10 +129,10 @@
     transition: all 0.3s ease;
     padding: 0;
     box-shadow: var(--shadow);
-    width: calc(50% - 3px); /* Вычитаем правую рамку */
-    height: calc(50% - 3px); /* Вычитаем нижнюю рамку */
+    width: calc(50% - 1.5px); /* Уменьшаем вычитание */
+    height: calc(50% - 1.5px); /* Уменьшаем вычитание */
     margin: 0;
-    box-sizing: content-box;
+    box-sizing: border-box; /* Меняем с content-box на border-box */
 }
 
 .corner-panel.active {

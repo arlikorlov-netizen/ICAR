@@ -56,12 +56,6 @@ function toggleAllPanels() {
 function openAllPanels() {
     const panels = ['health', 'habits', 'tasks', 'finance'];
     
-    // СНАЧАЛА общий крестик
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) {
-        allPanelsClose.classList.add('active');
-    }
-    
     const bg = document.getElementById('allPanelsBackground');
     if (bg) bg.classList.add('active');
     
@@ -79,7 +73,13 @@ function openAllPanels() {
         }, index * 60);
     });
     
-    allPanelsOpen = true;
+    setTimeout(() => {
+        const allPanelsClose = document.getElementById('allPanelsClose');
+        if (allPanelsClose) {
+            allPanelsClose.classList.add('active');
+        }
+        allPanelsOpen = true;
+    }, 300);
 }
 
 // === БЛОК 20.4: Крестики на панелях ===
