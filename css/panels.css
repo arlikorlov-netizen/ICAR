@@ -238,7 +238,7 @@
     border: none; /* Убираем ВСЕ границы */
 }
 /* Скрываем крестики на панелях когда все открыты */
-.all-panels-open .panel-close {
+.all-panels-open .corner-panel .panel-close {
     display: none !important;
 }
 
