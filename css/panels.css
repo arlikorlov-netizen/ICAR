@@ -214,8 +214,10 @@
     border: none; /* Убираем ВСЕ границы */
 }
 
-body.all-panels-open .panel-close {
+.all-panels-open .panel-close {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 /* === БЛОК 18.7: Содержимое панелей === */

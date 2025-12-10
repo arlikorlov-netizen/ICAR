@@ -1,7 +1,14 @@
 /* === БЛОК 23: Логика модального окна сна === */
 
-document.addEventListener('DOMContentLoaded', () => {
-    initSleepModal();
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await sleepDB.init();
+        console.log('База данных инициализирована');
+        initSleepModal();
+        updateSleepDisplay();
+    } catch (error) {
+        console.error('Ошибка инициализации БД:', error);
+    }
 });
 
 function initSleepModal() {
