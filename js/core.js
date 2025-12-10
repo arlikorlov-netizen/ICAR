@@ -22,7 +22,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.127", // ← Добавляем версию
+    version: "1.0.128", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initClosePanels();
     initBottomSheetClose();
     initCommitHash();
-    initVisibility(); // ← ДОБАВЛЯЕМ ВЫЗОВ НОВОЙ ФУНКЦИИ
+    // УДАЛЯЕМ: initVisibility();
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -166,23 +166,6 @@ function initCommitHash() {
     commitElement.style.fontSize = '9px';
     commitElement.style.opacity = '0.6';
     commitElement.style.marginLeft = '3px';
-}
-
-// === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
-// === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
-function initVisibility() {
-    // Убираем скрывающие стили
-    const hiddenStyle = document.querySelector('style[data-hide-elements]');
-    if (hiddenStyle) {
-        hiddenStyle.remove();
-    }
-    
-    // Сразу показываем общий крестик если нужно (независимо от класса active)
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) {
-        allPanelsClose.style.visibility = 'visible';
-        allPanelsClose.style.opacity = '1';
-    }
 }
 
 // === БЛОК 19.5: Закрытие панелей по клику вне ===
