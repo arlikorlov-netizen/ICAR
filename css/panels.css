@@ -99,18 +99,16 @@
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 28px; /* увеличили */
+    font-size: 28px;
     cursor: pointer;
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
-    padding: 8px; /* увеличили */
+    padding: 10px 15px; /* увеличиваем padding для размера */
     transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; /* добавили фиксированную ширину */
-    height: 40px; /* добавили фиксированную высоту */
 }
 
 .all-panels-close.active {
@@ -178,18 +176,16 @@
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 24px; /* увеличили */
+    font-size: 24px;
     cursor: pointer;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    padding: 8px; /* увеличили */
+    padding: 10px 12px; /* увеличиваем padding для размера */
     transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; /* добавили фиксированную ширину */
-    height: 40px; /* добавили фиксированную высоту */
 }
 
 .corner-panel.active .panel-close {
