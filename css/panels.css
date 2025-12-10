@@ -193,15 +193,14 @@
     visibility: visible;
 }
 
-/* Убираем hover эффект */
+/* УДАЛЯЕМ ВЕСЬ БЛОК:
 .panel-close:hover {
     background-color: var(--color-button-hover);
-    /* transform убрана */
 }
+*/
 
-.panel-close:hover {
-    background-color: var(--color-button-hover);
-    transform: rotate(90deg) scale(1.1);
+.all-panels-close:hover {
+    transform: rotate(90deg);
 }
 
 /* === БЛОК 18.6: Состояние "все панели открыты" === */

@@ -56,14 +56,18 @@ function toggleAllPanels() {
 function openAllPanels() {
     const panels = ['health', 'habits', 'tasks', 'finance'];
     
+    // СНАЧАЛА общий крестик
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.classList.add('active');
+        allPanelsClose.style.opacity = '1';
+        allPanelsClose.style.visibility = 'visible';
+    }
+    
     const bg = document.getElementById('allPanelsBackground');
     if (bg) bg.classList.add('active');
     
     document.body.classList.add('all-panels-open');
-    
-    // СНАЧАЛА добавляем общий крестик
-    const allPanelsClose = document.getElementById('allPanelsClose');
-    if (allPanelsClose) allPanelsClose.classList.add('active');
     
     closeAllPanels();
     
