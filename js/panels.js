@@ -61,6 +61,10 @@ function openAllPanels() {
     
     document.body.classList.add('all-panels-open');
     
+    // СНАЧАЛА добавляем общий крестик
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) allPanelsClose.classList.add('active');
+    
     closeAllPanels();
     
     panels.forEach((panelType, index) => {
@@ -73,11 +77,7 @@ function openAllPanels() {
         }, index * 60);
     });
     
-    setTimeout(() => {
-        const allPanelsClose = document.getElementById('allPanelsClose');
-        if (allPanelsClose) allPanelsClose.classList.add('active');
-        allPanelsOpen = true;
-    }, 300);
+    allPanelsOpen = true;
 }
 
 // === БЛОК 20.4: Крестики на панелях ===
