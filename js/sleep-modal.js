@@ -41,21 +41,68 @@ function initSleepModal() {
     });
     
     // Отправка формы
-    if (sleepForm) {
-        sleepForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+if (sleepForm) {
+    sleepForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const sleepStart = document.getElementById('sleepStart').value;
+        const sleepEnd = document.getElementById('sleepEnd').value;
+        const quality = document.querySelector('.quality-btn.active')?.textContent || '3';
+        
+        try {
+            // Сохраняем в IndexedDB
+            await sleepDB.addSleepRecord({ sleepStart, sleepEnd, quality });
+            console.log('Сон успешно сохранён в базу данных');
             
-            const sleepStart = document.getElementById('sleepStart').value;
-            const sleepEnd = document.getElementById('sleepEnd').value;
-            const quality = document.querySelector('.quality-btn.active')?.textContent || '3';
+            // Обновляем отображение в панели здоровья
+            updateSleepDisplay();
             
-            // Здесь будет сохранение в IndexedDB
-            console.log('Сон записан:', { sleepStart, sleepEnd, quality });
-            
+            // Закрываем модальное окно
             modalOverlay.classList.remove('active');
             sleepForm.reset();
             qualityButtons.forEach(b => b.classList.remove('active'));
-            qualityButtons[2].classList.add('active'); // Сбрасываем на среднюю оценку
-        });
+            qualityButtons[2].classList.add('active');
+            
+        } catch (error) {
+            console.error('Ошибка сохранения сна:', error);
+            alert('Ошибка сохранения записи');
+        }
+    });
+}
+
+// Функция обновления отображения в панели здоровья
+async function updateSleepDisplay() {
+    try {
+        const stats = await sleepDB.getSleepStats();
+        const healthPanelBody = document.querySelector('#healthPanel .panel-body');
+        
+        if (healthPanelBody && stats.totalRecords > 0) {
+            // Очищаем и добавляем статистику
+            healthPanelBody.innerHTML = `
+                <div class="sleep-stats">
+                    <div>Средняя длительность: ${stats.avgDuration}ч</div>
+                    <div>Качество сна: ${stats.avgQuality}/5</div>
+                    <div>Всего записей: ${stats.totalRecords}</div>
+                </div>
+                <button class="sleep-record-btn" id="recordSleepBtn">Записать сон</button>
+            `;
+            
+            // Переинициализируем кнопку
+            const newRecordBtn = document.getElementById('recordSleepBtn');
+            if (newRecordBtn) {
+                newRecordBtn.addEventListener('click', () => {
+                    document.getElementById('sleepModalOverlay').classList.add('active');
+                });
+            }
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки статистики:', error);
     }
+}
+
+// Инициализируем при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    initSleepModal();
+    updateSleepDisplay(); // Загружаем статистику при загрузке
+});
 }

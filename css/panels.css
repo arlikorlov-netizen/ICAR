@@ -101,7 +101,7 @@
     color: var(--color-text);
     font-size: 20px;
     cursor: pointer;
-    z-index: 140; /* панели имеют z-index: 150, фон: 140 */
+    z-index: 200; /* панели имеют z-index: 150, фон: 140 */
     opacity: 0;
     visibility: hidden;
     padding: 5px;
@@ -214,10 +214,8 @@
     border: none; /* Убираем ВСЕ границы */
 }
 
-.all-panels-open .corner-panel.active .panel-close {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+body.all-panels-open .panel-close {
+    display: none !important;
 }
 
 /* === БЛОК 18.7: Содержимое панелей === */

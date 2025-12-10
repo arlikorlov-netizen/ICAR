@@ -124,3 +124,24 @@
 .sleep-submit-btn:hover {
     background-color: var(--color-button-hover);
 }
+
+/* Стили для кнопки в панели здоровья */
+.sleep-record-btn {
+    background-color: var(--color-button);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--border-radius);
+    color: var(--color-text);
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-family: 'CrySisBold', sans-serif;
+    margin-top: 20px;
+}
+
+.sleep-record-btn:hover {
+    background-color: var(--color-button-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
