@@ -101,15 +101,16 @@
     color: var(--color-text);
     font-size: 20px;
     cursor: pointer;
-    z-index: 1001;
-    opacity: 1;
-    visibility: visible;
+    z-index: 140; /* панели имеют z-index: 150, фон: 140 */
+    opacity: 0;
+    visibility: hidden;
     padding: 5px;
     transition: transform 0.3s ease;
 }
+
 .all-panels-close.active {
-    opacity: 1!important;
-    visibility: visible!important;
+    opacity: 1;
+    visibility: visible;
 }
 
 
@@ -129,8 +130,8 @@
     transition: all 0.3s ease;
     padding: 0;
     box-shadow: var(--shadow);
-    width: calc(50% - 1.5px); /* Уменьшаем вычитание */
-    height: calc(50% - 1.5px); /* Уменьшаем вычитание */
+    width: calc(50% - 1px); /* Уменьшаем вычитание */
+    height: calc(50% - 1px); /* Уменьшаем вычитание */
     margin: 0;
     box-sizing: border-box; /* Меняем с content-box на border-box */
 }
@@ -211,6 +212,12 @@
 .all-panels-open .tasks-panel,
 .all-panels-open .finance-panel {
     border: none; /* Убираем ВСЕ границы */
+}
+
+.all-panels-open .corner-panel.active .panel-close {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 /* === БЛОК 18.7: Содержимое панелей === */
