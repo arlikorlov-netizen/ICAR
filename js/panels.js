@@ -60,8 +60,6 @@ function openAllPanels() {
     const allPanelsClose = document.getElementById('allPanelsClose');
     if (allPanelsClose) {
         allPanelsClose.classList.add('active');
-        allPanelsClose.style.opacity = '1';
-        allPanelsClose.style.visibility = 'visible';
     }
     
     const bg = document.getElementById('allPanelsBackground');
