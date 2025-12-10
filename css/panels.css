@@ -105,12 +105,12 @@
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
     box-shadow: 0 0 10px rgba(42, 165, 42, 0.5);
     line-height: 1;
     padding: 0;

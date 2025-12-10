@@ -22,7 +22,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.123", // ← Добавляем версию
+    version: "1.0.124", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -169,6 +169,7 @@ function initCommitHash() {
 }
 
 // === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
+// === НОВАЯ ФУНКЦИЯ: Инициализация видимости элементов ===
 function initVisibility() {
     // Убираем скрывающие стили
     const hiddenStyle = document.querySelector('style[data-hide-elements]');
@@ -176,21 +177,12 @@ function initVisibility() {
         hiddenStyle.remove();
     }
     
-    // Теперь показываем элементы как нужно
-    setTimeout(() => {
-        // Показываем крестики на активных панелях
-        document.querySelectorAll('.corner-panel.active .panel-close').forEach(btn => {
-            btn.style.visibility = 'visible';
-            btn.style.opacity = '1';
-        });
-        
-        // Показываем общий крестик если активен
-        const allPanelsClose = document.getElementById('allPanelsClose');
-        if (allPanelsClose && allPanelsClose.classList.contains('active')) {
-            allPanelsClose.style.visibility = 'visible';
-            allPanelsClose.style.opacity = '1';
-        }
-    }, 100);
+    // Сразу показываем общий крестик если нужно (независимо от класса active)
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.style.visibility = 'visible';
+        allPanelsClose.style.opacity = '1';
+    }
 }
 
 // === БЛОК 19.5: Закрытие панелей по клику вне ===
