@@ -98,16 +98,14 @@
     right: 20px;
     background: none;
     border: none;
-    color: #90FF90;
-    font-size: 32px;
-    font-weight: bold;
+    color: var(--color-text);
+    font-size: 24px;
     cursor: pointer;
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
     padding: 5px;
-    margin: 0;
-    text-shadow: 0 0 10px rgba(144, 255, 144, 0.8);
+    transition: transform 0.3s ease;
 }
 
 .all-panels-close.active {
@@ -180,16 +178,14 @@
     right: 15px;
     background: none;
     border: none;
-    color: #90FF90;
-    font-size: 24px;
-    font-weight: bold;
+    color: var(--color-text);
+    font-size: 20px;
     cursor: pointer;
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
     padding: 5px;
-    margin: 0;
-    text-shadow: 0 0 8px rgba(144, 255, 144, 0.8);
+    transition: transform 0.3s ease;
 }
 
 .corner-panel.active .panel-close {
