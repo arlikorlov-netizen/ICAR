@@ -108,8 +108,8 @@
     transition: transform 0.3s ease;
 }
 .all-panels-close.active {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1!important;
+    visibility: visible!important;
 }
 
 
@@ -182,8 +182,8 @@
 }
 
 .corner-panel.active .panel-close {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* УДАЛЯЕМ ВЕСЬ БЛОК:
