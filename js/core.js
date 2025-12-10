@@ -2,27 +2,11 @@
   БЛОК 19: core.js - Ядро приложения
   Содержит: конфигурацию, инициализацию, общие функции
 */
-// === ПРЕДВАРИТЕЛЬНОЕ СКРЫТИЕ ЭЛЕМЕНТОВ ===
-(function hideElementsBeforeLoad() {
-    // Этот код выполнится ДО загрузки DOM
-    if (document.readyState === 'loading') {
-        // Создаём стиль который скроет элементы сразу
-        const style = document.createElement('style');
-        style.textContent = `
-            .panel-close, 
-            .all-panels-close {
-                visibility: hidden !important;
-                opacity: 0 !important;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-})();
 // === БЛОК 19.1: Конфигурация приложения ===
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.0.128", // ← Добавляем версию
+    version: "1.0.129", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
