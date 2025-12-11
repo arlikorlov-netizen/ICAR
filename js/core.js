@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.149", // ← Добавляем версию
+    version: "1.1.150", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -373,23 +373,24 @@ window.addEventListener('resize', updateConnectionLines);
 
 // === БЛОК 19.9: Горячие клавиши для отладки ===
 document.addEventListener('keydown', function(e) {
-    // Ctrl+Shift+D для диагностики (в любом состоянии)
-    if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+    // Ctrl+Alt+X для диагностики (редко используется)
+    if (e.ctrlKey && e.altKey && e.key === 'X') {
         e.preventDefault();
-        console.log('Горячая клавиша Ctrl+Shift+D - запуск диагностики');
+        console.log('Горячая клавиша Ctrl+Alt+X - запуск диагностики');
         showStyleDiagnostics();
     }
     
-    // Ctrl+Shift+S для проверки состояния all-panels-open
-    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+    // Ctrl+Alt+C для быстрой проверки
+    if (e.ctrlKey && e.altKey && e.key === 'C') {
         e.preventDefault();
         console.log('=== БЫСТРАЯ ПРОВЕРКА ===');
         console.log('allPanelsOpen переменная:', allPanelsOpen);
         console.log('body имеет all-panels-open:', document.body.classList.contains('all-panels-open'));
         console.log('Активных панелей:', document.querySelectorAll('.corner-panel.active').length);
         console.log('Общий крестик активен:', document.getElementById('allPanelsClose')?.classList.contains('active'));
+        
+        alert(`Быстрая проверка:\n\nallPanelsOpen: ${allPanelsOpen}\nbody класс: "${document.body.className}"\nАктивных панелей: ${document.querySelectorAll('.corner-panel.active').length}`);
     }
 });
 
-// Также можно добавить сообщение в консоль при загрузке
-console.log('Отладка: используйте Ctrl+Shift+D для диагностики, Ctrl+Shift+S для быстрой проверки');
+console.log('Отладка: используйте Ctrl+Alt+X для диагностики, Ctrl+Alt+C для быстрой проверки');
