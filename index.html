@@ -239,37 +239,38 @@
         }
     </script>
     <!-- БЛОК 24: Модальное окно записи сна -->
-<div class="sleep-modal-overlay" id="sleepModalOverlay">
-    <div class="sleep-modal">
-        <div class="sleep-modal-header">
-            <h3 class="sleep-modal-title">Запись сна</h3>
-            <button class="sleep-modal-close" id="sleepModalClose">×</button>
+    <!-- БЛОК 24: Модальное окно записи сна -->
+    <div class="sleep-modal-overlay" id="sleepModalOverlay">
+        <div class="sleep-modal">
+            <div class="sleep-modal-header">
+                <h3 class="sleep-modal-title">Запись сна</h3>
+                <button class="sleep-modal-close" id="sleepModalClose">×</button>
+            </div>
+            <form class="sleep-form" id="sleepForm">
+                <div class="form-group time-inputs">
+                    <div class="time-input">
+                        <label class="form-label">Начало сна</label>
+                        <input type="time" class="form-input" id="sleepStart" required>
+                    </div>
+                    <div class="time-input">
+                        <label class="form-label">Окончание</label>
+                        <input type="time" class="form-input" id="sleepEnd" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Качество сна</label>
+                    <div class="quality-rating">
+                        <button type="button" class="quality-btn">1</button>
+                        <button type="button" class="quality-btn">2</button>
+                        <button type="button" class="quality-btn active">3</button>
+                        <button type="button" class="quality-btn">4</button>
+                        <button type="button" class="quality-btn">5</button>
+                    </div>
+                </div>
+                <button type="submit" class="sleep-submit-btn">Сохранить запись</button>
+            </form>
         </div>
-        <form class="sleep-form" id="sleepForm">
-            <div class="form-group time-inputs">
-                <div class="time-input">
-                    <label class="form-label">Начало сна</label>
-                    <input type="time" class="form-input" id="sleepStart" required>
-                </div>
-                <div class="time-input">
-                    <label class="form-label">Окончание</label>
-                    <input type="time" class="form-input" id="sleepEnd" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Качество сна</label>
-                <div class="quality-rating">
-                    <button type="button" class="quality-btn">1</button>
-                    <button type="button" class="quality-btn">2</button>
-                    <button type="button" class="quality-btn active">3</button>
-                    <button type="button" class="quality-btn">4</button>
-                    <button type="button" class="quality-btn">5</button>
-                </div>
-            </div>
-            <button type="submit" class="sleep-submit-btn">Сохранить запись</button>
-        </form>
     </div>
-</div>
 
 
 
