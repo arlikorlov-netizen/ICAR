@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.147", // ← Добавляем версию
+    version: "1.1.148", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -133,9 +133,51 @@ function initSettingsButton() {
     const btn = document.getElementById('settingsBtn');
     if (btn) {
         btn.addEventListener('click', () => {
-            alert('Раздел настроек в разработке!');
+            showStyleDiagnostics();
         });
     }
+}
+
+function showStyleDiagnostics() {
+    const diagnostics = [];
+    
+    // Проверяем крестики на панелях
+    const panelCloses = document.querySelectorAll('.panel-close');
+    panelCloses.forEach((btn, i) => {
+        const styles = window.getComputedStyle(btn);
+        diagnostics.push(`Крестик ${i+1}:`);
+        diagnostics.push(`  display: ${styles.display}`);
+        diagnostics.push(`  opacity: ${styles.opacity}`);
+        diagnostics.push(`  visibility: ${styles.visibility}`);
+        diagnostics.push(`  classList: ${btn.className}`);
+    });
+    
+    // Проверяем общий крестик
+    const allClose = document.getElementById('allPanelsClose');
+    if (allClose) {
+        const styles = window.getComputedStyle(allClose);
+        diagnostics.push('Общий крестик:');
+        diagnostics.push(`  display: ${styles.display}`);
+        diagnostics.push(`  opacity: ${styles.opacity}`);
+        diagnostics.push(`  visibility: ${styles.visibility}`);
+        diagnostics.push(`  имеет класс active: ${allClose.classList.contains('active')}`);
+    }
+    
+    // Проверяем body классы
+    diagnostics.push(`Body классы: ${document.body.className}`);
+    diagnostics.push(`allPanelsOpen переменная: ${allPanelsOpen}`);
+    
+    // Проверяем активные панели
+    const activePanelsList = document.querySelectorAll('.corner-panel.active');
+    diagnostics.push(`Активных панелей: ${activePanelsList.length}`);
+    
+    // Выводим в консоль и алерт
+    console.log('=== ДИАГНОСТИКА КРЕСТИКОВ ===');
+    diagnostics.forEach(line => console.log(line));
+    
+    // Показываем первые 10 строк в алерте
+    const alertText = diagnostics.slice(0, 15).join('\n');
+    alert(`Диагностика:\n\n${alertText}\n\nПолный лог в консоли (F12)`);
 }
 
 // === НОВАЯ ФУНКЦИЯ: Отображение хэша коммита ===
