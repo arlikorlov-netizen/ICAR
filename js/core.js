@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.142", // ← Добавляем версию
+    version: "1.1.143", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,

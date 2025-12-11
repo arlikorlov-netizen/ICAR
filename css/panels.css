@@ -130,8 +130,8 @@
     transition: all 0.3s ease;
     padding: 0;
     box-shadow: var(--shadow);
-    width: calc(50%); /* Уменьшаем вычитание */
-    height: calc(50%); /* Уменьшаем вычитание */
+    width: calc(50% + 3px); /* Уменьшаем вычитание */
+    height: calc(50% + 3px); /* Уменьшаем вычитание */
     margin: 0;
     box-sizing: border-box; /* Меняем с content-box на border-box */
 }
