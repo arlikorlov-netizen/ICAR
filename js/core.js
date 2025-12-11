@@ -370,3 +370,26 @@ window.addEventListener('load', () => {
 
 // Обновление при изменении размера
 window.addEventListener('resize', updateConnectionLines);
+
+// === БЛОК 19.9: Горячие клавиши для отладки ===
+document.addEventListener('keydown', function(e) {
+    // Ctrl+Shift+D для диагностики (в любом состоянии)
+    if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        e.preventDefault();
+        console.log('Горячая клавиша Ctrl+Shift+D - запуск диагностики');
+        showStyleDiagnostics();
+    }
+    
+    // Ctrl+Shift+S для проверки состояния all-panels-open
+    if (e.ctrlKey && e.shiftKey && e.key === 'S') {
+        e.preventDefault();
+        console.log('=== БЫСТРАЯ ПРОВЕРКА ===');
+        console.log('allPanelsOpen переменная:', allPanelsOpen);
+        console.log('body имеет all-panels-open:', document.body.classList.contains('all-panels-open'));
+        console.log('Активных панелей:', document.querySelectorAll('.corner-panel.active').length);
+        console.log('Общий крестик активен:', document.getElementById('allPanelsClose')?.classList.contains('active'));
+    }
+});
+
+// Также можно добавить сообщение в консоль при загрузке
+console.log('Отладка: используйте Ctrl+Shift+D для диагностики, Ctrl+Shift+S для быстрой проверки');
