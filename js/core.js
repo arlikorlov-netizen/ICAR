@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.150", // ← Добавляем версию
+    version: "1.1.151", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -373,15 +373,16 @@ window.addEventListener('resize', updateConnectionLines);
 
 // === БЛОК 19.9: Горячие клавиши для отладки ===
 document.addEventListener('keydown', function(e) {
-    // Ctrl+Alt+X для диагностики (редко используется)
-    if (e.ctrlKey && e.altKey && e.key === 'X') {
+    // Ctrl+O для диагностики
+    if (e.ctrlKey && e.key === 'o') {
         e.preventDefault();
-        console.log('Горячая клавиша Ctrl+Alt+X - запуск диагностики');
+        console.log('Горячая клавиша Ctrl+O - запуск диагностики');
         showStyleDiagnostics();
+        return false; // предотвращаем открытие файла
     }
     
-    // Ctrl+Alt+C для быстрой проверки
-    if (e.ctrlKey && e.altKey && e.key === 'C') {
+    // Ctrl+I для быстрой проверки
+    if (e.ctrlKey && e.key === 'i') {
         e.preventDefault();
         console.log('=== БЫСТРАЯ ПРОВЕРКА ===');
         console.log('allPanelsOpen переменная:', allPanelsOpen);
@@ -390,7 +391,8 @@ document.addEventListener('keydown', function(e) {
         console.log('Общий крестик активен:', document.getElementById('allPanelsClose')?.classList.contains('active'));
         
         alert(`Быстрая проверка:\n\nallPanelsOpen: ${allPanelsOpen}\nbody класс: "${document.body.className}"\nАктивных панелей: ${document.querySelectorAll('.corner-panel.active').length}`);
+        return false; // предотвращаем инспектор
     }
 });
 
-console.log('Отладка: используйте Ctrl+Alt+X для диагностики, Ctrl+Alt+C для быстрой проверки');
+console.log('Отладка: используйте Ctrl+O для диагностики, Ctrl+I для быстрой проверки');
