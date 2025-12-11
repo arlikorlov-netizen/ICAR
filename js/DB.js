@@ -1,78 +1,51 @@
-/* === БЛОК 24: Простая база данных для сна === */
+/* === БЛОК 24: Заглушка базы данных === */
 
 const sleepDB = {
-    db: null,
+    // Простая заглушка - храним в памяти
+    records: [],
     
-    // Инициализация
     init: function() {
-        return new Promise((resolve, reject) => {
-            const request = indexedDB.open('SleepDB', 1);
-            
-            request.onerror = () => reject(request.error);
-            
-            request.onsuccess = () => {
-                this.db = request.result;
-                console.log('База данных сна готова');
-                resolve();
-            };
-            
-            request.onupgradeneeded = (event) => {
-                const db = event.target.result;
-                if (!db.objectStoreNames.contains('sleepRecords')) {
-                    db.createObjectStore('sleepRecords', { 
-                        keyPath: 'id', 
-                        autoIncrement: true 
-                    });
-                }
-            };
-        });
+        console.log('База данных сна (заглушка) инициализирована');
+        return Promise.resolve();
     },
     
-    // Добавление записи
     addSleepRecord: function(data) {
-        return new Promise((resolve, reject) => {
-            if (!this.db) {
-                reject('База данных не инициализирована');
-                return;
-            }
-            
-            const transaction = this.db.transaction(['sleepRecords'], 'readwrite');
-            const store = transaction.objectStore('sleepRecords');
-            
+        return new Promise((resolve) => {
             const record = {
+                id: Date.now(),
                 ...data,
-                date: new Date().toLocaleDateString('ru-RU'),
-                timestamp: Date.now()
+                date: new Date().toLocaleDateString('ru-RU')
             };
             
-            const request = store.add(record);
-            
-            request.onsuccess = () => {
-                console.log('Запись добавлена, ID:', request.result);
-                resolve(request.result);
-            };
-            
-            request.onerror = () => reject(request.error);
+            this.records.push(record);
+            console.log('Запись сохранена в памяти:', record);
+            resolve(record.id);
         });
     },
     
-    // Получение всех записей (упрощённое)
     getAllRecords: function() {
-        return new Promise((resolve, reject) => {
-            if (!this.db) {
-                reject('База данных не инициализирована');
-                return;
-            }
-            
-            const transaction = this.db.transaction(['sleepRecords'], 'readonly');
-            const store = transaction.objectStore('sleepRecords');
-            const request = store.getAll();
-            
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
+        return Promise.resolve(this.records);
+    },
+    
+    getSleepStats: function() {
+        if (this.records.length === 0) {
+            return Promise.resolve({
+                avgDuration: 0,
+                avgQuality: 0,
+                totalRecords: 0
+            });
+        }
+        
+        // Простой расчёт
+        const totalRecords = this.records.length;
+        const lastRecord = this.records[this.records.length - 1];
+        
+        return Promise.resolve({
+            avgDuration: '7.5', // заглушка
+            avgQuality: lastRecord.quality || '3',
+            totalRecords: totalRecords
         });
     }
 };
 
-// Делаем глобально доступной
 window.sleepDB = sleepDB;

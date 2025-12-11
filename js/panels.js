@@ -61,6 +61,13 @@ function openAllPanels() {
     
     document.body.classList.add('all-panels-open');
     
+    // Скрываем ВСЕ крестики на панелях
+    document.querySelectorAll('.panel-close').forEach(closeBtn => {
+        closeBtn.style.display = 'none';
+        closeBtn.style.opacity = '0';
+        closeBtn.style.visibility = 'hidden';
+    });
+    
     closeAllPanels();
     
     panels.forEach((panelType, index) => {
@@ -77,6 +84,9 @@ function openAllPanels() {
         const allPanelsClose = document.getElementById('allPanelsClose');
         if (allPanelsClose) {
             allPanelsClose.classList.add('active');
+            allPanelsClose.style.display = 'flex';
+            allPanelsClose.style.opacity = '1';
+            allPanelsClose.style.visibility = 'visible';
         }
         allPanelsOpen = true;
     }, 300);
@@ -117,4 +127,32 @@ function initAllPanelsCloseButton() {
             closeAllPanels();
         });
     }
+}
+
+function closeAllPanels() {
+    document.querySelectorAll('.corner-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+    
+    // Восстанавливаем крестики на панелях
+    document.querySelectorAll('.panel-close').forEach(closeBtn => {
+        closeBtn.style.display = '';
+        closeBtn.style.opacity = '';
+        closeBtn.style.visibility = '';
+    });
+    
+    const bg = document.getElementById('allPanelsBackground');
+    if (bg) bg.classList.remove('active');
+    
+    const allPanelsClose = document.getElementById('allPanelsClose');
+    if (allPanelsClose) {
+        allPanelsClose.classList.remove('active');
+        allPanelsClose.style.opacity = '';
+        allPanelsClose.style.visibility = '';
+    }
+    
+    document.body.classList.remove('all-panels-open');
+    
+    activePanels = [];
+    allPanelsOpen = false;
 }
