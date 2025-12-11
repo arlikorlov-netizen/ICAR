@@ -182,27 +182,17 @@
     transition: transform 0.3s ease;
 }
 
+/* Крестик виден когда панель активна */
 .corner-panel.active .panel-close {
     opacity: 1 !important;
     visibility: visible !important;
 }
 
-/* Прячем крестики когда все панели открыты */
-body.all-panels-open .panel-close {
-    display: none !important;
+/* НО: когда все панели открыты - скрываем ВСЕ крестики на панелях */
+body.all-panels-open .corner-panel.active .panel-close {
     opacity: 0 !important;
     visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-/* УДАЛЯЕМ ВЕСЬ БЛОК:
-.panel-close:hover {
-    background-color: var(--color-button-hover);
-}
-*/
-
-.all-panels-close:hover {
-    transform: rotate(90deg);
+    display: none !important;
 }
 
 /* === БЛОК 18.6: Состояние "все панели открыты" === */
