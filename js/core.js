@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.148", // ← Добавляем версию
+    version: "1.1.149", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initClosePanels();
     initBottomSheetClose();
     initCommitHash();
-    // УДАЛЯЕМ: initVisibility();
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -142,42 +141,49 @@ function showStyleDiagnostics() {
     const diagnostics = [];
     
     // Проверяем крестики на панелях
+// Проверяем body
+    diagnostics.push(`=== СОСТОЯНИЕ BODY ===`);
+    diagnostics.push(`Body классы: ${document.body.className}`);
+    diagnostics.push(`Body имеет all-panels-open: ${document.body.classList.contains('all-panels-open')}`);
+    
+    // Проверяем крестики на панелях
+    diagnostics.push(`\n=== КРЕСТИКИ НА ПАНЕЛЯХ ===`);
     const panelCloses = document.querySelectorAll('.panel-close');
     panelCloses.forEach((btn, i) => {
         const styles = window.getComputedStyle(btn);
+        const parent = btn.closest('.corner-panel');
         diagnostics.push(`Крестик ${i+1}:`);
         diagnostics.push(`  display: ${styles.display}`);
         diagnostics.push(`  opacity: ${styles.opacity}`);
         diagnostics.push(`  visibility: ${styles.visibility}`);
+        diagnostics.push(`  background-color: ${styles.backgroundColor}`);
         diagnostics.push(`  classList: ${btn.className}`);
+        diagnostics.push(`  родитель активен: ${parent ? parent.classList.contains('active') : 'нет родителя'}`);
     });
     
     // Проверяем общий крестик
+    diagnostics.push(`\n=== ОБЩИЙ КРЕСТИК ===`);
     const allClose = document.getElementById('allPanelsClose');
     if (allClose) {
         const styles = window.getComputedStyle(allClose);
-        diagnostics.push('Общий крестик:');
         diagnostics.push(`  display: ${styles.display}`);
         diagnostics.push(`  opacity: ${styles.opacity}`);
         diagnostics.push(`  visibility: ${styles.visibility}`);
+        diagnostics.push(`  background-color: ${styles.backgroundColor}`);
         diagnostics.push(`  имеет класс active: ${allClose.classList.contains('active')}`);
     }
     
-    // Проверяем body классы
-    diagnostics.push(`Body классы: ${document.body.className}`);
+    // Дополнительная информация
+    diagnostics.push(`\n=== СИСТЕМНАЯ ИНФОРМАЦИЯ ===`);
     diagnostics.push(`allPanelsOpen переменная: ${allPanelsOpen}`);
+    diagnostics.push(`Активных панелей: ${document.querySelectorAll('.corner-panel.active').length}`);
     
-    // Проверяем активные панели
-    const activePanelsList = document.querySelectorAll('.corner-panel.active');
-    diagnostics.push(`Активных панелей: ${activePanelsList.length}`);
-    
-    // Выводим в консоль и алерт
-    console.log('=== ДИАГНОСТИКА КРЕСТИКОВ ===');
+    // Выводим
+    console.log('=== ДИАГНОСТИКА ===');
     diagnostics.forEach(line => console.log(line));
     
-    // Показываем первые 10 строк в алерте
-    const alertText = diagnostics.slice(0, 15).join('\n');
-    alert(`Диагностика:\n\n${alertText}\n\nПолный лог в консоли (F12)`);
+    const alertText = diagnostics.slice(0, 20).join('\n');
+    alert(`Диагностика:\n\n${alertText}\n\n...полный лог в консоли (F12)`);
 }
 
 // === НОВАЯ ФУНКЦИЯ: Отображение хэша коммита ===
