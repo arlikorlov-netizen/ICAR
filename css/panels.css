@@ -184,15 +184,19 @@
 
 /* Крестик виден когда панель активна */
 .corner-panel.active .panel-close {
-    opacity: 1 !important;
-    visibility: visible !important;
+    opacity: 1;
+    visibility: visible;
 }
 
-/* НО: когда все панели открыты - скрываем ВСЕ крестики на панелях */
-body.all-panels-open .corner-panel.active .panel-close {
+/* ГЛАВНОЕ: когда все панели открыты - ПЕРЕЗАПИСЫВАЕМ все стили */
+body.all-panels-open #healthPanel.active .panel-close,
+body.all-panels-open #habitsPanel.active .panel-close,
+body.all-panels-open #tasksPanel.active .panel-close,
+body.all-panels-open #financePanel.active .panel-close {
     opacity: 0 !important;
     visibility: hidden !important;
     display: none !important;
+    pointer-events: none !important;
 }
 
 /* === БЛОК 18.6: Состояние "все панели открыты" === */
