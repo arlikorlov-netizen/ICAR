@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICAR - Контроль Жизни</title>
+    <title>ICAR</title>
 
         
     <!-- Предзагрузка шрифта для iOS - БЛОК 1 -->
@@ -37,9 +37,9 @@
             <div class="user-info">
                 <div class="user-details">
                     <div class="current-date" id="currentDate">11.05.2024</div>
-                    <h2 class="user-name" id="userName">Алексей</h2>
+                    <h2 class="user-name" id="userName">ICAR</h2>
                     <div class="user-level">
-                        <span class="level-text" id="userLevel">lvl 8</span>
+                        <span class="level-text" id="userLevel">lvl 1429</span>
                     </div>
                 </div>
                 <div class="system-label">TEMPLAR SYSTEM <span id="commitHash"></span></div>
@@ -151,53 +151,53 @@
         </div>
 
         <!-- БЛОК 13: Панели модулей (4 штуки) -->
-<div class="corner-panel health-panel" id="healthPanel">
-    <div class="panel-content">
-        <div class="panel-header">
-            <h3>Здоровье</h3>
-            <button class="panel-close" data-close="health">×</button>
+        <div class="corner-panel health-panel" id="healthPanel">
+            <div class="panel-content">
+                <div class="panel-header">
+                    <h3>Здоровье</h3>
+                    <button class="panel-close" data-close="health">×</button>
+                </div>
+                <div class="panel-body">
+                    <button class="sleep-record-btn" id="recordSleepBtn">Записать сон</button>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <button class="sleep-record-btn" id="recordSleepBtn">Записать сон</button>
-        </div>
-    </div>
-</div>
 
-<div class="corner-panel habits-panel" id="habitsPanel">
-    <div class="panel-content">
-        <div class="panel-header">
-            <h3>Привычки</h3>
-            <button class="panel-close" data-close="habits">×</button>
+        <div class="corner-panel habits-panel" id="habitsPanel">
+            <div class="panel-content">
+                <div class="panel-header">
+                    <h3>Привычки</h3>
+                    <button class="panel-close" data-close="habits">×</button>
+                </div>
+                <div class="panel-body">
+                    <p>Медитация: ✅<br>Спорт: ✅<br>Чтение: ⚪</p>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <p>Медитация: ✅<br>Спорт: ✅<br>Чтение: ⚪</p>
-        </div>
-    </div>
-</div>
 
-<div class="corner-panel tasks-panel" id="tasksPanel">
-    <div class="panel-content">
-        <div class="panel-header">
-            <h3>Задачи</h3>
-            <button class="panel-close" data-close="tasks">×</button>
+        <div class="corner-panel tasks-panel" id="tasksPanel">
+            <div class="panel-content">
+                <div class="panel-header">
+                    <h3>Задачи</h3>
+                    <button class="panel-close" data-close="tasks">×</button>
+                </div>
+                <div class="panel-body">
+                    <p>Купить продукты<br>Позвонить маме<br>Записаться к врачу</p>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <p>Купить продукты<br>Позвонить маме<br>Записаться к врачу</p>
-        </div>
-    </div>
-</div>
 
-<div class="corner-panel finance-panel" id="financePanel">
-    <div class="panel-content">
-        <div class="panel-header">
-            <h3>Финансы</h3>
-            <button class="panel-close" data-close="finance">×</button>
+        <div class="corner-panel finance-panel" id="financePanel">
+            <div class="panel-content">
+                <div class="panel-header">
+                    <h3>Финансы</h3>
+                    <button class="panel-close" data-close="finance">×</button>
+                </div>
+                <div class="panel-body">
+                    <p>Расходы: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽</p>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <p>Расходы: 500₽<br>Бюджет: 1500₽<br>Сбережения: 25000₽</p>
-        </div>
-    </div>
-</div>
 
         <!-- БЛОК 14: Нижняя выдвижная панель -->
         <div class="bottom-sheet" id="bottomSheet">
@@ -221,7 +221,6 @@
     <script src="js/core.js"></script>
     <script src="js/panels.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/db.js"></script>
     
     <!-- БЛОК 15: Service Worker -->
     <script>
