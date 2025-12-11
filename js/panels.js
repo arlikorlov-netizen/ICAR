@@ -35,6 +35,10 @@ function openSinglePanel(panelType) {
     
     panel.classList.add('active');
     activePanels = [panelType];
+    
+    // Отправляем событие об открытии панели
+    const event = new CustomEvent('panelOpened', { detail: { panel: panelType } });
+    document.dispatchEvent(event);
 }
 
 // === БЛОК 20.3: Фигурка (открытие всех панелей) ===
