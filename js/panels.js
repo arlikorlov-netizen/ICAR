@@ -58,6 +58,8 @@ function toggleAllPanels() {
 }
 
 function openAllPanels() {
+        console.log('openAllPanels вызвана');
+    console.log('body имеет класс all-panels-open?', document.body.classList.contains('all-panels-open'));
     const panels = ['health', 'habits', 'tasks', 'finance'];
     
     const bg = document.getElementById('allPanelsBackground');
