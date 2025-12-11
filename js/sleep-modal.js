@@ -1,16 +1,24 @@
 /* === БЛОК 23: Логика модального окна сна === */
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Главная функция инициализации
+async function initSleepApp() {
     try {
+        // 1. Инициализируем базу данных
         await sleepDB.init();
         console.log('База данных инициализирована');
+        
+        // 2. Инициализируем модальное окно
         initSleepModal();
-        updateSleepDisplay();
+        
+        // 3. Загружаем статистику сна
+        await updateSleepDisplay();
+        
     } catch (error) {
-        console.error('Ошибка инициализации БД:', error);
+        console.error('Ошибка инициализации приложения сна:', error);
     }
-});
+}
 
+// Функция инициализации модального окна
 function initSleepModal() {
     const recordBtn = document.getElementById('recordSleepBtn');
     const modalOverlay = document.getElementById('sleepModalOverlay');
@@ -18,73 +26,97 @@ function initSleepModal() {
     const qualityButtons = document.querySelectorAll('.quality-btn');
     const sleepForm = document.getElementById('sleepForm');
     
-    if (!recordBtn || !modalOverlay) return;
+    // Проверяем элементы
+    if (!recordBtn || !modalOverlay) {
+        console.warn('Элементы модального окна не найдены');
+        return;
+    }
     
     // Открытие модального окна
-    recordBtn.addEventListener('click', () => {
+    recordBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
         modalOverlay.classList.add('active');
     });
     
-    // Закрытие модального окна
+    // Закрытие модального окна (крестик)
     if (modalClose) {
-        modalClose.addEventListener('click', () => {
+        modalClose.addEventListener('click', function() {
             modalOverlay.classList.remove('active');
         });
     }
     
-    // Клик вне модального окна
-    modalOverlay.addEventListener('click', (e) => {
+    // Закрытие по клику вне окна
+    modalOverlay.addEventListener('click', function(e) {
         if (e.target === modalOverlay) {
             modalOverlay.classList.remove('active');
         }
     });
     
-    // Кнопки оценки качества
+    // Кнопки оценки качества (1-5)
     qualityButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', function() {
             qualityButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            this.classList.add('active');
         });
     });
     
-    // Отправка формы
-if (sleepForm) {
-    sleepForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const sleepStart = document.getElementById('sleepStart').value;
-        const sleepEnd = document.getElementById('sleepEnd').value;
-        const quality = document.querySelector('.quality-btn.active')?.textContent || '3';
-        
-        try {
-            // Сохраняем в IndexedDB
-            await sleepDB.addSleepRecord({ sleepStart, sleepEnd, quality });
-            console.log('Сон успешно сохранён в базу данных');
+    // Отправка формы записи сна
+    if (sleepForm) {
+        sleepForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Обновляем отображение в панели здоровья
-            updateSleepDisplay();
+            const sleepStart = document.getElementById('sleepStart').value;
+            const sleepEnd = document.getElementById('sleepEnd').value;
+            const activeQualityBtn = document.querySelector('.quality-btn.active');
+            const quality = activeQualityBtn ? activeQualityBtn.textContent : '3';
             
-            // Закрываем модальное окно
-            modalOverlay.classList.remove('active');
-            sleepForm.reset();
-            qualityButtons.forEach(b => b.classList.remove('active'));
-            qualityButtons[2].classList.add('active');
+            // Проверяем заполнение времени
+            if (!sleepStart || !sleepEnd) {
+                alert('Заполните время начала и окончания сна');
+                return;
+            }
             
-        } catch (error) {
-            console.error('Ошибка сохранения сна:', error);
-            alert('Ошибка сохранения записи');
-        }
-    });
+            try {
+                // Сохраняем в базу данных
+                await sleepDB.addSleepRecord({ 
+                    sleepStart: sleepStart, 
+                    sleepEnd: sleepEnd, 
+                    quality: quality 
+                });
+                
+                console.log('Запись сна сохранена');
+                
+                // Обновляем отображение статистики
+                await updateSleepDisplay();
+                
+                // Закрываем и сбрасываем форму
+                modalOverlay.classList.remove('active');
+                sleepForm.reset();
+                
+                // Сбрасываем оценку качества на среднюю (3)
+                qualityButtons.forEach(b => b.classList.remove('active'));
+                if (qualityButtons[2]) {
+                    qualityButtons[2].classList.add('active');
+                }
+                
+            } catch (error) {
+                console.error('Ошибка сохранения сна:', error);
+                alert('Не удалось сохранить запись. Попробуйте снова.');
+            }
+        });
+    }
 }
 
-// Функция обновления отображения в панели здоровья
+// Функция обновления отображения статистики сна
 async function updateSleepDisplay() {
     try {
         const stats = await sleepDB.getSleepStats();
         const healthPanelBody = document.querySelector('#healthPanel .panel-body');
         
-        if (healthPanelBody && stats.totalRecords > 0) {
-            // Очищаем и добавляем статистику
+        if (!healthPanelBody) return;
+        
+        // Если есть записи - показываем статистику
+        if (stats.totalRecords > 0) {
             healthPanelBody.innerHTML = `
                 <div class="sleep-stats">
                     <div>Средняя длительность: ${stats.avgDuration}ч</div>
@@ -93,23 +125,32 @@ async function updateSleepDisplay() {
                 </div>
                 <button class="sleep-record-btn" id="recordSleepBtn">Записать сон</button>
             `;
-            
-            // Переинициализируем кнопку
-            const newRecordBtn = document.getElementById('recordSleepBtn');
-            if (newRecordBtn) {
-                newRecordBtn.addEventListener('click', () => {
-                    document.getElementById('sleepModalOverlay').classList.add('active');
-                });
-            }
+        } 
+        // Если записей нет - показываем только кнопку
+        else {
+            healthPanelBody.innerHTML = `
+                <button class="sleep-record-btn" id="recordSleepBtn">Записать первую запись сна</button>
+            `;
         }
+        
+        // Переинициализируем обработчик кнопки
+        const newRecordBtn = document.getElementById('recordSleepBtn');
+        if (newRecordBtn) {
+            newRecordBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const modal = document.getElementById('sleepModalOverlay');
+                if (modal) modal.classList.add('active');
+            });
+        }
+        
     } catch (error) {
-        console.error('Ошибка загрузки статистики:', error);
+        console.error('Ошибка загрузки статистики сна:', error);
     }
 }
 
-// Инициализируем при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    initSleepModal();
-    updateSleepDisplay(); // Загружаем статистику при загрузке
-});
+// Запускаем приложение при загрузке страницы
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSleepApp);
+} else {
+    initSleepApp();
 }

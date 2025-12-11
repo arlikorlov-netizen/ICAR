@@ -187,6 +187,13 @@
     visibility: visible !important;
 }
 
+/* Прячем крестики когда все панели открыты */
+.all-panels-open .corner-panel.active .panel-close {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    display: none !important;
+}
+
 /* УДАЛЯЕМ ВЕСЬ БЛОК:
 .panel-close:hover {
     background-color: var(--color-button-hover);
