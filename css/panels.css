@@ -355,3 +355,15 @@ body.all-panels-open .panel-close {
     opacity: 1 !important;
     visibility: visible !important;
 }
+
+/* === СУПЕР-СИЛЬНОЕ ПРАВИЛО ДЛЯ ТЕСТА === */
+body.all-panels-open #healthPanel.active .panel-close,
+body.all-panels-open #habitsPanel.active .panel-close, 
+body.all-panels-open #tasksPanel.active .panel-close,
+body.all-panels-open #financePanel.active .panel-close {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    background-color: lime !important; /* ярко-зелёный для видимости */
+    border: 3px solid yellow !important;
+}
