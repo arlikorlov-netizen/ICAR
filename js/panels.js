@@ -58,15 +58,20 @@ function toggleAllPanels() {
 }
 
 function openAllPanels() {
-        console.log('openAllPanels вызвана');
-    console.log('body имеет класс all-panels-open?', document.body.classList.contains('all-panels-open'));
-    const panels = ['health', 'habits', 'tasks', 'finance'];
-    
-    const bg = document.getElementById('allPanelsBackground');
-    if (bg) bg.classList.add('active');
+        console.log('=== ОТКРЫТИЕ ВСЕХ ПАНЕЛЕЙ ===');
+        console.log('1. allPanelsOpen до:', allPanelsOpen);
+        console.log('2. body классы до:', document.body.className);
+        
+        const panels = ['health', 'habits', 'tasks', 'finance'];
+        
+        const bg = document.getElementById('allPanelsBackground');
+        if (bg) {
+            bg.classList.add('active');
+            console.log('3. Фон добавлен');
+        }
     
     document.body.classList.add('all-panels-open');
-    
+    console.log('4. all-panels-open добавлен. Теперь body классы:', document.body.className);
     // Скрываем ВСЕ крестики на панелях
     document.querySelectorAll('.panel-close').forEach(closeBtn => {
         closeBtn.style.display = 'none';
