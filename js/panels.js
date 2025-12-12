@@ -3,6 +3,19 @@
   Содержит: открытие/закрытие панелей, ярлычки, крестики
 */
 
+console.log('panels.js загружен');
+
+function toggleAllPanels() {
+    console.log('toggleAllPanels вызвана!');
+    if (allPanelsOpen) {
+        console.log('Закрываем все панели');
+        closeAllPanels();
+    } else {
+        console.log('Открываем все панели');
+        openAllPanels();
+    }
+}
+
 // === БЛОК 20.1: Инициализация панелей ===
 document.addEventListener('DOMContentLoaded', () => {
     initSideTabs();
@@ -58,6 +71,12 @@ function toggleAllPanels() {
 }
 
 function openAllPanels() {
+            console.log('🔥 openAllPanels() ВЫЗВАНА!');
+        console.log('Добавляем класс на body...');
+        
+        // ПРОСТОЙ ТЕСТ - сразу красим body в красный
+        document.body.style.backgroundColor = 'red';
+    document.body.classList.add('all-panels-open');
         console.log('=== ОТКРЫТИЕ ВСЕХ ПАНЕЛЕЙ ===');
         console.log('1. allPanelsOpen до:', allPanelsOpen);
         console.log('2. body классы до:', document.body.className);
