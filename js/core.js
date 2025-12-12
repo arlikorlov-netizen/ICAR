@@ -6,7 +6,7 @@
 const AppConfig = {
     userName: "ICAR",
     userLevel: 5,
-    version: "1.1.151", // ← Добавляем версию
+    version: "1.1.152", // ← Добавляем версию
     commitHash: "a1b2c3d", // ← Добавляем хэш коммита
     progressValues: {
         physical: 56,
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initClosePanels();
     initBottomSheetClose();
     initCommitHash();
+    initDebugFixedButton(); // добавляем эту строку
 });
 
 // === БЛОК 19.4: Функции инициализации ===
@@ -396,3 +397,17 @@ document.addEventListener('keydown', function(e) {
 });
 
 console.log('Отладка: используйте Ctrl+O для диагностики, Ctrl+I для быстрой проверки');
+
+// === БЛОК 19.10: Кнопка диагностики ===
+function initDebugFixedButton() {
+    const debugBtn = document.getElementById('debugFixedBtn');
+    if (debugBtn) {
+        debugBtn.addEventListener('click', showStyleDiagnostics);
+        console.log('Фиксированная кнопка диагностики готова');
+        
+        // Добавляем также двойной клик для быстрой проверки
+        debugBtn.addEventListener('dblclick', function() {
+            alert(`Быстрая проверка:\n\nallPanelsOpen: ${allPanelsOpen}\nbody класс: "${document.body.className}"\nАктивных панелей: ${document.querySelectorAll('.corner-panel.active').length}`);
+        });
+    }
+}

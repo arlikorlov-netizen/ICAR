@@ -318,3 +318,32 @@
     background-color: var(--color-button);
     transform: translateX(5px);
 }
+
+/* === Кнопка диагностики (фиксированная) === */
+.debug-fixed-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #8B4513;
+    border: 2px solid #FFA500;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 9999; /* максимальный z-index */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 0 10px rgba(139, 69, 19, 0.8);
+    transition: all 0.3s ease;
+}
+
+.debug-fixed-btn:hover {
+    background-color: #A0522D;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+}
