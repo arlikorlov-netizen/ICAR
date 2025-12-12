@@ -98,7 +98,11 @@ function openAllPanels() {
         closeBtn.style.visibility = 'hidden';
     });
     
-    closeAllPanels();
+        // НЕ ЗАКРЫВАЕМ панели, а просто сбрасываем активные
+        document.querySelectorAll('.corner-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        activePanels = [];
     
     panels.forEach((panelType, index) => {
         setTimeout(() => {
